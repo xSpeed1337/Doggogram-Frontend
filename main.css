@@ -1,0 +1,49 @@
+.top {
+    min-height: 40vh;
+    color: white;
+}
+.bot {
+    min-height: 40vh;
+    color: white;
+}
+.head {
+    min-height: 10vh;
+    color: white;
+}
+.main {
+    min-height: 80vh;
+    color: white;
+}
+.foot {
+    min-height: 10vh;
+    color: white;
+    line-height: 10vh;
+}
+.bg-main{
+    background-color: #232931;
+}
+.bg-left{
+    background-color: #1A1F25;
+}
+.bg-head{
+    background-color: #1D2229;
+}
+.bg-foot{
+    background-color: #20262D;
+}
+.copy{
+    float: left;
+    color: #4ECCA3;
+    font-weight: bold;
+}
+.impressum{
+    float: right;
+    color: #4ECCA3;
+}
+.datenrichtlinie{
+    float: right;
+    padding-right: 1vw;
+    color: #4ECCA3;
+}
+
+
