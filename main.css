@@ -15,7 +15,7 @@
     color: white;
 }
 .foot {
-    min-height: 10vh;
+    min-height: 5vh;
     color: white;
     line-height: 10vh;
 }
@@ -26,7 +26,7 @@
     background-color: #1A1F25;
 }
 .bg-head{
-    background-color: #1D2229;
+    background-color: #20262D;
 }
 .bg-foot{
     background-color: #20262D;
@@ -36,14 +36,84 @@
     color: #4ECCA3;
     font-weight: bold;
 }
-.impressum{
-    float: right;
+.mainnav-a{
+    color: #EEEEEE;
+    text-decoration: none;
+    padding-left: 2.5vw;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+}
+.material-icons{
+    font-size: 30px !important;
+}
+.mainnav-li{
+    margin-top: 0.5vh;
+    margin-left: -0.8vw;
+}
+.mainnav-a:hover{
+    font-weight: bold;
+    color: #4ECCA3;
+    border-left: 3px solid #4ECCA3;
+}
+.nav i {
+    margin-right: 2.5vw;
+}
+.mainnav{
+    margin-top: 10vh;
+}
+.footnav-a:hover{
+    font-weight: bold;
+    color: #4ECCA3;
+    border-bottom: 2px solid #4ECCA3;
+}
+.footnav-li{
+    margin-right: 2.5vw;
+}
+.form-head{
+    padding-top: 3vh;
+}
+.form-head-input{
+    color: #EEEEEE;
+    background-color: #1D2229;
+    border-radius: 20px;
+    border-color: #1D2229;
+    width: 1000px !important;
+}
+.form-head-button {
+    color: #EEEEEE;
+    border-color: #EEEEEE;
+    border-radius: 20px;
+}
+.form-head-button:hover {
+    background-color: #4ECCA3;
+    color: #20262D;
+    font-weight: bold;
+}
+.form-head-input:focus{
+    border-color: #4ECCA3;
+    box-shadow: none;
+    background-color: #1D2229;
+    color: #EEEEEE;
+}
+.applogo{
+    font-size: 30px;
+    position: absolute;
+    padding-left: 20px;
+    padding-top: 15px;
+    display: flex;
+    align-items: center;
+}
+.applogo-text{
+    padding-left: 20px;
+}
+.applogo-text:hover{
     color: #4ECCA3;
 }
-.datenrichtlinie{
+.upload-button{
     float: right;
-    padding-right: 1vw;
+    border-color: #4ECCA3;
     color: #4ECCA3;
+    margin-left: 50px;
+    width: 250px;
 }
-
-
