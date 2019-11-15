@@ -1,22 +1,17 @@
 .top {
     min-height: 40vh;
-    color: white;
 }
 .bot {
     min-height: 40vh;
-    color: white;
 }
 .head {
     min-height: 10vh;
-    color: white;
 }
 .main {
     min-height: 80vh;
-    color: white;
 }
 .foot {
     min-height: 5vh;
-    color: white;
     line-height: 10vh;
 }
 .bg-main{
@@ -60,11 +55,16 @@
     margin-right: 2.5vw;
 }
 .mainnav{
-    margin-top: 10vh;
+    margin-top: 2vh;
+}
+.footnav-a{
+    color: #EEEEEE !important;
+    text-decoration: none;
 }
 .footnav-a:hover{
     font-weight: bold;
     color: #4ECCA3;
+    text-decoration: none;
     border-bottom: 2px solid #4ECCA3;
 }
 .footnav-li{
@@ -78,7 +78,7 @@
     background-color: #1D2229;
     border-radius: 20px;
     border-color: #1D2229;
-    width: 1000px !important;
+    width: 52vw !important;
 }
 .form-head-button {
     color: #EEEEEE;
@@ -99,13 +99,14 @@
 .applogo{
     font-size: 30px;
     position: absolute;
-    padding-left: 20px;
-    padding-top: 15px;
+    padding-left: 1vw;
+    padding-top: 2vh;
     display: flex;
     align-items: center;
 }
 .applogo-text{
-    padding-left: 20px;
+    padding-left: 1vw;
+    color: #EEEEEE;
 }
 .applogo-text:hover{
     color: #4ECCA3;
@@ -113,7 +114,56 @@
 .upload-button{
     float: right;
     border-color: #4ECCA3;
+    background-color: #4ECCA3;
+    color: #20262D;
+    margin-left: 3vw;
+    width: 12vw;
+    font-weight: bold;
+}
+.upload-button:hover{
+    background: none;
+    border-color: #4ECCA3;
     color: #4ECCA3;
-    margin-left: 50px;
-    width: 250px;
+}
+.user-data{
+    text-align: center;
+    color: #EEEEEE;
+}
+.userText{
+    margin-top: 1.5vh;
+}
+.userPhoto{
+    margin-top: 10.5vh;
+    border: 2px solid #4ECCA3;
+    border-radius: 10px;
+    padding: 5px 5px 5px 5px;
+}
+.userName{
+    font-size: 15px;
+    font-weight: bold;
+}
+.userLocation{
+    font-size: 12px;
+}
+.userDescriptionTitle{
+    font-weight: bold;
+    font-size: 12px;
+}
+.userDescription{
+    font-size: 12px;
+    margin-top: -1vh;
+}
+.size-top{
+    height:52.5vh !important;
+}
+.size-bot{
+    height: 27.5vh !important;
+}
+.statsTitle{
+    font-size: 12px;
+}
+.stats{
+    margin-top: -2vh;
+    font-weight: bold;
+    font-size: 12px;
 }
