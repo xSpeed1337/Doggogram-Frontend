@@ -1,0 +1,84 @@
+.head-conf {
+    position: fixed;
+    width: 100%;
+    background-color: #17252A;
+    height: 80px;
+}
+.main {
+    background-color: #17252A;
+    height: 95vh;
+    z-index: -1;
+}
+.head-button {
+    background: #3AAFA9;
+    color: #17252A;
+}
+.head-img {
+    border-radius: 100px;
+    border: 2px solid #3AAFA9;
+    padding: 5px;
+}
+.head-button:hover {
+    background: none;
+    border: 2px solid #3AAFA9;
+    color: #FEFFFF;
+}
+.p-2 {
+    margin-right: 10px;
+}
+.head-items {
+    text-decoration: none;
+    color: #FEFFFF;
+}
+.head-icons {
+    font-size: 30px !important;
+}
+.head-items:hover{
+    color: #3AAFA9;
+}
+.head-logo {
+    margin-right: 15px;
+}
+.head-title {
+    color: #FEFFFF !important;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 24px;
+    position: absolute;
+    padding-top: 5px;
+}
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #17252A;
+    height: 90px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.foot-nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.foot-nav-item {
+    margin-right: 50px;
+}
+.foot-nav-item-link {
+    text-decoration: none;
+    color: #FEFFFF;
+    font-weight: bold;
+    position: relative;
+    top: 20px;
+    display: flex;
+    justify-content: center;
+}
+.nav-icons {
+    position: absolute;
+    top: -25px;
+    font-size: 30px !important;
+}
+.foot-nav-item-link:hover {
+    color: #3AAFA9;
+}
