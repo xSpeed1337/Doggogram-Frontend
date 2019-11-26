@@ -139,3 +139,7 @@
     color: #20262D;
     margin-left: 30px;
 }
+
+.modal-backdrop {
+    z-index: 1020;
+}
