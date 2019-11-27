@@ -2,7 +2,7 @@ $(document).ready(function () {
     let debug = true;
     let image;
     let that = this;
-    let token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBZG1pbiIsImV4cCI6MTU4MDgzMjk0NCwiaWF0IjoxNTc0Nzg0OTQ0fQ.fiqLc8MlDktBO_sApYasiJZ5chNRbpmsfIO71FClMLutxRAEPDSAOTYZCFh6IPxMATGjvJm3VMMJGddZh1d1hA";
+    let token = sessionStorage.getItem('token');
 
     /**
      *
