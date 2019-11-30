@@ -6,51 +6,72 @@
     <title>Doggogram</title>
     <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
-    <link href="../css/main.css" rel="stylesheet" type="text/css">
+    <link href="../css/login.css" rel="stylesheet" type="text/css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css"
           rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
+
+<header class="navbar navbar-expand flex-row bd-navbar fixed-top justify-content-center">
+    <a class="navbar-brand bd-navbar-title" href=""><i class="material-icons bd-navbar-title-icon">pets</i><span class="bd-title-text1">doggo</span><span class="bd-title-text2">gram</span></a>
+</header>
 <main class="bd-head" id="content" role="main">
     <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col-6">
-                <a class="navbar-brand bd-navbar-title"><i
-                        class="material-icons bd-navbar-title-icon">pets</i><span
-                        class="bd-title-text1">doggo</span><span class="bd-title-text2">gram</span></a>
-                <form>
-                    <div class="form-group">
-                        <label for="loginInputUsername">Titel</label>
-                        <input class="form-control" id="loginInputUsername"
-                               placeholder="Benutzername" type="text">
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+                <div class="bd-container-login">
+                <div class="bd-login">
+                    <div class="bd-login-container-img">
+                        <img class="bd-login-img" src="../resources/images/superthumb.jpg" alt="">
                     </div>
-                    <div class="form-group">
-                        <label for="loginInputPassword">Beschreibung</label>
-                        <input class="form-control" id="loginInputPassword" placeholder="Passwort">
+                    <div class="bd-login-form validate-form">
+                        <span class="bd-login-form-title">Login</span>
+                        <div class="bd-login-form-container-input validate-input" data-validate="Nutzername ist erforderlich">
+                            <input class="bd-login-form-input" type="text" name="username" placeholder="Nutzername">
+                            <span class="bd-login-form-input-focus"></span>
+                            <span class="bd-login-form-input-symbol"><i class="material-icons">person</i></span>
+                        </div>
+                        <div class="bd-login-form-container-input validate-input" data-validate="Passwort ist erforderlich">
+                            <input class="bd-login-form-input" type="password" name="pass" placeholder="Passwort">
+                            <span class="bd-login-form-input-focus"></span>
+                            <span class="bd-login-form-input-symbol"><i class="material-icons">vpn_key</i></span>
+                        </div>
+                        <div class="bd-login-form-container-btn">
+                            <button class="bd-login-form-btn">Einloggen</button>
+                        </div>
+                        <div class="text-center">
+                            <a class="bd-login-form-txt" href=""><span>Nutzername / Passwort vergessen?</span></a>
+                        </div>
+                        <div class="text-center">
+                            <a class="create-profile" href=""><span>Erstelle dein Profil</span><i class="material-icons create-profile-icon">keyboard_arrow_right</i></a>
+                        </div>
                     </div>
-                </form>
-                <button class="btn btn-primary btn-block" id="loginBtn">Log In</button>
+                </div>
+                </div>
             </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-6 mx-auto">
-                <a class="">Du hast kein Konto? </a>
-                <a class="" href="">Registrieren</a>
-            </div>
+            <div class="col-2"></div>
         </div>
     </div>
 </main>
 <footer class="bd-footer fixed-bottom">
     <div class="container-fluid">
-        <ul class="bd-footer-list">
-            <li class="bd-footer-items"><a class="bd-footer-links" href="">Datenschutz</a>
-            </li>
-            <li class="bd-footer-items"><a class="bd-footer-links" href="">Impressum</a>
-            </li>
-            <li class="bd-footer-items"><a class="bd-footer-links" href="">AGB</a>
-            </li>
-        </ul>
+        <div class="row">
+            <div class="col-3">
+                <ul class="bd-dinpa-list">
+                    <li class="bd-dinpa-items"></li><a class="bd-dinpa-links" href=""><span class="bd-dinpa-list-text">© 2019 DOGGOGRAM</span></a></li>
+                </ul>
+            </div>
+            <div class="col-3"></div>
+            <div class="col-3"></div>
+            <div class="col-3">
+                <ul class="bd-footer-list">
+                    <li class="bd-footer-items"><a class="bd-footer-links" href=""><span class="bd-footer-list-text">IMPRESSUM/AGB/NETZDG</span></a></li>
+                    <li class="bd-footer-items"><a class="bd-footer-links" href=""><span class="bd-footer-list-text">DATENRICHTLINIE</span></a></li>
+                </ul>
+            </div>
+        </div>
     </div>
 </footer>
 <script crossorigin="anonymous"
@@ -63,6 +84,6 @@
 <script crossorigin="anonymous"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="../js/loginController.js" type="text/javascript"></script>
+<script src="../js/indexController.js" type="text/javascript"></script>
 </body>
 </html>
