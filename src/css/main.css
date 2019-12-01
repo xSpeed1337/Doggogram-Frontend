@@ -72,6 +72,8 @@
 .bd-main-info {
     text-align: center;
     margin-top: 30px;
+    position: fixed;
+    transform: translateX(12.5%);
 }
 .bd-main-info-usericon {
     border-radius: 500px;
@@ -85,13 +87,32 @@
     text-decoration: none;
     color: #EEEEEE;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 25px;
+}
+.bd-main-info-username:hover {
+    text-decoration: none;
+    color: #4ECCA3;
 }
 .bd-main-info-user {
     margin-bottom: 15px;
 }
 .bd-main-info-stats {
     margin-bottom: 15px;
+}
+.bd-main-info-follower {
+    display: block;
+}
+.bd-main-info-followernumb {
+    display: block;
+}
+.bd-main-info-descriptiontitle {
+    font-weight: bold;
+}
+.bd-main-info-description {
+    width: 400px;
+}
+.bd-main-info-followernumb {
+    font-weight: bold;
 }
 .bd-main-content {
     margin-top: 15px;
