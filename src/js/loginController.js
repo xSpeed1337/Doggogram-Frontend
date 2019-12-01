@@ -23,12 +23,12 @@ $(document).ready(function () {
 
         if (loginUsername == undefined || loginUsername == "") {
             loginBool = false;
-            $('#loginInputUsername').after(loginAlert);
+            $('#loginUsernameForm').after(loginAlert);
         }
 
         if (loginPasswort == undefined || loginPasswort == "") {
             loginBool = false;
-            $('#loginInputPassword').after(loginAlert);
+            $('#loginPasswordForm').after(loginAlert);
         }
 
         if (loginBool) {
@@ -43,6 +43,7 @@ $(document).ready(function () {
                     }
                     sessionStorage.setItem('token', response.token);
                     sessionStorage.setItem('Username', loginUsername);
+                    location.href = "../html/userpage.html";
                 },
                 error: function (response) {
                     if (debug) {
