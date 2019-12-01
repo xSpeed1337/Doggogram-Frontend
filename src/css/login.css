@@ -87,10 +87,13 @@
     height: 40px;
     padding: 0 20px 0 50px;
 }
+.bd-login-form-input:focus {
+    outline: none;
+}
 .bd-login-form-input-focus {
     display: block;
     position: absolute;
-    border-radius: 25px;
+    border-radius: 50px;
     bottom: 0;
     left: 0;
     z-index: -1;
@@ -143,6 +146,9 @@
     background: none;
     border: 2px solid #4ECCA3;
     color: #EEEEEE;
+}
+.bd-login-form-btn:focus {
+    outline: none;
 }
 .bd-login-form-txt {
     line-height: 1.75;
