@@ -1,7 +1,7 @@
 # Doggogram-Frontend
 This repository holds the code for Baden-Wuerttemberg Cooperative State University (DHBW) Ravensburg project for the lecture Webprogrammierung.
 
-##Documentation
+## Documentation
 This web-application is used for the lecture Webprogrammierung and the code is documented.
 
 ## Technologies
