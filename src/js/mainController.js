@@ -20,7 +20,7 @@ $(document).ready(function () {
     /**
      * Shows the name of the file in the upload
      */
-    $("#customFile").on("change", function () {
+    $("#uploadImage").on("change", function () {
         let fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });
