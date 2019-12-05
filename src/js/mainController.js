@@ -87,8 +87,8 @@ $(document).ready(function () {
 
     /**
      * Loads a Image from the Backend
-     */
-    $('#loadImage').on('click', function () {
+
+     $('#loadImage').on('click', function () {
         let imageData;
 
         $.ajax({
@@ -113,5 +113,5 @@ $(document).ready(function () {
             $("#image").attr("src", "data:image/png;base64," + imageData.image);
         });
     });
-
+     */
 });
