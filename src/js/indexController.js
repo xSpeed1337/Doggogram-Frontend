@@ -1,7 +1,6 @@
 $(document).ready(function () {
     let debug = true;
     let image;
-    let that = this;
     let token = sessionStorage.getItem('token');
 
     /**
@@ -91,6 +90,7 @@ $(document).ready(function () {
      */
     $('#loadImage').on('click', function () {
         let imageData;
+
         $.ajax({
             url: 'https://cors-anywhere.herokuapp.com/http://88.214.57.214:6889/api/v1/images/image/1',
             type: 'GET',
