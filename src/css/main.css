@@ -1,6 +1,6 @@
 .bd-navbar {
     background-color: #1A1F25;
-    height: 75px;
+    height: 7.5vh;
 }
 .bd-navbar-title {
     color: #EEEEEE;
@@ -64,8 +64,9 @@
 
 .bd-head {
     position: relative;
-    margin-top: 75px;
-    margin-bottom: 75px;
+    min-height: 85vh;
+    margin-top: 7.5vh;
+    margin-bottom: 7.5vh;
     background-color: #232931;
     color: #EEEEEE;
 }
@@ -124,10 +125,118 @@
     height: 400px;
     width: 400px;
 }
+.post-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 50px;
+}
+.post {
+    background: #20262D;
+    width: 750px;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 15px;
+}
+.bd-post-title {
+    padding-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+.bd-post-pp {
+    height: 50px;
+    width: 50px;
+    border-radius: 50px;
+    border: 2px solid #4ECCA3;
+    padding: 3px;
+    margin-right: 20px;
+}
+.bd-post-name {
+    font-weight: bold;
+    font-size: 20px;
+}
+.bd-post-img-container {
+    padding-bottom: 10px;
+}
+.bd-post-img {
+    min-width: 100%;
+    border-radius: 15px;
+}
+.bd-post-stats {
+    display: flex;
+    align-items: center;
+}
+.bd-post-favtext {
+    margin-right: 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+.bd-post-favicon {
+    margin-right: 5px;
+ }
+.bd-post-chattext {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+.bd-post-chaticon {
+    margin-right: 5px;
+}
+.bd-searchcard {
+    width: 350px;
+    padding: 10px;
+    margin-bottom: 30px;
+    border-radius: 15px;
+    background: #20262D;
+    border: none;
+}
+.bd-searchpost {
+    border-radius: 10px;
+}
+.bd-search {
+    margin-top: 15px;
+    margin-bottom: 35px;
+}
+.bd-searchbar {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    z-index: 1;
+}
+.bd-searchicon {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: 25%;
+    padding-left: 15px;
+    pointer-events: none;
+    transition: all 0.4s;
+}
+.bd-searchform {
+    line-height: 1.5;
+    display: block;
+    width: 50%;
+    background: #1A1F25;
+    border: 0;
+    border-radius: 50px;
+    color: #EEEEEE;
+    height: 40px;
+    padding: 0 20px 0 50px;
+}
+.bd-searchform:focus + .bd-searchicon {
+    color: #4ECCA3;
+}
+.bd-searchform:focus {
+    outline: none;
+}
 
 .bd-footer {
     background-color: #20262D;
-    height: 75px;
+    height: 7.5vh;
     display: flex;
     align-items: center;
 }
