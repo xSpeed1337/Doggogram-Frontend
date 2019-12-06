@@ -13,7 +13,7 @@ $(document).ready(function () {
     /**
      * Saves the uploaded File for the call to the Backend
      */
-    $("#customFile").on('change', function () {
+    $("#uploadImage").on('change', function () {
         image = this.files[0];
     });
 
