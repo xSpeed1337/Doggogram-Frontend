@@ -85,33 +85,4 @@ $(document).ready(function () {
         }
     });
 
-    /**
-     * Loads a Image from the Backend
-
-     $('#loadImage').on('click', function () {
-        let imageData;
-
-        $.ajax({
-            url: 'https://cors-anywhere.herokuapp.com/http://88.214.57.214:6889/api/v1/images/image/1',
-            type: 'GET',
-            headers: {
-                "Authorization": `Bearer ${token}`
-            },
-            success: function (response) {
-                if (debug === true) {
-                    console.log('succes: ' + JSON.stringify(response));
-                }
-                imageData = response;
-            },
-            error: function (response) {
-                if (debug === true) {
-                    console.log('succes: ' + JSON.stringify(response));
-                }
-            }
-        }).always(function () {
-            $('#bilder').after('<img id="image" class="img-fluid">');
-            $("#image").attr("src", "data:image/png;base64," + imageData.image);
-        });
-    });
-     */
 });
