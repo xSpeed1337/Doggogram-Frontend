@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <title>Doggogram</title>
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
+    <link href="../css/main.css" rel="stylesheet" type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+
+<header class="navbar navbar-expand flex-row bd-navbar fixed-top">
+    <a class="navbar-brand bd-navbar-title" href=""><i class="material-icons bd-navbar-title-icon">pets</i><span
+            class="bd-title-text1">doggo</span><span class="bd-title-text2">gram</span></a>
+    <a class="btn btn-bd-upload d-inline-block mr-4" data-target="#exampleModal" data-toggle="modal"
+       href="" id="openUploadModalBtn">Hochladen</a>
+    <!-- Modal -->
+    <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" role="dialog"
+         tabindex="-1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="uploadTitle">Titel</label>
+                            <input class="form-control" id="uploadTitle"
+                                   placeholder="Wunderschöner Titel" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label for="uploadImage">Bild</label>
+                            <div class="custom-file">
+                                <input accept="image/*" id="uploadImage" name="datei" type="file">
+                                <label class="custom-file-label" for="uploadImage">Datei auswählen</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="uploadBio">Beschreibung</label>
+                            <textarea class="form-control" id="uploadBio" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-dismiss="modal" type="button">Schließen</button>
+                    <button class="btn btn-primary" id="uploadImageBtn" type="button">Bild hochladen</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <img alt="usericon" class="bd-navbar-usericon d-inline-block mr-3" src="../resources/images/superthumb.jpg">
+    <a class="bd-settings-link d-inline-block mr-3" href=""><i class="material-icons bd-settings-icon">build</i></a>
+    <a class="bd-logout-link d-inline-block mr-3" href=""><i
+            class="material-icons bd-logout-icon">power_settings_new</i></a>
+</header>
+<main class="bd-head" id="content" role="main">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="bd-search">
+                    <form class="form-inline bd-searchbar">
+                        <input aria-label="Search" autocomplete="off" class="bd-searchform" placeholder="Suchen"
+                               type="text">
+                        <span class="bd-searchicon"><i class="material-icons">search</i></span>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="container">
+                    <div class="row row-cols-2" id="discoverFeed">
+                        <div class="col">
+                            <div class="card bd-searchcard">
+                                <img alt="searchpost" class="card-img-top bd-searchpost"
+                                     src="../resources/images/superthumb.jpg">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<footer class="bd-footer fixed-bottom">
+    <div class="container-fluid">
+        <ul class="bd-footer-list">
+            <li class="bd-footer-items"><a class="bd-footer-links" href="../html/feed.html"><i
+                    class="material-icons bd-footer-icons">home</i></a>
+            </li>
+            <li class="bd-footer-items"><a class="bd-footer-links" href="../html/searchfeed.html"><i
+                    class="material-icons bd-footer-icons">search</i></a>
+            </li>
+            <li class="bd-footer-items"><a class="bd-footer-links" href="../html/userpage.html"><i
+                    class="material-icons bd-footer-icons">person</i></a>
+            </li>
+        </ul>
+    </div>
+</footer>
+<script crossorigin="anonymous"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script TYPE="text/javascript" src="../js/jQuery-dev.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="../js/mainController.js" type="text/javascript"></script>
+<script src="../js/discoverController.js" type="text/javascript"></script>
+</body>
+</html>
