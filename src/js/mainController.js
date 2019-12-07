@@ -1,10 +1,30 @@
+let backendAdress = 'https://cors-anywhere.herokuapp.com/http://88.214.57.214:6889';
+
 $(document).ready(function () {
     let debug = true;
     let image;
     let token = sessionStorage.getItem('token');
 
     /**
-     *
+     * Loads profile pic and sets in HTML
+     */
+    $.ajax({
+        url: backendAdress + '/api/v1/users/user/image/',
+        type: 'GET',
+        headers: {
+            "Authorization": `Bearer ${token}`
+        },
+        success: function (response) {
+            if (response == "" || response == undefined) {
+                $('#userImage').attr('src', '../resources/images/superthumb.jpg');
+            } else {
+                $('#userImage').attr('src', "data:image/png;base64," + response);
+            }
+        }
+    });
+
+    /**
+     * Close Alerts when Modal gets Called
      */
     $("#openUploadModalBtn").on('click', function () {
         $(".alert").alert('close');
@@ -62,7 +82,7 @@ $(document).ready(function () {
             formdata.append('file', uploadImage);
 
             $.ajax({
-                url: 'https://cors-anywhere.herokuapp.com/http://88.214.57.214:6889/api/v1/images/upload/',
+                url: backendAdress + '/api/v1/images/upload/',
                 type: 'POST',
                 processData: false,
                 contentType: false,
