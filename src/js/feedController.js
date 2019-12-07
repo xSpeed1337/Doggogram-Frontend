@@ -22,7 +22,7 @@ function loadFeedImage() {
     scrollLoad = false;
 
     $.ajax({
-        url: 'https://cors-anywhere.herokuapp.com/http://88.214.57.214:6889/api/v1/images/discover/' + feedImageID,
+        url: backendAdress + '/api/v1/images/discover/' + feedImageID,
         type: 'GET',
         headers: {
             "Authorization": `Bearer ${token}`

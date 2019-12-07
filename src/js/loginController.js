@@ -1,5 +1,6 @@
+let debug = true;
+
 $(document).ready(function () {
-    let debug = true;
 
     /**
      * Login Method
@@ -33,7 +34,7 @@ $(document).ready(function () {
 
         if (loginBool) {
             $.ajax({
-                url: 'https://cors-anywhere.herokuapp.com/http://88.214.57.214:6889/api/v1/auth/login',
+                url: backendAdress + '/api/v1/auth/login',
                 processData: false,
                 contentType: false,
                 type: 'POST',
@@ -65,13 +66,13 @@ $(document).ready(function () {
         };
 
         $.ajax({
-            url: 'https://cors-anywhere.herokuapp.com/http://88.214.57.214:6889/api/v1/users/register/',
+            url: backendAdress + '/api/v1/users/register/',
             contentType: "application/json",
             type: 'POST',
             data: JSON.stringify(registerJSON),
             success: function (response) {
                 if (debug) {
-                    console.log('succes: ' + JSON.stringify(response));
+                    console.log('success: ' + JSON.stringify(response));
                 }
             }
         });
