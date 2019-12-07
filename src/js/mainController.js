@@ -1,7 +1,6 @@
 $(document).ready(function () {
     let debug = true;
     let image;
-    let that = this;
     let token = sessionStorage.getItem('token');
 
     /**
@@ -14,14 +13,14 @@ $(document).ready(function () {
     /**
      * Saves the uploaded File for the call to the Backend
      */
-    $("#customFile").on('change', function () {
+    $("#uploadImage").on('change', function () {
         image = this.files[0];
     });
 
     /**
      * Shows the name of the file in the upload
      */
-    $("#customFile").on("change", function () {
+    $("#uploadImage").on("change", function () {
         let fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });
@@ -84,34 +83,6 @@ $(document).ready(function () {
                 }
             });
         }
-    });
-
-    /**
-     * Loads a Image from the Backend
-     */
-    $('#loadImage').on('click', function () {
-        let imageData;
-        $.ajax({
-            url: 'https://cors-anywhere.herokuapp.com/http://88.214.57.214:6889/api/v1/images/image/1',
-            type: 'GET',
-            headers: {
-                "Authorization": `Bearer ${token}`
-            },
-            success: function (response) {
-                if (debug === true) {
-                    console.log('succes: ' + JSON.stringify(response));
-                }
-                imageData = response;
-            },
-            error: function (response) {
-                if (debug === true) {
-                    console.log('succes: ' + JSON.stringify(response));
-                }
-            }
-        }).always(function () {
-            $('#bilder').after('<img id="image" class="img-fluid">');
-            $("#image").attr("src", "data:image/png;base64," + imageData.image);
-        });
     });
 
 });

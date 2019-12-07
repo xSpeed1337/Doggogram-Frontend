@@ -12,12 +12,12 @@ $(document).ready(function () {
             '                                </button>\n' +
             '                            </div>';
         let loginUsername = $('#loginInputUsername').val();
-        let loginPasswort = $('#loginInputPassword').val();
+        let loginPassword = $('#loginInputPassword').val();
+        let loginFormData = new FormData();
         let loginBool = true;
-        let loginJSON = {
-            user: loginUsername,
-            pass: loginPasswort
-        };
+
+        loginFormData.append('user', loginUsername);
+        loginFormData.append('password', loginPassword);
 
         $(".alert").alert('close');
 
@@ -26,7 +26,7 @@ $(document).ready(function () {
             $('#loginUsernameForm').after(loginAlert);
         }
 
-        if (loginPasswort == undefined || loginPasswort == "") {
+        if (loginPassword == undefined || loginPassword == "") {
             loginBool = false;
             $('#loginPasswordForm').after(loginAlert);
         }
@@ -34,16 +34,17 @@ $(document).ready(function () {
         if (loginBool) {
             $.ajax({
                 url: 'https://cors-anywhere.herokuapp.com/http://88.214.57.214:6889/api/v1/auth/login',
-                contentType: "application/json",
+                processData: false,
+                contentType: false,
                 type: 'POST',
-                data: JSON.stringify(loginJSON),
+                data: loginFormData,
                 success: function (response) {
                     if (debug) {
                         console.log('succes: ' + JSON.stringify(response));
                     }
                     sessionStorage.setItem('token', response.token);
                     sessionStorage.setItem('Username', loginUsername);
-                    location.href = "../html/userpage.html";
+                    location.href = "../html/feed.html";
                 },
                 error: function (response) {
                     if (debug) {
