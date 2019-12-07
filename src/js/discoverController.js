@@ -6,6 +6,7 @@ let discoverLastImageID = 0;
 $(document).ready(function () {
 
     loadDiscoverFeed();
+
     /**
      * Loads new Content when User reaches the end of the Window
      */
