@@ -106,3 +106,56 @@ $(document).ready(function () {
     });
 
 });
+
+/**
+ * Open Image Modal
+ */
+function openImageModal(event) {
+    let imageModalDOM = "<div id='imageModal' class=\"modal fade bd-example-modal-lg\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myLargeModalLabel\" aria-hidden=\"true\">\n" +
+        "  <div class=\"modal-dialog modal-lg\">\n" +
+        "    <div id='modalContainer' class=\"modal-content\">\n" +
+        "    </div>\n" +
+        "  </div>\n" +
+        "</div>";
+    let imageID = $(event.target)[0].id;
+    let iID = imageID.substr(5);
+
+    $.ajax({
+        url: backendAdress + '/api/v1/images/image/' + iID,
+        type: 'GET',
+        headers: {
+            "Authorization": `Bearer ${token}`
+        },
+        success: function (response) {
+            $('#modalContainer').append("<div class=\"post-container\" style=\"flex-direction: column\">\n" +
+                "                    <article class=\"post\">\n" +
+                "                        <header class=\"bd-post-title\">\n" +
+                "                            <img alt=\"\" class=\"bd-post-pp\" src=\"\data:image/jpeg;base64," + response.imageDTOS.userImage + "\">\n" +
+                "                            <span class=\"bd-post-name\">" + response.imageDTOS.user + "</span>\n" +
+                "                        </header>\n" +
+                "                        <div class=\"bd-post-img-container\">\n" +
+                "                            <img id=\"image" + response.imageDTOS.id + "\" alt=\"\" class=\"bd-post-img\" src=\"\data:image/jpeg;base64," + response.imageDTOS.image + "\">\n" +
+                "                        </div>\n" +
+                "                        <div class=\"bd-post-stats\">\n" +
+                "                            <a class=\"bd-post-favtext\"><i class=\"material-icons bd-post-favicon\">favorite</i><span\n" +
+                "                                    class=\"bd-post-span\">" + response.imageDTOS.likes + "</span></a>\n" +
+                "                            <a class=\"bd-post-chattext\"><i class=\"material-icons bd-post-chaticon\">chat</i><span\n" +
+                "                                    class=\"bd-post-span\">" + response.imageDTOS.comments + "</span></a>\n" +
+                "                        </div>\n" +
+                "                    </article>\n" +
+                "                </div>");
+
+            $('#' + imageID).after(imageModalDOM);
+            $('#imageModal').modal('toggle');
+        },
+        error: function (response) {
+
+        }
+    });
+}
+
+function likingImage(event) {
+    /**
+     * TODO
+     */
+}
