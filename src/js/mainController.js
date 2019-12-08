@@ -123,10 +123,9 @@ function openImageModal(event) {
             "Authorization": `Bearer ${token}`
         },
         success: function (response) {
-            let modal = "<div id='imageModal' class=\"modal fade bd-example-modal-lg\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myLargeModalLabel\" aria-hidden=\"true\">\n" +
+            let modal = "<div id='imageModal" + response.id + "' class=\"modal fade bd-example-modal-lg\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myLargeModalLabel\" aria-hidden=\"true\">\n" +
                 "  <div class=\"modal-dialog modal-lg\">\n" +
                 "    <div class=\"modal-content\">\n" +
-                "     <div class=\"post-container\" style=\"flex-direction: column\">\n" +
                 "                    <article class=\"post\">\n" +
                 "                        <header class=\"bd-post-title\">\n" +
                 "                            <img alt=\"\" class=\"bd-post-pp\" src=\"\data:image/jpeg;base64," + response.userImage + "\">\n" +
@@ -136,19 +135,18 @@ function openImageModal(event) {
                 "                            <img id=\"image" + response.id + "\" alt=\"\" class=\"bd-post-img\" src=\"\data:image/jpeg;base64," + response.image + "\">\n" +
                 "                        </div>\n" +
                 "                        <div class=\"bd-post-stats\">\n" +
-                "                            <a class=\"bd-post-favtext\"><i class=\"material-icons bd-post-favicon\">favorite</i><span\n" +
+                "                            <a id='imageLikes' class=\"bd-post-favtext\"><i class=\"material-icons bd-post-favicon\">favorite</i><span\n" +
                 "                                    class=\"bd-post-span\">" + response.likes + "</span></a>\n" +
                 "                            <a class=\"bd-post-chattext\"><i class=\"material-icons bd-post-chaticon\">chat</i><span\n" +
                 "                                    class=\"bd-post-span\">" + response.comments + "</span></a>\n" +
                 "                        </div>\n" +
                 "                    </article>\n" +
-                "                </div> \n" +
                 "    </div>\n" +
                 "  </div>\n" +
                 "</div>";
 
             $('#' + imageID).after(modal);
-            $('#imageModal').modal('toggle');
+            $('#imageModal' + response.id).modal('toggle');
         }
     });
 }
@@ -157,8 +155,30 @@ function openImageModal(event) {
  * Inkrements the amount of likes
  * @param event
  */
-function likingImage(event) {
-    /**
-     * TODO
-     */
+function likingImage(imageID) {
+    let likeFormData = new FormData();
+    likeFormData.append('imageId', imageID);
+
+    $.ajax({
+        url: backendAdress + '/api/v1/images/liked',
+        type: 'POST',
+        processData: false,
+        contentType: false,
+        data: likeFormData,
+        headers: {
+            "Authorization": `Bearer ${token}`
+        },
+        success: function (response) {
+            let currentLikes = $('#imageLikes' + imageID).html() * 1;
+            if (response) {
+                $('#imageLikes' + imageID).text(currentLikes + 1);
+            } else {
+                $('#imageLikes' + imageID).text(currentLikes - 1);
+            }
+        }
+    });
+}
+
+function loadModalComments() {
+
 }
