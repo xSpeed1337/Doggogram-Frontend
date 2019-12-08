@@ -139,6 +139,7 @@
     flex-direction: column;
     justify-content: center;
     padding: 15px;
+    margin-bottom: 15px;
 }
 .bd-post-title {
     padding-bottom: 10px;
@@ -159,9 +160,13 @@
 }
 .bd-post-img-container {
     padding-bottom: 10px;
+    height: 700px;
+    width: 720px;
 }
 .bd-post-img {
-    min-width: 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     border-radius: 15px;
 }
 .bd-post-stats {
@@ -186,8 +191,9 @@
     margin-right: 5px;
 }
 .bd-searchcard {
-    width: 350px;
     padding: 10px;
+    width: 350px;
+    height: 350px;
     margin-bottom: 30px;
     border-radius: 15px;
     background: #20262D;
@@ -195,6 +201,9 @@
 }
 .bd-searchpost {
     border-radius: 10px;
+    object-fit: cover;
+    width: 350px;
+    height: 350px;
 }
 .bd-search {
     margin-top: 15px;
@@ -273,6 +282,65 @@
     color: #4ECCA3;
 }
 
+.modal-content {
+    background: #232931;
+    border: none;
+    border-radius: 15px;
+    margin-top: 250px;
+    color: #EEEEEE;
+}
+.modal-footer {
+    border: none;
+}
+.btn-primary {
+    background: #4ECCA3;
+    color: #232931;
+    box-shadow: none;
+    border: 2px solid #4ECCA3;
+}
+.btn-primary:hover {
+    background: none;
+    border: 2px solid #4ECCA3;
+}
+.btn-secondary {
+    background: none;
+    color: #EEEEEE;
+    border: 2px solid #cc574e;
+}
+.btn-secondary:hover {
+    background: #cc574e;
+    color: #EEEEEE;
+    border: 2px solid #cc574e;
+}
+.form-control {
+    background-color: #1A1F25;
+    border: none;
+}
+.form-control:focus {
+    background-color: #1A1F25;
+    border: none;
+    box-shadow: none;
+    color: #EEEEEE;
+}
+.form-control::placeholder {
+    color: grey;
+}
+.custom-file-label {
+    background: #1A1F25;
+    border: none;
+    box-shadow: none;
+    color: grey;
+}
+.custom-file-input {
+    background: #1A1F25;
+    border: none;
+    box-shadow: none;
+    color: grey;
+}
 .modal-backdrop {
     z-index: 1020;
+}
+::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space */
+    background: transparent;  /* optional: just make scrollbar invisible */
 }
