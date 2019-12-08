@@ -6,6 +6,7 @@ let discoverLastImageID = 0;
 $(document).ready(function () {
 
     loadDiscoverFeed();
+
     /**
      * Loads new Content when User reaches the end of the Window
      */
@@ -21,7 +22,7 @@ function loadDiscoverFeed() {
     scrollLoad = false;
 
     $.ajax({
-        url: 'https://cors-anywhere.herokuapp.com/http://88.214.57.214:6889/api/v1/images/discover/' + discoverImageID,
+        url: backendAdress + '/api/v1/images/discover/' + discoverImageID,
         type: 'GET',
         headers: {
             "Authorization": `Bearer ${token}`
@@ -46,4 +47,3 @@ function loadDiscoverFeed() {
         }
     });
 }
-

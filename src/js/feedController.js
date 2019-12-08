@@ -22,7 +22,7 @@ function loadFeedImage() {
     scrollLoad = false;
 
     $.ajax({
-        url: 'https://cors-anywhere.herokuapp.com/http://88.214.57.214:6889/api/v1/images/discover/' + feedImageID,
+        url: backendAdress + '/api/v1/images/discover/' + feedImageID,
         type: 'GET',
         headers: {
             "Authorization": `Bearer ${token}`
@@ -32,17 +32,17 @@ function loadFeedImage() {
                 let imageDiv = "<div class=\"post-container\" style=\"flex-direction: column\">\n" +
                     "                    <article class=\"post\">\n" +
                     "                        <header class=\"bd-post-title\">\n" +
-                    "                            <img alt=\"\" class=\"bd-post-pp\" src=\"../resources/images/superthumb.jpg\">\n" +
-                    "                            <span class=\"bd-post-name\">Mein Name</span>\n" +
+                    "                            <img alt=\"\" class=\"bd-post-pp\" src=\"\data:image/jpeg;base64," + response.imageDTOS[i].userImage + "\">\n" +
+                    "                            <span class=\"bd-post-name\">" + response.imageDTOS[i].user + "</span>\n" +
                     "                        </header>\n" +
                     "                        <div class=\"bd-post-img-container\">\n" +
-                    "                            <img id=\"image" + response.imageDTOS[i].id + "\" alt=\"\" class=\"bd-post-img\" src=\"\data:image/jpeg;base64," + response.imageDTOS[i].image + "\">\n" +
+                    "                            <img ondblclick='likingImage(event)' onclick='openImageModal(event)' id=\"image" + response.imageDTOS[i].id + "\" alt=\"\" class=\"bd-post-img\" src=\"\data:image/jpeg;base64," + response.imageDTOS[i].image + "\">\n" +
                     "                        </div>\n" +
                     "                        <div class=\"bd-post-stats\">\n" +
                     "                            <a class=\"bd-post-favtext\"><i class=\"material-icons bd-post-favicon\">favorite</i><span\n" +
                     "                                    class=\"bd-post-span\">" + response.imageDTOS[i].likes + "</span></a>\n" +
                     "                            <a class=\"bd-post-chattext\"><i class=\"material-icons bd-post-chaticon\">chat</i><span\n" +
-                    "                                    class=\"bd-post-span\">" + response.imageDTOS[1].comments + "</span></a>\n" +
+                    "                                    class=\"bd-post-span\">" + response.imageDTOS[i].comments + "</span></a>\n" +
                     "                        </div>\n" +
                     "                    </article>\n" +
                     "                </div>";
