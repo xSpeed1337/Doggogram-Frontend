@@ -283,11 +283,10 @@
 }
 
 .modal-content {
-    background: #232931;
-    border: none;
-    border-radius: 15px;
-    margin-top: 250px;
-    color: #EEEEEE;
+     background: #232931;
+     border: none;
+     border-radius: 15px;
+     color: #EEEEEE;
 }
 .modal-footer {
     border: none;
@@ -297,6 +296,7 @@
     color: #232931;
     box-shadow: none;
     border: 2px solid #4ECCA3;
+    font-weight: bold;
 }
 .btn-primary:hover {
     background: none;

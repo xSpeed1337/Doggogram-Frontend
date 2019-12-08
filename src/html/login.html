@@ -17,6 +17,31 @@
     <a class="navbar-brand bd-navbar-title" href=""><i class="material-icons bd-navbar-title-icon">pets</i><span class="bd-title-text1">doggo</span><span class="bd-title-text2">gram</span></a>
 </header>
 <main class="bd-head" id="content" role="main">
+    <div class="modal fade" id="registrationModal" tabindex="-1" role="dialog" aria-labelledby="registrationModalLogin" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Nutzername und Passwort festlegen!</h5>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label>Dein Nutzername</label>
+                            <input autocomplete="off" class="form-control" name="username" placeholder="Nutzername eingeben" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label>Dein Passwort</label>
+                            <input type="password" autocomplete="off" class="form-control" placeholder="Passwort eingeben">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+                    <button type="button" class="btn btn-primary">Registrieren</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="container-fluid">
         <div class="row">
             <div class="col-2"></div>
@@ -52,28 +77,6 @@
                 </div>
             </div>
             <div class="col-2"></div>
-        </div>
-        <div class="modal fase" id="registrationModal" tabindex="-1" role="dialog" aria-labelledby="registrationModalLogin" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="model-content">
-                    <div class="model-body">
-                        <form>
-                            <div class="form-group">
-                                <label>Nutzername</label>
-                                <input autocomplete="off" class="bd-registration-form-input" name="username" placeholder="Nutzername eingeben" type="text">
-                            </div>
-                            <div class="form-group">
-                                <label>Passwort</label>
-                                <input type="password" autocomplete="off" class="bd-registration-form-input" placeholder="Passwort eingeben">
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
-                        <button type="button" class="btn btn-primary">Registrieren</button>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </main>
