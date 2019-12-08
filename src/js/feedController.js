@@ -39,8 +39,8 @@ function loadFeedImage() {
                     "                            <img onclick='openImageModal(event)' id=\"image" + response.imageDTOS[i].id + "\" alt=\"\" class=\"bd-post-img\" src=\"\data:image/jpeg;base64," + response.imageDTOS[i].image + "\">\n" +
                     "                        </div>\n" +
                     "                        <div class=\"bd-post-stats\">\n" +
-                    "                            <a class=\"bd-post-favtext\"><i class=\"material-icons bd-post-favicon\">favorite</i><span\n" +
-                    "                                    class=\"bd-post-span\">" + response.imageDTOS[i].likes + "</span></a>\n" +
+                    "                            <a onclick='likingImage(" + response.imageDTOS[i].id + ")' class=\"bd-post-favtext\"><i class=\"material-icons bd-post-favicon\">favorite</i><span\n" +
+                    "                                    class=\"bd-post-span\" id='imageLikes" + response.imageDTOS[i].id + "'>" + response.imageDTOS[i].likes + "</span></a>\n" +
                     "                            <a class=\"bd-post-chattext\"><i class=\"material-icons bd-post-chaticon\">chat</i><span\n" +
                     "                                    class=\"bd-post-span\">" + response.imageDTOS[i].comments + "</span></a>\n" +
                     "                        </div>\n" +
