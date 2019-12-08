@@ -42,7 +42,7 @@ function loadFeedImage() {
                     "                            <a onclick='likingImage(" + response.imageDTOS[i].id + ")' class=\"bd-post-favtext\"><i class=\"material-icons bd-post-favicon\">favorite</i><span\n" +
                     "                                    class=\"bd-post-span\" id='imageLikes" + response.imageDTOS[i].id + "'>" + response.imageDTOS[i].likes + "</span></a>\n" +
                     "                            <a class=\"bd-post-chattext\"><i class=\"material-icons bd-post-chaticon\">chat</i><span\n" +
-                    "                                    class=\"bd-post-span\">" + response.imageDTOS[i].comments + "</span></a>\n" +
+                    "                                    id='imageComments" + response.imageDTOS[i].id + "' class=\"bd-post-span\">" + response.imageDTOS[i].comments + "</span></a>\n" +
                     "                        </div>\n" +
                     "                    </article>\n" +
                     "                </div>";
