@@ -14,8 +14,7 @@
 <body>
 
 <header class="navbar navbar-expand flex-row bd-navbar fixed-top justify-content-center">
-    <a class="navbar-brand bd-navbar-title" href=""><i class="material-icons bd-navbar-title-icon">pets</i><span
-            class="bd-title-text1">doggo</span><span class="bd-title-text2">gram</span></a>
+    <a class="navbar-brand bd-navbar-title" href=""><i class="material-icons bd-navbar-title-icon">pets</i><span class="bd-title-text1">doggo</span><span class="bd-title-text2">gram</span></a>
 </header>
 <main class="bd-head" id="content" role="main">
     <div class="container-fluid">
@@ -29,21 +28,13 @@
                         </div>
                         <div class="bd-login-form validate-form">
                             <span class="bd-login-form-title">Login</span>
-                            <div class="bd-login-form-container-input validate-input"
-                                 data-validate="Nutzername ist erforderlich"
-                                 id="loginUsernameForm">
-                                <input autocomplete="off" class="bd-login-form-input" id="loginInputUsername"
-                                       name="username"
-                                       placeholder="Nutzername" type="text">
+                            <div class="bd-login-form-container-input validate-input" data-validate="Nutzername ist erforderlich" id="loginUsernameForm">
+                                <input autocomplete="off" class="bd-login-form-input" id="loginInputUsername" name="username" placeholder="Nutzername" type="text">
                                 <span class="bd-login-form-input-focus"></span>
                                 <span class="bd-login-form-input-symbol"><i class="material-icons">person</i></span>
                             </div>
-                            <div class="bd-login-form-container-input validate-input"
-                                 data-validate="Passwort ist erforderlich"
-                                 id="loginPasswordForm">
-                                <input autocomplete="off" class="bd-login-form-input" id="loginInputPassword"
-                                       name="pass"
-                                       placeholder="Passwort" type="password">
+                            <div class="bd-login-form-container-input validate-input" data-validate="Passwort ist erforderlich" id="loginPasswordForm">
+                                <input autocomplete="off" class="bd-login-form-input" id="loginInputPassword" name="pass" placeholder="Passwort" type="password">
                                 <span class="bd-login-form-input-focus"></span>
                                 <span class="bd-login-form-input-symbol"><i class="material-icons">vpn_key</i></span>
                             </div>
@@ -54,14 +45,35 @@
                                 <a class="bd-login-form-txt" href=""><span>Nutzername / Passwort vergessen?</span></a>
                             </div>
                             <div class="text-center">
-                                <a class="create-profile" href=""><span>Erstelle dein Profil</span><i
-                                        class="material-icons create-profile-icon">keyboard_arrow_right</i></a>
+                                <a class="create-profile" href="" data-toggle="modal" data-target="#registrationModal"><span>Erstelle dein Profil</span><i class="material-icons create-profile-icon">keyboard_arrow_right</i></a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-2"></div>
+        </div>
+        <div class="modal fase" id="registrationModal" tabindex="-1" role="dialog" aria-labelledby="registrationModalLogin" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="model-content">
+                    <div class="model-body">
+                        <form>
+                            <div class="form-group">
+                                <label>Nutzername</label>
+                                <input autocomplete="off" class="bd-registration-form-input" name="username" placeholder="Nutzername eingeben" type="text">
+                            </div>
+                            <div class="form-group">
+                                <label>Passwort</label>
+                                <input type="password" autocomplete="off" class="bd-registration-form-input" placeholder="Passwort eingeben">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+                        <button type="button" class="btn btn-primary">Registrieren</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </main>
