@@ -60,23 +60,45 @@ $(document).ready(function () {
     /**
      * Register Method
      */
-    $("#RegisterButton").on("click", function () {
-        let registerJSON = {
-            user: $('#exampleInputEmail1').val(),
-            pass: $('#exampleInputPassword1').val()
-        };
+    $("#registerButton").on("click", function () {
+        let registerAlert = '<div class="alert alert-warning alert-dismissible show" role="alert">\n' +
+            '                                Dieses feld darf <strong>NICHT</strong> leer sein! \n' +
+            '                                <button aria-label="Close" class="close" data-dismiss="alert" type="button">\n' +
+            '                                    <span aria-hidden="true">&times;</span>\n' +
+            '                                </button>\n' +
+            '                            </div>';
+        let registerUsername = $('#registerInputUsername').val();
+        let registerPassword = $('#registerInputPassword').val();
+        let registerFormData = new FormData();
+        let registerBool = true;
 
-        $.ajax({
-            url: backendAdress + '/api/v1/users/register/',
-            contentType: "application/json",
-            type: 'POST',
-            data: JSON.stringify(registerJSON),
-            success: function (response) {
-                if (debug) {
-                    console.log('success: ' + JSON.stringify(response));
+        registerFormData.append('user', registerUsername);
+        registerFormData.append('password', registerPassword);
+
+        $(".alert").alert('close');
+
+        if (registerUsername == undefined || registerUsername == "") {
+            registerBool = false;
+            $('#registerUsername').after(registerAlert);
+        }
+
+        if (registerPassword == undefined || registerPassword == "") {
+            registerBool = false;
+            $('#registerPassword').after(registerAlert);
+        }
+
+        if (registerBool) {
+            $.ajax({
+                url: backendAdress + '/api/v1/users/register',
+                processData: false,
+                contentType: false,
+                type: 'POST',
+                data: registerFormData,
+                success: function (response) {
+
                 }
-            }
-        });
+            });
+        }
     });
 
 });
