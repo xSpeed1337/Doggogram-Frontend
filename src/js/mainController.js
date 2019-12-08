@@ -135,10 +135,10 @@ function openImageModal(event) {
                 "                            <img id=\"image" + response.id + "\" alt=\"\" class=\"bd-post-img\" src=\"\data:image/jpeg;base64," + response.image + "\">\n" +
                 "                        </div>\n" +
                 "                        <div class=\"bd-post-stats\">\n" +
-                "                            <a id='imageLikes' class=\"bd-post-favtext\"><i class=\"material-icons bd-post-favicon\">favorite</i><span\n" +
-                "                                    class=\"bd-post-span\">" + response.likes + "</span></a>\n" +
+                "                            <a onclick='likingImage(" + response.id + ")' class=\"bd-post-favtext\"><i class=\"material-icons bd-post-favicon\">favorite</i><span\n" +
+                "                                    id='imageLikes" + response.id + "' class=\"bd-post-span\">" + response.likes + "</span></a>\n" +
                 "                            <a class=\"bd-post-chattext\"><i class=\"material-icons bd-post-chaticon\">chat</i><span\n" +
-                "                                    class=\"bd-post-span\">" + response.comments + "</span></a>\n" +
+                "                                   id='imageComments" + response.id + "' class=\"bd-post-span\">" + response.comments + "</span></a>\n" +
                 "                        </div>\n" +
                 "                    </article>\n" +
                 "    </div>\n" +
