@@ -95,7 +95,13 @@ $(document).ready(function () {
                 type: 'POST',
                 data: registerFormData,
                 success: function (response) {
-
+                    let registerSuccessAlert = "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">\n" +
+                        "  <strong>Regestrierung erfolgreich.</strong> Du kannst dich jetzt einloggen.\n" +
+                        "  <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n" +
+                        "    <span aria-hidden=\"true\">&times;</span>\n" +
+                        "  </button>\n" +
+                        "</div>";
+                    $('#registerPassword').after(registerSuccessAlert);
                 }
             });
         }
