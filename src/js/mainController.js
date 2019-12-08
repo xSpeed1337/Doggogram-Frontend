@@ -123,10 +123,9 @@ function openImageModal(event) {
             "Authorization": `Bearer ${token}`
         },
         success: function (response) {
-            let modal = "<div id='imageModal' class=\"modal fade bd-example-modal-lg\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myLargeModalLabel\" aria-hidden=\"true\">\n" +
+            let modal = "<div id='imageModal" + response.id + "' class=\"modal fade bd-example-modal-lg\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myLargeModalLabel\" aria-hidden=\"true\">\n" +
                 "  <div class=\"modal-dialog modal-lg\">\n" +
                 "    <div class=\"modal-content\">\n" +
-                "     <div class=\"post-container\" style=\"flex-direction: column\">\n" +
                 "                    <article class=\"post\">\n" +
                 "                        <header class=\"bd-post-title\">\n" +
                 "                            <img alt=\"\" class=\"bd-post-pp\" src=\"\data:image/jpeg;base64," + response.userImage + "\">\n" +
@@ -142,13 +141,12 @@ function openImageModal(event) {
                 "                                    class=\"bd-post-span\">" + response.comments + "</span></a>\n" +
                 "                        </div>\n" +
                 "                    </article>\n" +
-                "                </div> \n" +
                 "    </div>\n" +
                 "  </div>\n" +
                 "</div>";
 
             $('#' + imageID).after(modal);
-            $('#imageModal').modal('toggle');
+            $('#imageModal' + response.id).modal('toggle');
         }
     });
 }
@@ -179,4 +177,8 @@ function likingImage(imageID) {
             }
         }
     });
+}
+
+function loadModalComments() {
+
 }
