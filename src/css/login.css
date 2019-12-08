@@ -224,3 +224,25 @@
 .bd-footer-list-text{
     font-size: 13.5px;
 }
+
+.modal {
+    display: flex;
+}
+.modal-body {
+    background: #232931;
+    border: none;
+    border-radius: 15px;
+}
+.modal-footer {
+    background: #232931;
+    border: none;
+    border-radius: 15px;
+}
+.bd-registration-form-input {
+    line-height: 1.5;
+    background: #1A1F25;
+    border: 0;
+    border-radius: 50px;
+    color: #EEEEEE;
+    height: 40px;
+}
