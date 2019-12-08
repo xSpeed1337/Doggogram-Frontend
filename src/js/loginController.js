@@ -1,4 +1,5 @@
-let debug = true;
+let debug = false;
+let backendAdress = 'https://cors-anywhere.herokuapp.com/http://88.214.57.214:6889';
 
 $(document).ready(function () {
 
