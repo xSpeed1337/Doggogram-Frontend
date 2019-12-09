@@ -1,4 +1,9 @@
 let backendAdress = 'https://cors-anywhere.herokuapp.com/http://88.214.57.214:6889';
+let bigLoadSpinner = "<div id='bigLoadSpinner' class=\"post-container\" style=\"flex-direction: column\" >" +
+    "<div class=\"spinner-border\" style=\"width: 3rem; height: 3rem; flex-direction: column;\" role=\"status\">\n" +
+    "  <span class=\"sr-only\">Loading...</span>\n" +
+    "</div>" +
+    "</div>";
 
 $(document).ready(function () {
     let debug = true;
