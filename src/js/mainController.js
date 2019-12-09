@@ -5,23 +5,8 @@ $(document).ready(function () {
     let image;
     let token = sessionStorage.getItem('token');
 
-    /**
-     * Loads profile pic and sets in HTML
-     */
-    $.ajax({
-        url: backendAdress + '/api/v1/users/user/image/',
-        type: 'GET',
-        headers: {
-            "Authorization": `Bearer ${token}`
-        },
-        success: function (response) {
-            if (response == "" || response == undefined) {
-                $('#userImage').attr('src', '../resources/images/superthumb.jpg');
-            } else {
-                $('#userImage').attr('src', "data:image/png;base64," + response);
-            }
-        }
-    });
+
+    loadProfilePic();
 
     /**
      * Close Alerts when Modal gets Called
@@ -147,6 +132,26 @@ function openImageModal(event) {
 
             $('#' + imageID).after(modal);
             $('#imageModal' + response.id).modal('toggle');
+        }
+    });
+}
+
+/**
+ * Loads profile pic and sets in HTML
+ */
+function loadProfilePic() {
+    $.ajax({
+        url: backendAdress + '/api/v1/users/user/image/',
+        type: 'GET',
+        headers: {
+            "Authorization": `Bearer ${token}`
+        },
+        success: function (response) {
+            if (response == "" || response == undefined) {
+                $('#userImage').attr('src', '../resources/images/superthumb.jpg');
+            } else {
+                $('#userImage').attr('src', "data:image/png;base64," + response);
+            }
         }
     });
 }
