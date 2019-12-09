@@ -51,7 +51,7 @@ $(document).ready(function () {
                     }
                     sessionStorage.setItem('token', response.token);
                     sessionStorage.setItem('Username', loginUsername);
-                    location.href = "../html/feed.html";
+                    location.href = "feed.html";
                 },
                 error: function (response) {
                     if (debug) {

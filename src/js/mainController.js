@@ -143,7 +143,7 @@ function openImageModal(event) {
 
 function autoRedirect() {
     if (token == '' || token == undefined) {
-        location.href = "../html/login.html";
+        location.href = "login.html";
     }
 }
 
@@ -159,7 +159,7 @@ function loadProfilePic() {
         },
         success: function (response) {
             if (response == "" || response == undefined) {
-                $('#userImage').attr('src', '../resources/images/superthumb.jpg');
+                $('#userImage').attr('src', 'resources/images/superthumb.jpg');
             } else {
                 $('#userImage').attr('src', "data:image/png;base64," + response);
             }
