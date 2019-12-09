@@ -1,4 +1,3 @@
-let token = sessionStorage.getItem('token');
 let scrollLoad = true;
 let feedImageID = 0;
 let feedLastImageID = 0;

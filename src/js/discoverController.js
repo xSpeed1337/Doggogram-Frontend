@@ -1,4 +1,3 @@
-let token = sessionStorage.getItem('token');
 let scrollLoad = true;
 let discoverImageID = 0;
 let discoverLastImageID = 0;
