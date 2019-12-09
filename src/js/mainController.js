@@ -1,27 +1,17 @@
 let backendAdress = 'https://cors-anywhere.herokuapp.com/http://88.214.57.214:6889';
+let token = sessionStorage.getItem('token');
+let bigLoadSpinner = "<div id='bigLoadSpinner' class=\"post-container\" style=\"flex-direction: column\" >" +
+    "<div class=\"spinner-border\" style=\"width: 3rem; height: 3rem; flex-direction: column;\" role=\"status\">\n" +
+    "  <span class=\"sr-only\">Loading...</span>\n" +
+    "</div>" +
+    "</div>";
 
 $(document).ready(function () {
     let debug = true;
     let image;
-    let token = sessionStorage.getItem('token');
 
-    /**
-     * Loads profile pic and sets in HTML
-     */
-    $.ajax({
-        url: backendAdress + '/api/v1/users/user/image/',
-        type: 'GET',
-        headers: {
-            "Authorization": `Bearer ${token}`
-        },
-        success: function (response) {
-            if (response == "" || response == undefined) {
-                $('#userImage').attr('src', '../resources/images/superthumb.jpg');
-            } else {
-                $('#userImage').attr('src', "data:image/png;base64," + response);
-            }
-        }
-    });
+    autoRedirect();
+    loadProfilePic();
 
     /**
      * Close Alerts when Modal gets Called
@@ -135,10 +125,10 @@ function openImageModal(event) {
                 "                            <img id=\"image" + response.id + "\" alt=\"\" class=\"bd-post-img\" src=\"\data:image/jpeg;base64," + response.image + "\">\n" +
                 "                        </div>\n" +
                 "                        <div class=\"bd-post-stats\">\n" +
-                "                            <a id='imageLikes' class=\"bd-post-favtext\"><i class=\"material-icons bd-post-favicon\">favorite</i><span\n" +
-                "                                    class=\"bd-post-span\">" + response.likes + "</span></a>\n" +
+                "                            <a onclick='likingImage(" + response.id + ")' class=\"bd-post-favtext\"><i class=\"material-icons bd-post-favicon\">favorite</i><span\n" +
+                "                                    id='imageLikes" + response.id + "' class=\"bd-post-span\">" + response.likes + "</span></a>\n" +
                 "                            <a class=\"bd-post-chattext\"><i class=\"material-icons bd-post-chaticon\">chat</i><span\n" +
-                "                                    class=\"bd-post-span\">" + response.comments + "</span></a>\n" +
+                "                                   id='imageComments" + response.id + "' class=\"bd-post-span\">" + response.comments + "</span></a>\n" +
                 "                        </div>\n" +
                 "                    </article>\n" +
                 "    </div>\n" +
@@ -147,6 +137,32 @@ function openImageModal(event) {
 
             $('#' + imageID).after(modal);
             $('#imageModal' + response.id).modal('toggle');
+        }
+    });
+}
+
+function autoRedirect() {
+    if (token == '' || token == undefined) {
+        location.href = "login.html";
+    }
+}
+
+/**
+ * Loads profile pic and sets in HTML
+ */
+function loadProfilePic() {
+    $.ajax({
+        url: backendAdress + '/api/v1/users/user/image/',
+        type: 'GET',
+        headers: {
+            "Authorization": `Bearer ${token}`
+        },
+        success: function (response) {
+            if (response == "" || response == undefined) {
+                $('#userImage').attr('src', 'resources/images/superthumb.jpg');
+            } else {
+                $('#userImage').attr('src', "data:image/png;base64," + response);
+            }
         }
     });
 }

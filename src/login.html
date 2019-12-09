@@ -6,7 +6,7 @@
     <title>Doggogram</title>
     <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
-    <link href="../css/login.css" rel="stylesheet" type="text/css">
+    <link href="css/login.css" rel="stylesheet" type="text/css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css"
           rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -14,10 +14,13 @@
 <body>
 
 <header class="navbar navbar-expand flex-row bd-navbar fixed-top justify-content-center">
-    <a class="navbar-brand bd-navbar-title" href=""><i class="material-icons bd-navbar-title-icon">pets</i><span class="bd-title-text1">doggo</span><span class="bd-title-text2">gram</span></a>
+    <a class="navbar-brand bd-navbar-title" href=""><i class="material-icons bd-navbar-title-icon">pets</i><span
+            class="bd-title-text1">doggo</span><span class="bd-title-text2">gram</span></a>
 </header>
 <main class="bd-head" id="content" role="main">
-    <div class="modal fade" id="registrationModal" tabindex="-1" role="dialog" aria-labelledby="registrationModalLogin" aria-hidden="true">
+    <div aria-hidden="true" aria-labelledby="registrationModalLogin" class="modal fade" id="registrationModal"
+         role="dialog"
+         tabindex="-1">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -25,19 +28,22 @@
                 </div>
                 <div class="modal-body">
                     <form>
-                        <div class="form-group">
+                        <div class="form-group" id="registerUsername">
                             <label>Dein Nutzername</label>
-                            <input autocomplete="off" class="form-control" name="username" placeholder="Nutzername eingeben" type="text">
+                            <input autocomplete="off" class="form-control" id="registerInputUsername" name="username"
+                                   placeholder="Nutzername eingeben" type="text">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" id="registerPassword">
                             <label>Dein Passwort</label>
-                            <input type="password" autocomplete="off" class="form-control" placeholder="Passwort eingeben">
+                            <input autocomplete="off" class="form-control" id="registerInputPassword"
+                                   placeholder="Passwort eingeben"
+                                   type="password">
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
-                    <button type="button" class="btn btn-primary">Registrieren</button>
+                    <button class="btn btn-secondary" data-dismiss="modal" type="button">Abbrechen</button>
+                    <button class="btn btn-primary" id="registerButton" type="button">Registrieren</button>
                 </div>
             </div>
         </div>
@@ -49,17 +55,21 @@
                 <div class="bd-container-login">
                     <div class="bd-login">
                         <div class="bd-login-container-img">
-                            <img alt="" class="bd-login-img" src="../resources/images/superthumb.jpg">
+                            <img alt="" class="bd-login-img" src="resources/images/superthumb.jpg">
                         </div>
                         <div class="bd-login-form validate-form">
                             <span class="bd-login-form-title">Login</span>
-                            <div class="bd-login-form-container-input validate-input" data-validate="Nutzername ist erforderlich" id="loginUsernameForm">
-                                <input autocomplete="off" class="bd-login-form-input" id="loginInputUsername" name="username" placeholder="Nutzername" type="text">
+                            <div class="bd-login-form-container-input validate-input"
+                                 data-validate="Nutzername ist erforderlich" id="loginUsernameForm">
+                                <input autocomplete="off" class="bd-login-form-input" id="loginInputUsername"
+                                       name="username" placeholder="Nutzername" type="text">
                                 <span class="bd-login-form-input-focus"></span>
                                 <span class="bd-login-form-input-symbol"><i class="material-icons">person</i></span>
                             </div>
-                            <div class="bd-login-form-container-input validate-input" data-validate="Passwort ist erforderlich" id="loginPasswordForm">
-                                <input autocomplete="off" class="bd-login-form-input" id="loginInputPassword" name="pass" placeholder="Passwort" type="password">
+                            <div class="bd-login-form-container-input validate-input"
+                                 data-validate="Passwort ist erforderlich" id="loginPasswordForm">
+                                <input autocomplete="off" class="bd-login-form-input" id="loginInputPassword"
+                                       name="pass" placeholder="Passwort" type="password">
                                 <span class="bd-login-form-input-focus"></span>
                                 <span class="bd-login-form-input-symbol"><i class="material-icons">vpn_key</i></span>
                             </div>
@@ -72,7 +82,9 @@
                             </div>
                             -->
                             <div class="text-center">
-                                <a class="create-profile" href="" data-toggle="modal" data-target="#registrationModal"><span>Erstelle dein Profil</span><i class="material-icons create-profile-icon">keyboard_arrow_right</i></a>
+                                <a class="create-profile" data-target="#registrationModal" data-toggle="modal"
+                                   href=""><span>Erstelle dein Profil</span><i
+                                        class="material-icons create-profile-icon">keyboard_arrow_right</i></a>
                             </div>
                         </div>
                     </div>
@@ -107,13 +119,13 @@
 <script crossorigin="anonymous"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script TYPE="text/javascript" src="../js/jQuery-dev.js"></script>
+<script TYPE="text/javascript" src="js/jQuery-dev.js"></script>
 <script crossorigin="anonymous"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script crossorigin="anonymous"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="../js/loginController.js" type="text/javascript"></script>
+<script src="js/loginController.js" type="text/javascript"></script>
 </body>
 </html>
