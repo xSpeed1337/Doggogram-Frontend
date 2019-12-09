@@ -3,6 +3,8 @@ let backendAdress = 'https://cors-anywhere.herokuapp.com/http://88.214.57.214:68
 
 $(document).ready(function () {
 
+    let loadingSpinner = "<span class=\"spinner-border spinner-border-sm\" role=\"status\" aria-hidden=\"true\"></span>";
+
     /**
      * Login Method
      */
@@ -34,6 +36,9 @@ $(document).ready(function () {
         }
 
         if (loginBool) {
+            $('#loginBtn').text('');
+            $('#loginBtn').append(loadingSpinner);
+
             $.ajax({
                 url: backendAdress + '/api/v1/auth/login',
                 processData: false,
@@ -46,12 +51,13 @@ $(document).ready(function () {
                     }
                     sessionStorage.setItem('token', response.token);
                     sessionStorage.setItem('Username', loginUsername);
-                    location.href = "../html/feed.html";
+                    location.href = "feed.html";
                 },
                 error: function (response) {
                     if (debug) {
                         console.log('error: ' + JSON.stringify(response));
                     }
+                    $('#loginBtn').text('Einloggen');
                 }
             });
         }
@@ -60,23 +66,58 @@ $(document).ready(function () {
     /**
      * Register Method
      */
-    $("#RegisterButton").on("click", function () {
-        let registerJSON = {
-            user: $('#exampleInputEmail1').val(),
-            pass: $('#exampleInputPassword1').val()
-        };
+    $("#registerButton").on("click", function () {
+        let registerAlert = '<div class="alert alert-warning alert-dismissible show" role="alert">\n' +
+            '                                Dieses feld darf <strong>NICHT</strong> leer sein! \n' +
+            '                                <button aria-label="Close" class="close" data-dismiss="alert" type="button">\n' +
+            '                                    <span aria-hidden="true">&times;</span>\n' +
+            '                                </button>\n' +
+            '                            </div>';
+        let registerUsername = $('#registerInputUsername').val();
+        let registerPassword = $('#registerInputPassword').val();
+        let registerFormData = new FormData();
+        let registerBool = true;
 
-        $.ajax({
-            url: backendAdress + '/api/v1/users/register/',
-            contentType: "application/json",
-            type: 'POST',
-            data: JSON.stringify(registerJSON),
-            success: function (response) {
-                if (debug) {
-                    console.log('success: ' + JSON.stringify(response));
+        registerFormData.append('user', registerUsername);
+        registerFormData.append('password', registerPassword);
+
+        $(".alert").alert('close');
+
+        if (registerUsername == undefined || registerUsername == "") {
+            registerBool = false;
+            $('#registerUsername').after(registerAlert);
+        }
+
+        if (registerPassword == undefined || registerPassword == "") {
+            registerBool = false;
+            $('#registerPassword').after(registerAlert);
+        }
+
+        if (registerBool) {
+            $('#registerButton').text('');
+            $('#registerButton').append(loadingSpinner);
+
+            $.ajax({
+                url: backendAdress + '/api/v1/users/register',
+                processData: false,
+                contentType: false,
+                type: 'POST',
+                data: registerFormData,
+                success: function (response) {
+                    let registerSuccessAlert = "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">\n" +
+                        "  <strong>Regestrierung erfolgreich.</strong> Du kannst dich jetzt einloggen.\n" +
+                        "  <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n" +
+                        "    <span aria-hidden=\"true\">&times;</span>\n" +
+                        "  </button>\n" +
+                        "</div>";
+                    $('#registerPassword').after(registerSuccessAlert);
+                    $('#registerButton').text('Registrieren');
+                },
+                error: function () {
+                    $('#registerButton').text('Registrieren');
                 }
-            }
-        });
+            });
+        }
     });
 
 });

@@ -1,4 +1,3 @@
-let token = sessionStorage.getItem('token');
 let scrollLoad = true;
 let discoverImageID = 0;
 let discoverLastImageID = 0;
@@ -20,7 +19,7 @@ $(document).ready(function () {
 
 function loadDiscoverFeed() {
     scrollLoad = false;
-
+    $('#discoverFeed').append(bigLoadSpinner);
     $.ajax({
         url: backendAdress + '/api/v1/images/discover/' + discoverImageID,
         type: 'GET',
@@ -44,6 +43,10 @@ function loadDiscoverFeed() {
                 discoverImageID = discoverLastImageID;
                 scrollLoad = true;
             }
+            $('#bigLoadSpinner').remove();
+        },
+        error: function () {
+            $('#bigLoadSpinner').remove();
         }
     });
 }
