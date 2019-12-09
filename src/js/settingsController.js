@@ -7,6 +7,7 @@ $("#idChangePassword").on('click', function () {
 
     let oldPw = $("#idInputOldPassword").val();
     let newPw = $("#idInputNewPassword").val();
+    let pwformdata = new FormData();
  pwformdata.append('oldPassword', oldPw);
 pwformdata.append('newPassword', newPw);
 
