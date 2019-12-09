@@ -21,6 +21,8 @@ $(document).ready(function () {
 function loadFeedImage() {
     scrollLoad = false;
 
+    $('#feedContainer').append(bigLoadSpinner);
+
     $.ajax({
         url: backendAdress + '/api/v1/images/discover/' + feedImageID,
         type: 'GET',
@@ -54,6 +56,10 @@ function loadFeedImage() {
                 feedImageID = feedLastImageID;
                 scrollLoad = true;
             }
+            $('#bigLoadSpinner').remove();
+        },
+        error: function () {
+            $('#bigLoadSpinner').remove();
         }
     });
 }
