@@ -3,6 +3,8 @@ let backendAdress = 'https://cors-anywhere.herokuapp.com/http://88.214.57.214:68
 
 $(document).ready(function () {
 
+    let loadingSpinner = "<span class=\"spinner-border spinner-border-sm\" role=\"status\" aria-hidden=\"true\"></span>";
+
     /**
      * Login Method
      */
@@ -34,6 +36,9 @@ $(document).ready(function () {
         }
 
         if (loginBool) {
+            $('#loginBtn').text('');
+            $('#loginBtn').append(loadingSpinner);
+
             $.ajax({
                 url: backendAdress + '/api/v1/auth/login',
                 processData: false,
@@ -52,6 +57,7 @@ $(document).ready(function () {
                     if (debug) {
                         console.log('error: ' + JSON.stringify(response));
                     }
+                    $('#loginBtn').text('Einloggen');
                 }
             });
         }
@@ -88,6 +94,9 @@ $(document).ready(function () {
         }
 
         if (registerBool) {
+            $('#registerButton').text('');
+            $('#registerButton').append(loadingSpinner);
+
             $.ajax({
                 url: backendAdress + '/api/v1/users/register',
                 processData: false,
@@ -102,6 +111,10 @@ $(document).ready(function () {
                         "  </button>\n" +
                         "</div>";
                     $('#registerPassword').after(registerSuccessAlert);
+                    $('#registerButton').text('Registrieren');
+                },
+                error: function () {
+                    $('#registerButton').text('Registrieren');
                 }
             });
         }
