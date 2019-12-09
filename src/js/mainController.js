@@ -1,4 +1,5 @@
 let backendAdress = 'https://cors-anywhere.herokuapp.com/http://88.214.57.214:6889';
+let token = sessionStorage.getItem('token');
 let bigLoadSpinner = "<div id='bigLoadSpinner' class=\"post-container\" style=\"flex-direction: column\" >" +
     "<div class=\"spinner-border\" style=\"width: 3rem; height: 3rem; flex-direction: column;\" role=\"status\">\n" +
     "  <span class=\"sr-only\">Loading...</span>\n" +
@@ -8,9 +9,8 @@ let bigLoadSpinner = "<div id='bigLoadSpinner' class=\"post-container\" style=\"
 $(document).ready(function () {
     let debug = true;
     let image;
-    let token = sessionStorage.getItem('token');
 
-
+    autoRedirect();
     loadProfilePic();
 
     /**
@@ -139,6 +139,12 @@ function openImageModal(event) {
             $('#imageModal' + response.id).modal('toggle');
         }
     });
+}
+
+function autoRedirect() {
+    if (token == '' || token == undefined) {
+        location.href = "../html/login.html";
+    }
 }
 
 /**
