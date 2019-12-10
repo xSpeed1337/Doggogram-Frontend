@@ -217,7 +217,7 @@ $(document).ready(function () {
 
 
         $.ajax({
-            url: 'https://cors-anywhere.herokuapp.com/http://88.214.57.214:6889/api/v1/images/user/'+username + '/0',
+            url: 'https://cors-anywhere.herokuapp.com/http://88.214.57.214:6889/api/v1/images/$count/'+username,
             type: 'GET',
             processData: false,
             contentType: false,
@@ -230,7 +230,7 @@ $(document).ready(function () {
 
                     console.log('succes: ' + JSON.stringify(response));
                 }
-                document.getElementById("idBeitraege").innerHTML = response.imageDTOS.length; //vorübergehende Lösung
+                document.getElementById("idBeitraege").innerHTML = response; //vorübergehende Lösung
 
             },
             error: function (response) {
