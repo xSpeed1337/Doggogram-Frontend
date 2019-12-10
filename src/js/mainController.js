@@ -5,6 +5,12 @@ let bigLoadSpinner = "<div id='bigLoadSpinner' class=\"post-container\" style=\"
     "  <span class=\"sr-only\">Loading...</span>\n" +
     "</div>" +
     "</div>";
+let notEmptyAlert = '<div class="alert alert-warning alert-dismissible show" role="alert">\n' +
+    '                                Dieses feld darf <strong>NICHT</strong> leer sein! \n' +
+    '                                <button aria-label="Close" class="close" data-dismiss="alert" type="button">\n' +
+    '                                    <span aria-hidden="true">&times;</span>\n' +
+    '                                </button>\n' +
+    '                            </div>';
 
 $(document).ready(function () {
     let debug = true;
@@ -39,12 +45,7 @@ $(document).ready(function () {
      * Uploads the from to the Backend
      */
     $("#uploadImageBtn").on('click', function () {
-        let uploadAlert = '<div class="alert alert-warning alert-dismissible show" role="alert">\n' +
-            '                                Dieses feld darf <strong>NICHT</strong> leer sein! \n' +
-            '                                <button aria-label="Close" class="close" data-dismiss="alert" type="button">\n' +
-            '                                    <span aria-hidden="true">&times;</span>\n' +
-            '                                </button>\n' +
-            '                            </div>';
+
         let formdata = new FormData();
         let uploadTitle = $("#uploadTitle").val();
         let uploadBio = $("#uploadBio").val();
@@ -55,15 +56,15 @@ $(document).ready(function () {
 
         if (uploadTitle == undefined || uploadTitle == "") {
             uploadbool = false;
-            $('#uploadTitle').after(uploadAlert);
+            $('#uploadTitle').after(notEmptyAlert);
         }
         if (uploadImage == undefined) {
             uploadbool = false;
-            $('#uploadImage').after(uploadAlert)
+            $('#uploadImage').after(notEmptyAlert)
         }
         if (uploadBio == undefined || uploadBio == "") {
             uploadbool = false;
-            $('#uploadBio').after(uploadAlert)
+            $('#uploadBio').after(notEmptyAlert)
         }
 
         if (uploadbool) {
@@ -143,9 +144,9 @@ function openImageModal(event) {
                 "                                <section class=\"bd-image-section-form\">\n" +
                 "                                    <div class=\"bd-image-container-form\">\n" +
                 "                                        <form class=\"bd-image-form\">\n" +
-                "                                            <textarea id='textare" + response.id + "' aria-label=\"Kommentar schreiben...\" placeholder=\"Kommentar schreiben...\" class=\"bd-image-form-textarea\" autocomplete=\"off\"></textarea>\n" +
-                "                                            <button onclick='writeComment(" + response.id + ")' class=\"bd-image-form-button\" type=\"submit\"><i class=\"material-icons bd-image-button-icon\">send</i></button>\n" +
+                "                                            <textarea id='textarea" + response.id + "' aria-label=\"Kommentar schreiben...\" placeholder=\"Kommentar schreiben...\" class=\"bd-image-form-textarea\" autocomplete=\"off\"></textarea>\n" +
                 "                                        </form>\n" +
+                "                                            <button onclick='writeComment(" + response.id + ")' class=\"bd-image-form-button\" type=\"submit\"><i class=\"material-icons bd-image-button-icon\">send</i></button>\n" +
                 "                                    </div>\n" +
                 "                                </section>\n" +
                 "                            </div>\n" +
@@ -229,15 +230,15 @@ function likingImage(imageID) {
  */
 function loadModalComments(imageID) {
 
-    let commentFormData = new FormData();
-    commentFormData.append('imageId', imageID);
+    let loadCommentFormData = new FormData();
+    loadCommentFormData.append('imageId', imageID);
 
     $.ajax({
         url: backendAdress + '/api/v1/comment/image/comments/' + imageID,
         type: 'GET',
         processData: false,
         contentType: false,
-        data: commentFormData,
+        data: loadCommentFormData,
         headers: {
             "Authorization": `Bearer ${token}`
         },
@@ -271,4 +272,40 @@ function loadModalComments(imageID) {
  */
 function writeComment(imageID) {
 
+    let commentFormData = new FormData();
+    let comment = $('#textarea' + imageID).val();
+    let commentBool = true;
+
+    if (comment == undefined || comment == "") {
+        commentBool = false;
+        $('#textarea' + imageID).after(notEmptyAlert);
+    }
+
+    commentFormData.append('content', comment);
+    commentFormData.append('imageId', imageID);
+
+    if (commentBool) {
+        $.ajax({
+            url: backendAdress + '/api/v1/comment/add',
+            type: 'POST',
+            processData: false,
+            contentType: false,
+            data: commentFormData,
+            headers: {
+                "Authorization": `Bearer ${token}`
+            },
+            success: function (response) {
+                let commendCreatedAlert = "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">\n" +
+                    "  Commentar erfolgreich erstellt\n" +
+                    "  <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n" +
+                    "    <span aria-hidden=\"true\">&times;</span>\n" +
+                    "  </button>\n" +
+                    "</div>";
+                $('#textarea' + imageID).append(commendCreatedAlert);
+            },
+            error: function (response) {
+
+            }
+        });
+    }
 }
