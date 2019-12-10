@@ -113,29 +113,53 @@ function openImageModal(event) {
             "Authorization": `Bearer ${token}`
         },
         success: function (response) {
-            let modal = "<div id='imageModal" + response.id + "' class=\"modal fade bd-example-modal-lg\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myLargeModalLabel\" aria-hidden=\"true\">\n" +
-                "  <div class=\"modal-dialog modal-lg\">\n" +
-                "    <div class=\"modal-content\">\n" +
-                "                    <article class=\"post\">\n" +
-                "                        <header class=\"bd-post-title\">\n" +
-                "                            <img alt=\"\" class=\"bd-post-pp\" src=\"\data:image/jpeg;base64," + response.userImage + "\">\n" +
-                "                            <span class=\"bd-post-name\">" + response.user + "</span>\n" +
-                "                        </header>\n" +
-                "                        <div class=\"bd-post-img-container\">\n" +
-                "                            <img id=\"image" + response.id + "\" alt=\"\" class=\"bd-post-img\" src=\"\data:image/jpeg;base64," + response.image + "\">\n" +
+            let newImageModal = "<div class=\"modal fade  bd-image-modal\" id='imageModal" + response.id + "' tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"imageModalLabel\" aria-hidden=\"true\">\n" +
+                "    <div class=\"modal-dialog modal-lg modal-dialog-centered\" role=\"document\">\n" +
+                "        <div class=\"modal-content\">\n" +
+                "            <div class=\"modal-body\">\n" +
+                "                <div class=\"container-fluid\">\n" +
+                "                    <div class=\"row no-gutters\">\n" +
+                "                        <div class=\"col-8\">\n" +
+                "                            <div class=\"bd-image-container-main-picture\">\n" +
+                "                                <img class=\"bd-image-main-picture\" src=\"\data:image/jpeg;base64," + response.image + "\" alt=\"Content Picture\">\n" +
+                "                            </div>\n" +
                 "                        </div>\n" +
-                "                        <div class=\"bd-post-stats\">\n" +
-                "                            <a onclick='likingImage(" + response.id + ")' class=\"bd-post-favtext\"><i class=\"material-icons bd-post-favicon\">favorite</i><span\n" +
+                "                        <div class=\"col-4\">\n" +
+                "                            <header class=\"bd-image-header\">\n" +
+                "                                <img class=\"bd-image-profile-picture\" src=\"\data:image/jpeg;base64," + response.userImage + "\" alt=\"Profile Picture\">\n" +
+                "                                <span class=\"bd-image-profile-name\">" + response.user + "</span>\n" +
+                "                                <span class=\"bd-image-profile-description\">" + response.bio + "</span>\n" +
+                "                            </header>\n" +
+                "                            <div class=\"bd-image-body\">\n" +
+                "                                <div class=\"bd-image-container-comments\">\n" +
+                "                                    <ul id='commentList" + response.id + "' class=\"bd-image-comment-list\">\n" +
+                "                                    </ul>\n" +
+                "                                </div>\n" +
+                "                                <section class=\"bd-image-container-actions\">\n" +
+                "                                     <a onclick='likingImage(" + response.id + ")' class=\"bd-post-favtext\"><i class=\"material-icons bd-post-favicon\">favorite</i><span\n" +
                 "                                    id='imageLikes" + response.id + "' class=\"bd-post-span\">" + response.likes + "</span></a>\n" +
-                "                            <a class=\"bd-post-chattext\"><i class=\"material-icons bd-post-chaticon\">chat</i><span\n" +
+                "                                    <a class=\"bd-post-chattext\"><i class=\"material-icons bd-post-chaticon\">chat</i><span\n" +
                 "                                   id='imageComments" + response.id + "' class=\"bd-post-span\">" + response.comments + "</span></a>\n" +
+                "                                </section>\n" +
+                "                                <section class=\"bd-image-section-form\">\n" +
+                "                                    <div class=\"bd-image-container-form\">\n" +
+                "                                        <form class=\"bd-image-form\">\n" +
+                "                                            <textarea aria-label=\"Kommentar schreiben...\" placeholder=\"Kommentar schreiben...\" class=\"bd-image-form-textarea\" autocomplete=\"off\"></textarea>\n" +
+                "                                            <button class=\"bd-image-form-button\" type=\"submit\"><i class=\"material-icons bd-image-button-icon\">send</i></button>\n" +
+                "                                        </form>\n" +
+                "                                    </div>\n" +
+                "                                </section>\n" +
+                "                            </div>\n" +
                 "                        </div>\n" +
-                "                    </article>\n" +
+                "                    </div>\n" +
+                "                </div>\n" +
+                "            </div>\n" +
+                "        </div>\n" +
                 "    </div>\n" +
-                "  </div>\n" +
                 "</div>";
 
-            $('#' + imageID).after(modal);
+            $('#' + imageID).after(newImageModal);
+            loadModalComments(response.id);
             $('#imageModal' + response.id).modal('toggle');
         }
     });
@@ -195,6 +219,40 @@ function likingImage(imageID) {
     });
 }
 
-function loadModalComments() {
+function loadModalComments(imageID) {
+
+    let commentFormData = new FormData();
+    commentFormData.append('imageId', imageID);
+
+    $.ajax({
+        url: backendAdress + '/api/v1/comment/image/comments/' + imageID,
+        type: 'GET',
+        processData: false,
+        contentType: false,
+        data: commentFormData,
+        headers: {
+            "Authorization": `Bearer ${token}`
+        },
+        success: function (response) {
+            for (let i = 0; i < response.commentDTOs.length; i++) {
+                let formattedDate = new Date(response.commentDTOs[i].created);
+                let d = formattedDate.getDate();
+                let m = formattedDate.getMonth();
+                m += 1;
+                let y = formattedDate.getFullYear();
+
+                let commentHTML = "<li id='image" + imageID + "comment" + response.commentDTOs[i].id + "' class=\"bd-image-comment-list-item\">\n" +
+                    "                                            <div class=\"bd-image-comment-user\">\n" +
+                    "                                                <a><span>" + response.commentDTOs[i].user + "</span></a>\n" +
+                    "                                                <span>" + response.commentDTOs[i].comment + "</span>\n" +
+                    "                                            </div>\n" +
+                    "                                            <div class=\"bd-image-comment-container-time\">\n" +
+                    "                                                <div class=\"bd-image-comment-time\"><i class=\"material-icons bd-image-comment-time-icon\">schedule</i><span class=\"bd-image-comment-time-text\">" + d + "." + m + "." + y + "</span>></div>\n" +
+                    "                                            </div>\n" +
+                    "                                        </li>";
+                $('#commentList' + imageID).append(commentHTML);
+            }
+        }
+    });
 
 }
