@@ -101,7 +101,6 @@ $(document).ready(function () {
  * Opens Modal when clicked on a Image
  * @param event
  */
-
 function openImageModal(event) {
     let imageID = $(event.target)[0].id;
     let iID = imageID.substr(5);
@@ -167,6 +166,9 @@ function openImageModal(event) {
     });
 }
 
+/**
+ * Auto redirect to the loginPage if not logged in
+ */
 function autoRedirect() {
     if (token == '' || token == undefined) {
         location.href = "login.html";
@@ -221,6 +223,10 @@ function likingImage(imageID) {
     });
 }
 
+/**
+ * Loads the Comments from the Backend and adds them to the modal
+ * @param imageID
+ */
 function loadModalComments(imageID) {
 
     let commentFormData = new FormData();
@@ -256,5 +262,13 @@ function loadModalComments(imageID) {
             }
         }
     });
+
+}
+
+/**
+ * Sends the Comment to the backend
+ * @param imageID
+ */
+function writeComment(imageID) {
 
 }
