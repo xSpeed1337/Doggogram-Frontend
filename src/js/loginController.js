@@ -2,19 +2,18 @@ let debug = false;
 let backendAdress = 'https://cors-anywhere.herokuapp.com/http://88.214.57.214:6889';
 
 $(document).ready(function () {
-
-    let loadingSpinner = "<span class=\"spinner-border spinner-border-sm\" role=\"status\" aria-hidden=\"true\"></span>";
+    let notEmptyAlert = '<div class="alert alert-warning alert-dismissible show" role="alert">\n' +
+        '                                Dieses feld darf <strong>NICHT</strong> leer sein! \n' +
+        '                                <button aria-label="Close" class="close" data-dismiss="alert" type="button">\n' +
+        '                                    <span aria-hidden="true">&times;</span>\n' +
+        '                                </button>\n' +
+        '                            </div>';
+    let smallloadingSpinner = "<span class=\"spinner-border spinner-border-sm\" role=\"status\" aria-hidden=\"true\"></span>";
 
     /**
      * Login Method
      */
     $('#loginBtn').on('click', function () {
-        let loginAlert = '<div class="alert alert-warning alert-dismissible show" role="alert">\n' +
-            '                                Dieses feld darf <strong>NICHT</strong> leer sein! \n' +
-            '                                <button aria-label="Close" class="close" data-dismiss="alert" type="button">\n' +
-            '                                    <span aria-hidden="true">&times;</span>\n' +
-            '                                </button>\n' +
-            '                            </div>';
         let loginUsername = $('#loginInputUsername').val();
         let loginPassword = $('#loginInputPassword').val();
         let loginFormData = new FormData();
@@ -27,17 +26,17 @@ $(document).ready(function () {
 
         if (loginUsername == undefined || loginUsername == "") {
             loginBool = false;
-            $('#loginUsernameForm').after(loginAlert);
+            $('#loginUsernameForm').after(notEmptyAlert);
         }
 
         if (loginPassword == undefined || loginPassword == "") {
             loginBool = false;
-            $('#loginPasswordForm').after(loginAlert);
+            $('#loginPasswordForm').after(notEmptyAlert);
         }
 
         if (loginBool) {
             $('#loginBtn').text('');
-            $('#loginBtn').append(loadingSpinner);
+            $('#loginBtn').append(smallloadingSpinner);
 
             $.ajax({
                 url: backendAdress + '/api/v1/auth/login',
@@ -67,12 +66,7 @@ $(document).ready(function () {
      * Register Method
      */
     $("#registerButton").on("click", function () {
-        let registerAlert = '<div class="alert alert-warning alert-dismissible show" role="alert">\n' +
-            '                                Dieses feld darf <strong>NICHT</strong> leer sein! \n' +
-            '                                <button aria-label="Close" class="close" data-dismiss="alert" type="button">\n' +
-            '                                    <span aria-hidden="true">&times;</span>\n' +
-            '                                </button>\n' +
-            '                            </div>';
+
         let registerUsername = $('#registerInputUsername').val();
         let registerPassword = $('#registerInputPassword').val();
         let registerFormData = new FormData();
@@ -85,17 +79,17 @@ $(document).ready(function () {
 
         if (registerUsername == undefined || registerUsername == "") {
             registerBool = false;
-            $('#registerUsername').after(registerAlert);
+            $('#registerUsername').after(notEmptyAlert);
         }
 
         if (registerPassword == undefined || registerPassword == "") {
             registerBool = false;
-            $('#registerPassword').after(registerAlert);
+            $('#registerPassword').after(notEmptyAlert);
         }
 
         if (registerBool) {
             $('#registerButton').text('');
-            $('#registerButton').append(loadingSpinner);
+            $('#registerButton').append(smallloadingSpinner);
 
             $.ajax({
                 url: backendAdress + '/api/v1/users/register',

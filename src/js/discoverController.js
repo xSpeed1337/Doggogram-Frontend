@@ -31,7 +31,7 @@ function loadDiscoverFeed() {
                 let imageDiv = "</div>\n" +
                     "                        <div class=\"col\">\n" +
                     "                            <div class=\"card bd-searchcard\">\n" +
-                    "                                <img id =\"image" + response.imageDTOS[i].id + "\" alt=\"\" " +
+                    "                                <img onclick='openImageModal(event)' id =\"image" + response.imageDTOS[i].id + "\" alt=\"\" " +
                     "                                 class=\"bd-post-img\" src=\"\data:image/jpeg;base64," + response.imageDTOS[i].image + "\">\n" +
                     "                            </div>\n" +
                     "                        </div>";

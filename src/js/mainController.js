@@ -5,6 +5,12 @@ let bigLoadSpinner = "<div id='bigLoadSpinner' class=\"post-container\" style=\"
     "  <span class=\"sr-only\">Loading...</span>\n" +
     "</div>" +
     "</div>";
+let notEmptyAlert = '<div class="alert alert-warning alert-dismissible show" role="alert">\n' +
+    '                                Dieses feld darf <strong>NICHT</strong> leer sein! \n' +
+    '                                <button aria-label="Close" class="close" data-dismiss="alert" type="button">\n' +
+    '                                    <span aria-hidden="true">&times;</span>\n' +
+    '                                </button>\n' +
+    '                            </div>';
 
 $(document).ready(function () {
     let debug = true;
@@ -39,12 +45,7 @@ $(document).ready(function () {
      * Uploads the from to the Backend
      */
     $("#uploadImageBtn").on('click', function () {
-        let uploadAlert = '<div class="alert alert-warning alert-dismissible show" role="alert">\n' +
-            '                                Dieses feld darf <strong>NICHT</strong> leer sein! \n' +
-            '                                <button aria-label="Close" class="close" data-dismiss="alert" type="button">\n' +
-            '                                    <span aria-hidden="true">&times;</span>\n' +
-            '                                </button>\n' +
-            '                            </div>';
+
         let formdata = new FormData();
         let uploadTitle = $("#uploadTitle").val();
         let uploadBio = $("#uploadBio").val();
@@ -55,15 +56,15 @@ $(document).ready(function () {
 
         if (uploadTitle == undefined || uploadTitle == "") {
             uploadbool = false;
-            $('#uploadTitle').after(uploadAlert);
+            $('#uploadTitle').after(notEmptyAlert);
         }
         if (uploadImage == undefined) {
             uploadbool = false;
-            $('#uploadImage').after(uploadAlert)
+            $('#uploadImage').after(notEmptyAlert)
         }
         if (uploadBio == undefined || uploadBio == "") {
             uploadbool = false;
-            $('#uploadBio').after(uploadAlert)
+            $('#uploadBio').after(notEmptyAlert)
         }
 
         if (uploadbool) {
@@ -101,7 +102,6 @@ $(document).ready(function () {
  * Opens Modal when clicked on a Image
  * @param event
  */
-
 function openImageModal(event) {
     let imageID = $(event.target)[0].id;
     let iID = imageID.substr(5);
@@ -113,34 +113,63 @@ function openImageModal(event) {
             "Authorization": `Bearer ${token}`
         },
         success: function (response) {
-            let modal = "<div id='imageModal" + response.id + "' class=\"modal fade bd-example-modal-lg\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myLargeModalLabel\" aria-hidden=\"true\">\n" +
-                "  <div class=\"modal-dialog modal-lg\">\n" +
-                "    <div class=\"modal-content\">\n" +
-                "                    <article class=\"post\">\n" +
-                "                        <header class=\"bd-post-title\">\n" +
-                "                            <img alt=\"\" class=\"bd-post-pp\" src=\"\data:image/jpeg;base64," + response.userImage + "\">\n" +
-                "                            <span class=\"bd-post-name\">" + response.user + "</span>\n" +
-                "                        </header>\n" +
-                "                        <div class=\"bd-post-img-container\">\n" +
-                "                            <img id=\"image" + response.id + "\" alt=\"\" class=\"bd-post-img\" src=\"\data:image/jpeg;base64," + response.image + "\">\n" +
+            let newImageModal = "<div class=\"modal fade  bd-image-modal\" id='imageModal" + response.id + "' tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"imageModalLabel\" aria-hidden=\"true\">\n" +
+                "    <div class=\"modal-dialog modal-lg modal-dialog-centered\" role=\"document\">\n" +
+                "        <div class=\"modal-content\">\n" +
+                "            <div class=\"modal-body\">\n" +
+                "                <div class=\"container-fluid\">\n" +
+                "                    <div class=\"row no-gutters\">\n" +
+                "                        <div class=\"col-8\">\n" +
+                "                            <div class=\"bd-image-container-main-picture\">\n" +
+                "                                <img class=\"bd-image-main-picture\" src=\"\data:image/jpeg;base64," + response.image + "\" alt=\"Content Picture\">\n" +
+                "                            </div>\n" +
                 "                        </div>\n" +
-                "                        <div class=\"bd-post-stats\">\n" +
-                "                            <a onclick='likingImage(" + response.id + ")' class=\"bd-post-favtext\"><i class=\"material-icons bd-post-favicon\">favorite</i><span\n" +
+                "                        <div class=\"col-4\">\n" +
+                "                            <header class=\"bd-image-header\">\n" +
+                "                                <img class=\"bd-image-profile-picture\" src=\"\data:image/jpeg;base64," + response.userImage + "\" alt=\"Profile Picture\">\n" +
+                "                                <span class=\"bd-image-profile-name\">" + response.user + "</span>\n" +
+                "                                <span class=\"bd-image-profile-description\">" + response.bio + "</span>\n" +
+                "                            </header>\n" +
+                "                            <div class=\"bd-image-body\">\n" +
+                "                                <div class=\"bd-image-container-comments\">\n" +
+                "                                    <ul id='commentList" + response.id + "' class=\"bd-image-comment-list\">\n" +
+                "                                    </ul>\n" +
+                "                                </div>\n" +
+                "                                <section class=\"bd-image-container-actions\">\n" +
+                "                                     <a onclick='likingImage(" + response.id + ")' class=\"bd-post-favtext\"><i class=\"material-icons bd-post-favicon\">favorite</i><span\n" +
                 "                                    id='imageLikes" + response.id + "' class=\"bd-post-span\">" + response.likes + "</span></a>\n" +
-                "                            <a class=\"bd-post-chattext\"><i class=\"material-icons bd-post-chaticon\">chat</i><span\n" +
+                "                                    <a class=\"bd-post-chattext\"><i class=\"material-icons bd-post-chaticon\">chat</i><span\n" +
                 "                                   id='imageComments" + response.id + "' class=\"bd-post-span\">" + response.comments + "</span></a>\n" +
+                "                                </section>\n" +
+                "                                <section class=\"bd-image-section-form\">\n" +
+                "                                    <div class=\"bd-image-container-form\">\n" +
+                "                                        <form class=\"bd-image-form\">\n" +
+                "                                            <textarea id='textarea" + response.id + "' aria-label=\"Kommentar schreiben...\" placeholder=\"Kommentar schreiben...\" class=\"bd-image-form-textarea\" autocomplete=\"off\"></textarea>\n" +
+                "                                        </form>\n" +
+                "                                            <button onclick='writeComment(" + response.id + ")' class=\"bd-image-form-button\" type=\"submit\"><i class=\"material-icons bd-image-button-icon\">send</i></button>\n" +
+                "                                    </div>\n" +
+                "                                </section>\n" +
+                "                            </div>\n" +
                 "                        </div>\n" +
-                "                    </article>\n" +
+                "                    </div>\n" +
+                "                </div>\n" +
+                "            </div>\n" +
+                "        </div>\n" +
                 "    </div>\n" +
-                "  </div>\n" +
                 "</div>";
 
-            $('#' + imageID).after(modal);
+            $('#' + imageID).after(newImageModal);
+            if (response.comments != 0) {
+                loadModalComments(response.id);
+            }
             $('#imageModal' + response.id).modal('toggle');
         }
     });
 }
 
+/**
+ * Auto redirect to the loginPage if not logged in
+ */
 function autoRedirect() {
     if (token == '' || token == undefined) {
         location.href = "login.html";
@@ -195,6 +224,88 @@ function likingImage(imageID) {
     });
 }
 
-function loadModalComments() {
+/**
+ * Loads the Comments from the Backend and adds them to the modal
+ * @param imageID
+ */
+function loadModalComments(imageID) {
 
+    let loadCommentFormData = new FormData();
+    loadCommentFormData.append('imageId', imageID);
+
+    $.ajax({
+        url: backendAdress + '/api/v1/comment/image/comments/' + imageID,
+        type: 'GET',
+        processData: false,
+        contentType: false,
+        data: loadCommentFormData,
+        headers: {
+            "Authorization": `Bearer ${token}`
+        },
+        success: function (response) {
+            for (let i = 0; i < response.commentDTOs.length; i++) {
+                let formattedDate = new Date(response.commentDTOs[i].created);
+                let d = formattedDate.getDate();
+                let m = formattedDate.getMonth();
+                m += 1;
+                let y = formattedDate.getFullYear();
+
+                let commentHTML = "<li id='image" + imageID + "comment" + response.commentDTOs[i].id + "' class=\"bd-image-comment-list-item\">\n" +
+                    "                                            <div class=\"bd-image-comment-user\">\n" +
+                    "                                                <a><span>" + response.commentDTOs[i].user + "</span></a>\n" +
+                    "                                                <span>" + response.commentDTOs[i].comment + "</span>\n" +
+                    "                                            </div>\n" +
+                    "                                            <div class=\"bd-image-comment-container-time\">\n" +
+                    "                                                <div class=\"bd-image-comment-time\"><i class=\"material-icons bd-image-comment-time-icon\">schedule</i><span class=\"bd-image-comment-time-text\">" + d + "." + m + "." + y + "</span>></div>\n" +
+                    "                                            </div>\n" +
+                    "                                        </li>";
+                $('#commentList' + imageID).append(commentHTML);
+            }
+        }
+    });
+
+}
+
+/**
+ * Sends the Comment to the backend
+ * @param imageID
+ */
+function writeComment(imageID) {
+
+    let commentFormData = new FormData();
+    let comment = $('#textarea' + imageID).val();
+    let commentBool = true;
+
+    if (comment == undefined || comment == "") {
+        commentBool = false;
+        $('#textarea' + imageID).after(notEmptyAlert);
+    }
+
+    commentFormData.append('content', comment);
+    commentFormData.append('imageId', imageID);
+
+    if (commentBool) {
+        $.ajax({
+            url: backendAdress + '/api/v1/comment/add',
+            type: 'POST',
+            processData: false,
+            contentType: false,
+            data: commentFormData,
+            headers: {
+                "Authorization": `Bearer ${token}`
+            },
+            success: function (response) {
+                let commendCreatedAlert = "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">\n" +
+                    "  Commentar erfolgreich erstellt\n" +
+                    "  <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n" +
+                    "    <span aria-hidden=\"true\">&times;</span>\n" +
+                    "  </button>\n" +
+                    "</div>";
+                $('#textarea' + imageID).append(commendCreatedAlert);
+            },
+            error: function (response) {
+
+            }
+        });
+    }
 }
