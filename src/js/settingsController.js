@@ -4,8 +4,7 @@ let token = sessionStorage.getItem('token');
 let debug = true;
 let newProfileImage;
 
-
-//loadProfileImage();
+loadProfileImage();
 
     function loadProfileImage() {
 
@@ -20,15 +19,16 @@ let newProfileImage;
             success: function (response) {
 
                if(response==""){
-
                    return;
-
                     //setUserImgageDefault()
                 }
                 if (debug === true) {
                     alert('success');
                     console.log('succes: ' + JSON.stringify(response));
                 }
+
+                let newPicString = "data:image/jpeg;base64,"+ response;
+                $('#idOldProfileImage').attr("src", newPicString);
 
 
             },
@@ -132,7 +132,7 @@ $("#uploadUserPictureBtn").on('click', function () {
                 }
                 $("#myModal").modal('toggle');
 
-                //loadProfileImage();
+                loadProfileImage();
             },
             error: function (response) {
                 if (debug === true) {
