@@ -66,7 +66,9 @@ $(document).ready(function () {
                 }
 
 
-                document.getElementById("idBio").innerHTML = response.bio;
+                if (!(response.bio == undefined || response.bio == "")) {
+                    document.getElementById("idBio").innerHTML = response.bio;
+                }
 
                 document.getElementById("idUserName").innerHTML = response.user;
 
@@ -167,9 +169,32 @@ $(document).ready(function () {
                 //display pictures
 
                 for (let i = 0; i < response.imageDTOS.length; i++) {
-                    let imageDiv = "<img alt=\"content\" class=\"bd-main-content-img\" src=\"\data:image/jpeg;base64," + response.imageDTOS[i].image + "\">";
+                    let imageDiv =
 
-                    "data:image/jpeg;base64,"+ response.imageDTOS[i].image
+
+                        "                    <article class=\"post\">\n" +
+                        "                        <header class=\"bd-post-title\">\n" +
+                        "                            <img alt=\"\" class=\"bd-post-pp\" src=\"../resources/images/superthumb.jpg\">\n" +
+                        "                            <span class=\"bd-post-name\">Mein Name</span>\n" +
+                        "                        </header>\n" +
+                        "                        <div>\n" +
+                        "                            <img id=\"image" + response.imageDTOS[i].id + "\" alt=\"\" class=\"bd-post-img\" src=\"\data:image/jpeg;base64," + response.imageDTOS[i].image + "\">\n" +
+                        "                        </div>\n" +
+                        "                        <div class=\"bd-post-stats\">\n" +
+                        "                            <a class=\"bd-post-favtext\"><i class=\"material-icons bd-post-favicon\">favorite</i><span\n" +
+                        "                                    class=\"bd-post-span\">" + response.imageDTOS[i].likes + "</span></a>\n" +
+                        "                            <a class=\"bd-post-chattext\"><i class=\"material-icons bd-post-chaticon\">chat</i><span\n" +
+                        "                                    class=\"bd-post-span\">" + response.imageDTOS[1].comments + "</span></a>\n" +
+                        "                        </div>\n" +
+                        "                    </article>";
+
+
+
+
+
+                        //"<img alt=\"content\" class=\"bd-main-content-img\" src=\"\data:image/jpeg;base64," + response.imageDTOS[i].image + "\">";
+
+
 
                     $('#idFeedContainerUserImages').append(imageDiv);
 
