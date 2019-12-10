@@ -74,6 +74,9 @@ $(document).ready(function () {
 
                 picString = "data:image/jpeg;base64,"+ response.userImage;
                 $('#idProfileImage').attr("src", picString);
+                $('#idTRUserPic').attr("src", picString);
+
+
 
 
             },
@@ -181,7 +184,7 @@ $(document).ready(function () {
                         "                            <img id=\"image" + response.imageDTOS[i].id + "\" alt=\"\" class=\"bd-post-img\" src=\"\data:image/jpeg;base64," + response.imageDTOS[i].image + "\">\n" +
                         "                        </div>\n" +
                         "                        <div class=\"bd-post-stats\">\n" +
-                        "                            <a class=\"bd-post-favtext\"><i class=\"material-icons bd-post-favicon\">favorite</i><span\n" +
+                        "                            <a id=\"afav" + response.imageDTOS[i].id + "\" class=\"bd-post-favtext\"><i class=\"material-icons bd-post-favicon\">favorite</i><span\n" +
                         "                                    class=\"bd-post-span\">" + response.imageDTOS[i].likes + "</span></a>\n" +
                         "                            <a class=\"bd-post-chattext\"><i class=\"material-icons bd-post-chaticon\">chat</i><span\n" +
                         "                                    class=\"bd-post-span\">" + response.imageDTOS[1].comments + "</span></a>\n" +
@@ -205,6 +208,9 @@ $(document).ready(function () {
                     let spanID = "span" + response.imageDTOS[i].id;
                     document.getElementById(spanID).innerHTML=response.imageDTOS[0].title;
 
+                    let afavId = "afav" + response.imageDTOS[i].id;
+                    document.getElementById(afavId).addEventListener("click", triggerLike);
+
                 }
                 //end display pictures
                 //update profile pic of imgs
@@ -221,6 +227,17 @@ $(document).ready(function () {
             }
         });
     }
+    
+    function triggerLike(oEvent) {
+
+        let imageId= oEvent.currentTarget.id.slice(4);
+
+
+
+
+
+    }
+ 
 
     function loadNumImages() {
 
