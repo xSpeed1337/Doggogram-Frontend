@@ -159,7 +159,9 @@ function openImageModal(event) {
                 "</div>";
 
             $('#' + imageID).after(newImageModal);
-            loadModalComments(response.id);
+            if (response.comments != 0) {
+                loadModalComments(response.id);
+            }
             $('#imageModal' + response.id).modal('toggle');
         }
     });
