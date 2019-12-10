@@ -2,7 +2,7 @@ $(document).ready(function () {
     let debug = true;
     let token = sessionStorage.getItem('token');
     let username;
-
+    let picString;
     getUserName();
 
    // loadProfileImage();
@@ -72,7 +72,7 @@ $(document).ready(function () {
 
                 document.getElementById("idUserName").innerHTML = response.user;
 
-                let picString = "data:image/jpeg;base64,"+ response.userImage;
+                picString = "data:image/jpeg;base64,"+ response.userImage;
                 $('#idProfileImage').attr("src", picString);
 
 
@@ -174,8 +174,8 @@ $(document).ready(function () {
 
                         "                    <article class=\"post\">\n" +
                         "                        <header class=\"bd-post-title\">\n" +
-                        "                            <img alt=\"\" class=\"bd-post-pp\" src=\"../resources/images/superthumb.jpg\">\n" +
-                        "                            <span class=\"bd-post-name\">Mein Name</span>\n" +
+                        "                            <img alt=\"\" class=\"bd-post-pp\" src=\"" + picString + "\">\n" +
+                        "                            <span id=\"span" + response.imageDTOS[i].id + "\"  class=\"bd-post-name\">Mein Name</span>\n" +
                         "                        </header>\n" +
                         "                        <div>\n" +
                         "                            <img id=\"image" + response.imageDTOS[i].id + "\" alt=\"\" class=\"bd-post-img\" src=\"\data:image/jpeg;base64," + response.imageDTOS[i].image + "\">\n" +
@@ -189,6 +189,10 @@ $(document).ready(function () {
                         "                    </article>";
 
 
+                                      //  \"" + picString + "\"
+
+
+
 
 
 
@@ -198,9 +202,14 @@ $(document).ready(function () {
 
                     $('#idFeedContainerUserImages').append(imageDiv);
 
-                }
+                    let spanID = "span" + response.imageDTOS[i].id;
+                    document.getElementById(spanID).innerHTML=response.imageDTOS[0].title;
 
+                }
                 //end display pictures
+                //update profile pic of imgs
+
+
 
 
             },
