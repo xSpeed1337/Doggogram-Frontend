@@ -143,8 +143,8 @@ function openImageModal(event) {
                 "                                <section class=\"bd-image-section-form\">\n" +
                 "                                    <div class=\"bd-image-container-form\">\n" +
                 "                                        <form class=\"bd-image-form\">\n" +
-                "                                            <textarea aria-label=\"Kommentar schreiben...\" placeholder=\"Kommentar schreiben...\" class=\"bd-image-form-textarea\" autocomplete=\"off\"></textarea>\n" +
-                "                                            <button class=\"bd-image-form-button\" type=\"submit\"><i class=\"material-icons bd-image-button-icon\">send</i></button>\n" +
+                "                                            <textarea id='textare" + response.id + "' aria-label=\"Kommentar schreiben...\" placeholder=\"Kommentar schreiben...\" class=\"bd-image-form-textarea\" autocomplete=\"off\"></textarea>\n" +
+                "                                            <button onclick='writeComment(" + response.id + ")' class=\"bd-image-form-button\" type=\"submit\"><i class=\"material-icons bd-image-button-icon\">send</i></button>\n" +
                 "                                        </form>\n" +
                 "                                    </div>\n" +
                 "                                </section>\n" +
