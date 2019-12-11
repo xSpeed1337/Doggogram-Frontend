@@ -50,3 +50,28 @@ function loadDiscoverFeed() {
         }
     });
 }
+
+function searchUser(event) {
+    if (event.which == 13 || event.keyCode === 13) {
+        let searchFormData = new FormData();
+        let searchUsername = $('#searchUserFeed').val();
+        searchFormData.append('user', searchUsername);
+
+        $.ajax({
+            url: backendAdress + '/api/v1/users/search/' + searchUsername,
+            type: 'GET',
+            processData: false,
+            contentType: false,
+            data: searchFormData,
+            headers: {
+                "Authorization": `Bearer ${token}`
+            },
+            success: function () {
+
+            },
+            error: function () {
+
+            }
+        });
+    }
+}
