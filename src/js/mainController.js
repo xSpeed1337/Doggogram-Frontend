@@ -302,6 +302,9 @@ function writeComment(imageID) {
                     "  </button>\n" +
                     "</div>";
                 $('#textarea' + imageID).append(commendCreatedAlert);
+                $('#textarea' + imageID).val('');
+                $('#commentList' + imageID).empty();
+                loadModalComments(imageID);
             },
             error: function (response) {
 
