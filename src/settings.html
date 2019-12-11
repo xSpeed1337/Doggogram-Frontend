@@ -7,6 +7,7 @@
     <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet" type="text/css">
+    <link href="css/messagetoast.css" rel="stylesheet" type="text/css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css"
           rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -104,7 +105,12 @@
                             </label>
 
                         </div>-->
-            <button class="btn btn-primary active" id="idChangePassword" type="button">Password ändern</button>
+            <button  class="btn btn-primary active" id="idChangePassword" type="button">Password ändern</button>
+
+            <div id="snackbarSuccess" >Änderung erfolgreich durchgeführt!</div>
+            <div id="snackbarFail" >Änderung nicht erfolgreich durchgeführt!</div>
+
+
         </form>
     </div>
 </main>
@@ -123,6 +129,9 @@
         </ul>
     </div>
 </footer>
+<script>
+
+</script>
 <script crossorigin="anonymous"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>

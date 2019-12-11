@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
 let token = sessionStorage.getItem('token');
-let debug = true;
+let debug = false;
 let newProfileImage;
 
 loadProfileImage();
@@ -132,12 +132,15 @@ $("#uploadUserPictureBtn").on('click', function () {
                 }
                 $("#myModal").modal('toggle');
 
+                showMessageToastSuccess();
+
                 loadProfileImage();
             },
             error: function (response) {
                 if (debug === true) {
                     console.log('error: ' + JSON.stringify(response));
                 }
+                showMessageToastFail()
             }
         });
     }
@@ -171,12 +174,19 @@ $("#idChangePassword").on('click', function () {
                     console.log('succes: ' + JSON.stringify(response));
                 }
 
+                showMessageToastSuccess();
+
+
+
             },
             error: function (response) {
                 if (debug === true) {
                     alert('error');
                     console.log('error: ' + JSON.stringify(response));
                 }
+
+                showMessageToastFail();
+
             }
         });
 
@@ -203,6 +213,7 @@ $("#idChangePassword").on('click', function () {
                     alert('success');
                     console.log('succes: ' + JSON.stringify(response));
                 }
+                showMessageToastSuccess();
 
 
             },
@@ -211,10 +222,22 @@ $("#idChangePassword").on('click', function () {
                     alert('error');
                     console.log('error: ' + JSON.stringify(response));
                 }
+                showMessageToastFail();
             }
         });
 
     });
+
+    function showMessageToastSuccess() {
+        var x = document.getElementById("snackbarSuccess");
+        x.className = "show";
+        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+    }
+    function showMessageToastFail() {
+        var x = document.getElementById("snackbarFail");
+        x.className = "show";
+        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+    }
 
 
 
