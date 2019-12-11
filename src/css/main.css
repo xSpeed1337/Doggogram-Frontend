@@ -1,3 +1,4 @@
+
 .bd-navbar {
     background-color: #1A1F25;
     height: 7.5vh;
@@ -61,6 +62,8 @@
 .bd-logout-icon:hover {
     color: #4ECCA3;
 }
+
+
 
 .bd-head {
     position: relative;
@@ -149,6 +152,7 @@
 .bd-post-pp {
     height: 50px;
     width: 50px;
+    object-fit: cover;
     border-radius: 50px;
     border: 2px solid #4ECCA3;
     padding: 3px;
@@ -243,6 +247,8 @@
     outline: none;
 }
 
+
+
 .bd-footer {
     background-color: #20262D;
     height: 7.5vh;
@@ -282,13 +288,15 @@
     color: #4ECCA3;
 }
 
-.modal-content {
+
+
+.bd-modal-upload-content {
      background: #232931;
      border: none;
      border-radius: 15px;
      color: #EEEEEE;
 }
-.modal-footer {
+.bd-modal-upload-footer {
     border: none;
 }
 .btn-primary {
@@ -312,17 +320,17 @@
     color: #EEEEEE;
     border: 2px solid #cc574e;
 }
-.form-control {
+.bd-modal-upload-form-control {
     background-color: #1A1F25;
     border: none;
 }
-.form-control:focus {
+.bd-modal-upload-form-control:focus {
     background-color: #1A1F25;
     border: none;
     box-shadow: none;
     color: #EEEEEE;
 }
-.form-control::placeholder {
+.bd-modal-upload-form-control::placeholder {
     color: grey;
 }
 .custom-file-label {
@@ -344,3 +352,131 @@
     width: 0px;  /* remove scrollbar space */
     background: transparent;  /* optional: just make scrollbar invisible */
 }
+
+
+
+.bd-image-modal {
+}
+.bd-image-modal-content {
+    background-color: #232931;
+    border-radius: 25px;
+}
+.bd-image-container-main-picture {
+    height: 500px;
+    width: 500px;
+    padding-right: 20px;
+}
+.bd-image-main-picture {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+}
+.bd-image-modal-body-container {
+    padding: 0;
+}
+.bd-image-header {
+}
+.bd-image-profile-container-description {
+    height: 75px;
+    overflow: scroll;
+    margin-top: 15px;
+}
+.bd-image-profile-picture {
+    border-radius: 50px;
+    border: 2px solid #4ECCA3;
+    padding: 3px;
+    height: 50px;
+    width: 50px;
+    object-fit: cover;
+}
+.bd-image-profile-name {
+    font-weight: bold;
+    padding-left: 15px;
+    font-size: 20px;
+}
+.bd-image-profile-description {
+}
+.bd-image-body {
+}
+.bd-image-container-comments {
+    margin-top: 10px;
+    height: 265px;
+    overflow: scroll;
+}
+.bd-image-comment-list {
+    list-style: none;
+    padding: 0;
+}
+.bd-image-comment-list-item {
+    padding-bottom: 5px;
+}
+.bd-image-comment-user {
+}
+.bd-image-comment-user-name {
+    font-weight: bold;
+}
+.bd-image-comment-user-comment {
+}
+.bd-image-comment-container-time {
+}
+.bd-image-comment-time {
+    display: flex;
+    align-items: center;
+    font-size: 12px!important;
+}
+.bd-image-comment-time-icon {
+    font-size: 12px!important;
+    padding-right: 10px;
+}
+.bd-image-comment-time-text {}
+.bd-image-container-actions {
+    display: flex;
+    align-items: center;
+    padding-bottom: 20px;
+}
+.bd-image-action-like {
+    display: flex;
+    align-items: center;
+}
+.bd-image-action-like-icon {}
+.bd-image-action-like-text {}
+.bd-image-action-comment {
+    display: flex;
+    align-items: center;
+}
+.bd-image-action-like-comment-icon {}
+.bd-image-action-comment-text {}
+.bd-image-section-form {}
+.bd-image-container-form {
+    display: flex;
+    align-items: center;
+}
+.bd-image-form {
+    width: 200px;
+}
+.bd-image-form-textarea {
+    background: #1A1F25;
+    width: 200px;
+    height: 50px;
+    border-radius: 25px;
+    border: none;
+    padding-top: 10px;
+    padding-left: 15px;
+    color: #EEEEEE;
+}
+.bd-image-form-textarea:focus {
+    outline: none;
+}
+.bd-image-form-button {
+    display: flex;
+    background: none;
+    border: none;
+    margin: 0;
+    padding-left: 20px;
+    color: #EEEEEE;
+}
+.bd-image-form-button:hover {
+    color: #4ECCA3;
+}
+.bd-image-button-icon {}
