@@ -53,10 +53,13 @@ $(document).ready(function () {
                     location.href = "feed.html";
                 },
                 error: function (response) {
-                    if (debug) {
-                        console.log('error: ' + JSON.stringify(response));
-                    }
                     $('#loginBtn').text('Einloggen');
+                    $('#loginPasswordForm').after("<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">\n" +
+                        "  <strong>Login fehlgeschlagen!</strong> Bitte überprüfen sie Benutzername und Passwort!.\n" +
+                        "  <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n" +
+                        "    <span aria-hidden=\"true\">&times;</span>\n" +
+                        "  </button>\n" +
+                        "</div>");
                 }
             });
         }
@@ -109,6 +112,12 @@ $(document).ready(function () {
                 },
                 error: function () {
                     $('#registerButton').text('Registrieren');
+                    $('#registerPassword').after("<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">\n" +
+                        "  <strong>Registrierung fehlgeschlagen!</strong> Bitte überprüfen sie Benutzername und Passwort!.\n" +
+                        "  <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n" +
+                        "    <span aria-hidden=\"true\">&times;</span>\n" +
+                        "  </button>\n" +
+                        "</div>");
                 }
             });
         }
