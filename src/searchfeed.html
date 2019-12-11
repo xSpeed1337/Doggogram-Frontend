@@ -39,7 +39,8 @@
                         </div>
                         <div class="form-group">
                             <label for="uploadBio">Beschreibung</label>
-                            <textarea class="form-control bd-modal-upload-form-control" id="uploadBio" rows="3"></textarea>
+                            <textarea class="form-control bd-modal-upload-form-control" id="uploadBio"
+                                      rows="3"></textarea>
                         </div>
                     </form>
                 </div>
@@ -50,7 +51,7 @@
             </div>
         </div>
     </div>
-    <img alt="usericon" class="bd-navbar-usericon d-inline-block mr-3" src="resources/images/superthumb.jpg">
+    <img alt="usericon" class="bd-navbar-usericon d-inline-block mr-3" id="userImage">
     <a class="bd-settings-link d-inline-block mr-3" href="settings.html"><i class="material-icons bd-settings-icon">build</i></a>
     <a class="bd-logout-link d-inline-block mr-3" href="login.html"><i
             class="material-icons bd-logout-icon">power_settings_new</i></a>
@@ -60,8 +61,11 @@
         <div class="row">
             <div class="col">
                 <div class="bd-search">
-                    <form class="form-inline bd-searchbar">
-                        <input aria-label="Search" autocomplete="off" class="bd-searchform" placeholder="Suchen"
+                    <form class="form-inline bd-searchbar" id="searchUserForm" onkeypress="searchUser(event)"
+                          onsubmit="return false;">
+                        <input aria-label="Search" autocomplete="off" class="bd-searchform"
+                               id="searchUserFeed"
+                               placeholder="Suchen"
                                type="text">
                         <span class="bd-searchicon"><i class="material-icons">search</i></span>
                     </form>
@@ -72,12 +76,6 @@
             <div class="col">
                 <div class="container">
                     <div class="row row-cols-2" id="discoverFeed">
-                        <div class="col d-flex justify-content-center">
-                            <div class="card bd-searchcard">
-                                <img alt="searchpost" alt="Card image cap" class="card-img-top img-fluid bd-searchpost"
-                                     src="resources/images/superthumb.jpg">
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
