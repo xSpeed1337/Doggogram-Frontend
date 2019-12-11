@@ -115,9 +115,9 @@ function openImageModal(event) {
         success: function (response) {
             let newImageModal = "<div class=\"modal fade  bd-image-modal\" id='imageModal" + response.id + "' tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"imageModalLabel\" aria-hidden=\"true\">\n" +
                 "    <div class=\"modal-dialog modal-lg modal-dialog-centered\" role=\"document\">\n" +
-                "        <div class=\"modal-content\">\n" +
+                "        <div class=\"modal-content bd-image-modal-content\">\n" +
                 "            <div class=\"modal-body\">\n" +
-                "                <div class=\"container-fluid\">\n" +
+                "                <div class=\"container-fluid bd-image-modal-body-container\">\n" +
                 "                    <div class=\"row no-gutters\">\n" +
                 "                        <div class=\"col-8\">\n" +
                 "                            <div class=\"bd-image-container-main-picture\">\n" +
@@ -128,7 +128,7 @@ function openImageModal(event) {
                 "                            <header class=\"bd-image-header\">\n" +
                 "                                <img class=\"bd-image-profile-picture\" src=\"\data:image/jpeg;base64," + response.userImage + "\" alt=\"Profile Picture\">\n" +
                 "                                <span class=\"bd-image-profile-name\">" + response.user + "</span>\n" +
-                "                                <span class=\"bd-image-profile-description\">" + response.bio + "</span>\n" +
+                "                                <div class=\"bd-image-profile-container-description\"><span class=\"bd-image-profile-description\">" + response.bio + "</span></div>\n" +
                 "                            </header>\n" +
                 "                            <div class=\"bd-image-body\">\n" +
                 "                                <div class=\"bd-image-container-comments\">\n" +
@@ -252,11 +252,11 @@ function loadModalComments(imageID) {
 
                 let commentHTML = "<li id='image" + imageID + "comment" + response.commentDTOs[i].id + "' class=\"bd-image-comment-list-item\">\n" +
                     "                                            <div class=\"bd-image-comment-user\">\n" +
-                    "                                                <a><span>" + response.commentDTOs[i].user + "</span></a>\n" +
-                    "                                                <span>" + response.commentDTOs[i].comment + "</span>\n" +
+                    "                                                <a><span class=\"bd-image-comment-user-name\">" + response.commentDTOs[i].user + "</span></a>\n" +
+                    "                                                <span class=\"bd-image-comment-user-comment\">" + response.commentDTOs[i].comment + "</span>\n" +
                     "                                            </div>\n" +
                     "                                            <div class=\"bd-image-comment-container-time\">\n" +
-                    "                                                <div class=\"bd-image-comment-time\"><i class=\"material-icons bd-image-comment-time-icon\">schedule</i><span class=\"bd-image-comment-time-text\">" + d + "." + m + "." + y + "</span>></div>\n" +
+                    "                                                <div class=\"bd-image-comment-time\"><i class=\"material-icons bd-image-comment-time-icon\">schedule</i><span class=\"bd-image-comment-time-text\">" + d + "." + m + "." + y + "</span></div>\n" +
                     "                                            </div>\n" +
                     "                                        </li>";
                 $('#commentList' + imageID).append(commentHTML);
