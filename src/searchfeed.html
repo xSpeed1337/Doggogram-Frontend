@@ -39,7 +39,8 @@
                         </div>
                         <div class="form-group">
                             <label for="uploadBio">Beschreibung</label>
-                            <textarea class="form-control bd-modal-upload-form-control" id="uploadBio" rows="3"></textarea>
+                            <textarea class="form-control bd-modal-upload-form-control" id="uploadBio"
+                                      rows="3"></textarea>
                         </div>
                     </form>
                 </div>
@@ -60,8 +61,10 @@
         <div class="row">
             <div class="col">
                 <div class="bd-search">
-                    <form class="form-inline bd-searchbar">
-                        <input aria-label="Search" autocomplete="off" class="bd-searchform" id="searchUserFeed"
+                    <form class="form-inline bd-searchbar" id="searchUserForm" onkeypress="searchUser(event)"
+                          onsubmit="return false;">
+                        <input aria-label="Search" autocomplete="off" class="bd-searchform"
+                               id="searchUserFeed"
                                placeholder="Suchen"
                                type="text">
                         <span class="bd-searchicon"><i class="material-icons">search</i></span>

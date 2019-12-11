@@ -53,6 +53,7 @@ function loadDiscoverFeed() {
 
 function searchUser(event) {
     if (event.which == 13 || event.keyCode === 13) {
+
         let searchFormData = new FormData();
         let searchUsername = $('#searchUserFeed').val();
         searchFormData.append('user', searchUsername);
@@ -73,5 +74,7 @@ function searchUser(event) {
 
             }
         });
+        return false;
     }
+    return true;
 }
