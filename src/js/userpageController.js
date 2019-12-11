@@ -5,12 +5,9 @@ $(document).ready(function () {
     let picString;
     getUserName();
 
-   // loadProfileImage();
-
+    // loadProfileImage();
 
     function getUserName() {
-
-
         $.ajax({
             url: 'https://cors-anywhere.herokuapp.com/http://88.214.57.214:6889/api/v1/users/username',
             type: 'GET',
@@ -20,21 +17,15 @@ $(document).ready(function () {
                 "Authorization": `Bearer ${token}`
             },
             success: function (response) {
-
-
                 if (debug === true) {
-
                     console.log('succes: ' + JSON.stringify(response));
                 }
-                username=response;
-
+                username = response;
                 loadUserData();
                 loadFollowers();
                 loadFollowing();
                 loadNumImages();
                 loadUserImages();
-
-
             },
             error: function (response) {
                 if (debug === true) {
@@ -45,13 +36,9 @@ $(document).ready(function () {
         });
     }
 
-
-
     function loadUserData() {
-
-
         $.ajax({
-            url: 'https://cors-anywhere.herokuapp.com/http://88.214.57.214:6889/api/v1/users/user/'+username,
+            url: 'https://cors-anywhere.herokuapp.com/http://88.214.57.214:6889/api/v1/users/user/' + username,
             type: 'GET',
             processData: false,
             contentType: false,
@@ -64,21 +51,13 @@ $(document).ready(function () {
 
                     console.log('succes: ' + JSON.stringify(response));
                 }
-
-
                 if (!(response.bio == undefined || response.bio == "")) {
                     document.getElementById("idBio").innerHTML = response.bio;
                 }
-
                 document.getElementById("idUserName").innerHTML = response.user;
-
-                picString = "data:image/jpeg;base64,"+ response.userImage;
+                picString = "data:image/jpeg;base64," + response.userImage;
                 $('#idProfileImage').attr("src", picString);
                 $('#idTRUserPic').attr("src", picString);
-
-
-
-
             },
             error: function (response) {
                 if (debug === true) {
@@ -90,10 +69,8 @@ $(document).ready(function () {
     }
 
     function loadFollowing() {
-
-
         $.ajax({
-            url: 'https://cors-anywhere.herokuapp.com/http://88.214.57.214:6889/api/v1/users/following/user/'+username,
+            url: 'https://cors-anywhere.herokuapp.com/http://88.214.57.214:6889/api/v1/users/following/user/' + username,
             type: 'GET',
             processData: false,
             contentType: false,
@@ -101,16 +78,10 @@ $(document).ready(function () {
                 "Authorization": `Bearer ${token}`
             },
             success: function (response) {
-
                 if (debug === true) {
-
                     console.log('succes: ' + JSON.stringify(response));
                 }
-
-
                 //document.getElementById("idFollower").innerHTML = response.userDTOS.length;
-
-
             },
             error: function (response) {
                 if (debug === true) {
@@ -120,11 +91,10 @@ $(document).ready(function () {
             }
         });
     }
+
     function loadFollowers() {
-
-
         $.ajax({
-            url: 'https://cors-anywhere.herokuapp.com/http://88.214.57.214:6889/api/v1/users/followers/user/'+username,
+            url: 'https://cors-anywhere.herokuapp.com/http://88.214.57.214:6889/api/v1/users/followers/user/' + username,
             type: 'GET',
             processData: false,
             contentType: false,
@@ -132,16 +102,10 @@ $(document).ready(function () {
                 "Authorization": `Bearer ${token}`
             },
             success: function (response) {
-
                 if (debug === true) {
-
                     console.log('succes: ' + JSON.stringify(response));
                 }
-
-
                 document.getElementById("idFollower").innerHTML = response.userDTOS.length;
-
-
             },
             error: function (response) {
                 if (debug === true) {
@@ -151,11 +115,10 @@ $(document).ready(function () {
             }
         });
     }
+
     function loadUserImages() {
-
-
         $.ajax({
-            url: 'https://cors-anywhere.herokuapp.com/http://88.214.57.214:6889/api/v1/images/user/'+username + '/0',
+            url: 'https://cors-anywhere.herokuapp.com/http://88.214.57.214:6889/api/v1/images/user/' + username + '/0',
             type: 'GET',
             processData: false,
             contentType: false,
@@ -163,19 +126,14 @@ $(document).ready(function () {
                 "Authorization": `Bearer ${token}`
             },
             success: function (response) {
-
                 if (debug === true) {
-
                     console.log('succes: ' + JSON.stringify(response));
                 }
 
                 //display pictures
 
                 for (let i = 0; i < response.imageDTOS.length; i++) {
-                    let imageDiv =
-
-
-                        "                    <article class=\"post\">\n" +
+                    let imageDiv = "                    <article class=\"post\">\n" +
                         "                        <header class=\"bd-post-title\">\n" +
                         "                            <img alt=\"\" class=\"bd-post-pp\" src=\"" + picString + "\">\n" +
                         "                            <span id=\"span" + response.imageDTOS[i].id + "\"  class=\"bd-post-name\">Mein Name</span>\n" +
@@ -191,33 +149,19 @@ $(document).ready(function () {
                         "                        </div>\n" +
                         "                    </article>";
 
-
-                                      //  \"" + picString + "\"
-
-
-
-
-
-
-                        //"<img alt=\"content\" class=\"bd-main-content-img\" src=\"\data:image/jpeg;base64," + response.imageDTOS[i].image + "\">";
-
-
+                    //  \"" + picString + "\"
+                    //"<img alt=\"content\" class=\"bd-main-content-img\" src=\"\data:image/jpeg;base64," + response.imageDTOS[i].image + "\">";
 
                     $('#idFeedContainerUserImages').append(imageDiv);
 
                     let spanID = "span" + response.imageDTOS[i].id;
-                    document.getElementById(spanID).innerHTML=response.imageDTOS[0].title;
+                    document.getElementById(spanID).innerHTML = response.imageDTOS[0].title;
 
                     let afavId = "afav" + response.imageDTOS[i].id;
                     document.getElementById(afavId).addEventListener("click", triggerLike);
-
                 }
                 //end display pictures
                 //update profile pic of imgs
-
-
-
-
             },
             error: function (response) {
                 if (debug === true) {
@@ -227,23 +171,14 @@ $(document).ready(function () {
             }
         });
     }
-    
+
     function triggerLike(oEvent) {
-
-        let imageId= oEvent.currentTarget.id.slice(4);
-
-
-
-
-
+        let imageId = oEvent.currentTarget.id.slice(4);
     }
- 
 
     function loadNumImages() {
-
-
         $.ajax({
-            url: 'https://cors-anywhere.herokuapp.com/http://88.214.57.214:6889/api/v1/images/$count/'+username,
+            url: 'https://cors-anywhere.herokuapp.com/http://88.214.57.214:6889/api/v1/images/$count/' + username,
             type: 'GET',
             processData: false,
             contentType: false,
@@ -257,7 +192,6 @@ $(document).ready(function () {
                     console.log('succes: ' + JSON.stringify(response));
                 }
                 document.getElementById("idBeitraege").innerHTML = response; //vorübergehende Lösung
-
             },
             error: function (response) {
                 if (debug === true) {
@@ -267,9 +201,5 @@ $(document).ready(function () {
             }
         });
     }
-
-
-
-
 
 });
