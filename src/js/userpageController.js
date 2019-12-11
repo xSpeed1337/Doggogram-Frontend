@@ -6,9 +6,6 @@ $(document).ready(function () {
         getUserName();
     }
 
-
-    // loadProfileImage();
-
     function getUserName() {
         $.ajax({
             url: 'https://cors-anywhere.herokuapp.com/http://88.214.57.214:6889/api/v1/users/username',
@@ -22,12 +19,7 @@ $(document).ready(function () {
                 if (debug === true) {
                     console.log('succes: ' + JSON.stringify(response));
                 }
-                let responseUsername = response;
-                loadUserData(responseUsername);
-                loadFollowers(responseUsername);
-                loadFollowing(responseUsername);
-                loadNumImages(responseUsername);
-                loadUserImages(responseUsername);
+                loadAllProfileData(response)
             },
             error: function (response) {
                 if (debug === true) {
@@ -36,6 +28,14 @@ $(document).ready(function () {
                 }
             }
         });
+    }
+
+    function loadAllProfileData(username) {
+        loadUserData(username);
+        loadFollowers(username);
+        loadFollowing(username);
+        loadNumImages(username);
+        loadUserImages(username);
     }
 
     function loadUserData(username) {
