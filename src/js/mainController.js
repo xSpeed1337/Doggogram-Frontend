@@ -12,6 +12,8 @@ let notEmptyAlert = '<div class="alert alert-warning alert-dismissible show" rol
     '                                </button>\n' +
     '                            </div>';
 
+let searchParams = "";
+
 $(document).ready(function () {
     let debug = true;
     let image;

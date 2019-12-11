@@ -1,9 +1,11 @@
 $(document).ready(function () {
-    let debug = true;
+    let debug = false;
     let token = sessionStorage.getItem('token');
-    let username;
     let picString;
-    getUserName();
+    if (searchParams == "") {
+        getUserName();
+    }
+
 
     // loadProfileImage();
 
@@ -20,12 +22,12 @@ $(document).ready(function () {
                 if (debug === true) {
                     console.log('succes: ' + JSON.stringify(response));
                 }
-                username = response;
-                loadUserData();
-                loadFollowers();
-                loadFollowing();
-                loadNumImages();
-                loadUserImages();
+                let responseUsername = response;
+                loadUserData(responseUsername);
+                loadFollowers(responseUsername);
+                loadFollowing(responseUsername);
+                loadNumImages(responseUsername);
+                loadUserImages(responseUsername);
             },
             error: function (response) {
                 if (debug === true) {
@@ -36,7 +38,7 @@ $(document).ready(function () {
         });
     }
 
-    function loadUserData() {
+    function loadUserData(username) {
         $.ajax({
             url: 'https://cors-anywhere.herokuapp.com/http://88.214.57.214:6889/api/v1/users/user/' + username,
             type: 'GET',
@@ -68,7 +70,7 @@ $(document).ready(function () {
         });
     }
 
-    function loadFollowing() {
+    function loadFollowing(username) {
         $.ajax({
             url: 'https://cors-anywhere.herokuapp.com/http://88.214.57.214:6889/api/v1/users/following/user/' + username,
             type: 'GET',
@@ -92,7 +94,7 @@ $(document).ready(function () {
         });
     }
 
-    function loadFollowers() {
+    function loadFollowers(username) {
         $.ajax({
             url: 'https://cors-anywhere.herokuapp.com/http://88.214.57.214:6889/api/v1/users/followers/user/' + username,
             type: 'GET',
@@ -116,7 +118,7 @@ $(document).ready(function () {
         });
     }
 
-    function loadUserImages() {
+    function loadUserImages(username) {
         $.ajax({
             url: 'https://cors-anywhere.herokuapp.com/http://88.214.57.214:6889/api/v1/images/user/' + username + '/0',
             type: 'GET',
@@ -176,7 +178,7 @@ $(document).ready(function () {
         let imageId = oEvent.currentTarget.id.slice(4);
     }
 
-    function loadNumImages() {
+    function loadNumImages(username) {
         $.ajax({
             url: 'https://cors-anywhere.herokuapp.com/http://88.214.57.214:6889/api/v1/images/$count/' + username,
             type: 'GET',
