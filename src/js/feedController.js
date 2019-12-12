@@ -19,21 +19,29 @@ $(document).ready(function () {
 
 function loadFeedImage() {
     scrollLoad = false;
+    let userImage;
 
     $('#feedContainer').append(bigLoadSpinner);
 
     $.ajax({
-        url: backendAdress + '/api/v1/images/discover/' + feedImageID,
+        url: backendAdress + '/api/v1/images/feed/' + feedImageID,
         type: 'GET',
         headers: {
             "Authorization": `Bearer ${token}`
         },
         success: function (response) {
             for (let i = 0; i < response.imageDTOS.length; i++) {
+
+                if (response.imageDTOS[i].userImage == "" || response.imageDTOS[i].userImage == undefined || response.imageDTOS[i].userImage == null) {
+                    userImage = "resources/images/superthumb.jpg";
+                } else {
+                    userImage = "data:image/jpeg;base64," + response.imageDTOS[i].userImage;
+                }
+
                 let imageDiv = "<div class=\"post-container\" style=\"flex-direction: column\">\n" +
                     "                    <article class=\"post\">\n" +
                     "                        <header class=\"bd-post-title\">\n" +
-                    "                            <img alt=\"\" class=\"bd-post-pp\" src=\"\data:image/jpeg;base64," + response.imageDTOS[i].userImage + "\">\n" +
+                    "                            <img alt=\"\" class=\"bd-post-pp\" src=\"" + userImage + "\">\n" +
                     "                            <span class=\"bd-post-name\">" + response.imageDTOS[i].user + "</span>\n" +
                     "                        </header>\n" +
                     "                        <div class=\"bd-post-img-container\">\n" +

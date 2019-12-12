@@ -1,5 +1,6 @@
 let debug = false;
 let picString;
+let userId;
 
 
 $(document).ready(function () {
@@ -9,7 +10,9 @@ $(document).ready(function () {
         $('#followBtn').remove();
     } else {
         loadAllProfileData(sessionStorage.getItem('searchUser'));
+        userId = sessionStorage.getItem('searchUser');
         sessionStorage.setItem('searchUser', '');
+        getFollower(userId);
     }
 
 });
@@ -65,7 +68,12 @@ function loadUserData(username) {
                 document.getElementById("idBio").innerHTML = response.bio;
             }
             document.getElementById("idUserName").innerHTML = response.user;
-            picString = "data:image/jpeg;base64," + response.userImage;
+
+            if (response.userImage == "" || response.userImage == undefined || response.userImage == null) {
+                picString = "resources/images/superthumb.jpg";
+            } else {
+                picString = "data:image/jpeg;base64," + response.userImage;
+            }
             $('#idProfileImage').attr("src", picString);
         },
         error: function (response) {
@@ -139,38 +147,24 @@ function loadUserImages(username) {
                 console.log('succes: ' + JSON.stringify(response));
             }
 
-            //display pictures
-
             for (let i = 0; i < response.imageDTOS.length; i++) {
                 let imageDiv = "                    <article class=\"post\">\n" +
                     "                        <header class=\"bd-post-title\">\n" +
                     "                            <img alt=\"\" class=\"bd-post-pp\" src=\"" + picString + "\">\n" +
-                    "                            <span id=\"span" + response.imageDTOS[i].id + "\"  class=\"bd-post-name\">Mein Name</span>\n" +
+                    "                            <span id=\"span" + response.imageDTOS[i].id + "\"  class=\"bd-post-name\">" + response.imageDTOS[i].user + "</span>\n" +
                     "                        </header>\n" +
                     "                        <div>\n" +
-                    "                            <img id=\"image" + response.imageDTOS[i].id + "\" alt=\"\" class=\"bd-post-img\" src=\"\data:image/jpeg;base64," + response.imageDTOS[i].image + "\">\n" +
+                    "                            <img onclick='openImageModal(event)' id=\"image" + response.imageDTOS[i].id + "\" alt=\"\" class=\"bd-post-img\" src=\"\data:image/jpeg;base64," + response.imageDTOS[i].image + "\">\n" +
                     "                        </div>\n" +
                     "                        <div class=\"bd-post-stats\">\n" +
-                    "                            <a id=\"afav" + response.imageDTOS[i].id + "\" class=\"bd-post-favtext\"><i class=\"material-icons bd-post-favicon\">favorite</i><span\n" +
-                    "                                   id=\"idSpan" + response.imageDTOS[i].id + "\" class=\"bd-post-span\">" + response.imageDTOS[i].likes + "</span></a>\n" +
+                    "                            <a onclick='likingImage(" + response.imageDTOS[i].id + ")' id=\"afav" + response.imageDTOS[i].id + "\" class=\"bd-post-favtext\"><i class=\"material-icons bd-post-favicon\">favorite</i><span\n" +
+                    "                                   id='imageLikes" + response.imageDTOS[i].id + "' class=\"bd-post-span\">" + response.imageDTOS[i].likes + "</span></a>\n" +
                     "                            <a class=\"bd-post-chattext\"><i class=\"material-icons bd-post-chaticon\">chat</i><span\n" +
-                    "                                    class=\"bd-post-span\">" + response.imageDTOS[1].comments + "</span></a>\n" +
+                    "                                    class=\"bd-post-span\">" + response.imageDTOS[i].comments + "</span></a>\n" +
                     "                        </div>\n" +
                     "                    </article>";
-
-                //  \"" + picString + "\"
-                //"<img alt=\"content\" class=\"bd-main-content-img\" src=\"\data:image/jpeg;base64," + response.imageDTOS[i].image + "\">";
-
                 $('#idFeedContainerUserImages').append(imageDiv);
-
-                let spanID = "span" + response.imageDTOS[i].id;
-                document.getElementById(spanID).innerHTML = response.imageDTOS[0].title;
-
-                let afavId = "afav" + response.imageDTOS[i].id;
-                document.getElementById(afavId).addEventListener("click", triggerLike);
             }
-            //end display pictures
-            //update profile pic of imgs
         },
         error: function (response) {
             if (debug === true) {
@@ -179,34 +173,6 @@ function loadUserImages(username) {
             }
         }
     });
-}
-
-function triggerLike(oEvent) {
-
-    let imageId = oEvent.currentTarget.id.slice(4);
-        let likeFormData = new FormData();
-        likeFormData.append('imageId', imageId);
-
-        $.ajax({
-            url: backendAdress + '/api/v1/images/liked',
-            type: 'POST',
-            processData: false,
-            contentType: false,
-            data: likeFormData,
-            headers: {
-                "Authorization": `Bearer ${token}`
-            },
-            success: function (response) {
-                let currentLikes = $('#idSpan' + imageId).html() * 1;
-                if (response) {
-                    $('#idSpan' + imageId).text(currentLikes + 1);
-                } else {
-                    $('#idSpan' + imageId).text(currentLikes - 1);
-                }
-            }
-        });
-
-
 }
 
 function loadNumImages(username) {
@@ -231,6 +197,62 @@ function loadNumImages(username) {
                 alert('error');
                 console.log('error: ' + JSON.stringify(response));
             }
+        }
+    });
+}
+
+/**
+ * Follows or Defollows the user
+ */
+function followUser() {
+    let followUserFormData = new FormData();
+    followUserFormData.append('followUser', userId);
+
+    $.ajax({
+        url: backendAdress + '/api/v1/users/follow',
+        type: 'POST',
+        processData: false,
+        contentType: false,
+        data: followUserFormData,
+        headers: {
+            "Authorization": `Bearer ${token}`
+        },
+        success: function (response) {
+            $('#followBtn').html('Unfollow');
+        },
+        error: function (response) {
+
+        }
+    });
+}
+
+/**
+ * Loads all Users and if follow changes the follow Button
+ * @param username
+ */
+function getFollower(username) {
+    let getFollowerFD = new FormData();
+    getFollowerFD.append('user', username);
+
+    $.ajax({
+        url: backendAdress + '/api/v1/users/followers/user/' + username,
+        type: 'GET',
+        processData: false,
+        contentType: false,
+        data: getFollowerFD,
+        headers: {
+            "Authorization": `Bearer ${token}`
+        },
+        success: function (response) {
+            for (let i = 0; i < response.userDTOS.length; i++) {
+                if (response.userDTOS[i].user.toString().toUpperCase() == sessionStorage.getItem('Username').toString().toUpperCase()
+                ) {
+                    $('#followBtn').html('Unfollow');
+                }
+            }
+        },
+        error: function (response) {
+
         }
     });
 }
