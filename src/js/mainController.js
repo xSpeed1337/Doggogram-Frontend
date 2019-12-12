@@ -114,12 +114,12 @@ function openImageModal(event) {
             "Authorization": `Bearer ${token}`
         },
         success: function (response) {
-
             if (response.userImage == "" || response.userImage == undefined || response.userImage == null) {
                 userImage = "resources/images/superthumb.jpg";
             } else {
                 userImage = "data:image/jpeg;base64," + response.userImage;
             }
+            let username = response.user;
 
             let newImageModal = "<div class=\"modal fade  bd-image-modal\" id='imageModal" + response.id + "' tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"imageModalLabel\" aria-hidden=\"true\">\n" +
                 "    <div class=\"modal-dialog modal-lg modal-dialog-centered\" role=\"document\">\n" +
@@ -134,8 +134,8 @@ function openImageModal(event) {
                 "                        </div>\n" +
                 "                        <div class=\"col-4\">\n" +
                 "                            <header class=\"bd-image-header\">\n" +
-                "                                <img class=\"bd-image-profile-picture\" src=\"" + userImage + "\" alt=\"Profile Picture\">\n" +
-                "                                <span class=\"bd-image-profile-name\">" + response.user + "</span>\n" +
+                "                                <a onclick='goToUserpage(\"" + response.user + "\")'><img class=\"bd-image-profile-picture\" src=\"" + userImage + "\" alt=\"Profile Picture\">\n" +
+                "                                <span id='username' class=\"bd-image-profile-name\">" + response.user + "</span></a>\n" +
                 "                                <div class=\"bd-image-profile-container-description\"><span class=\"bd-image-profile-description\">" + response.bio + "</span></div>\n" +
                 "                            </header>\n" +
                 "                            <div class=\"bd-image-body\">\n" +
@@ -319,4 +319,9 @@ function writeComment(imageID) {
             }
         });
     }
+}
+
+function goToUserpage(user) {
+    sessionStorage.setItem('searchUser', user);
+    location.href = "userpage.html";
 }
