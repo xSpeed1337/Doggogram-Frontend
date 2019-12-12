@@ -412,3 +412,8 @@ function createSuccessMessage(sMain, sSub) {
         '                                </button>\n' +
         '                            </div>';
 }
+
+function logout() {
+    sessionStorage.clear();
+    location.href = "login.html";
+}
