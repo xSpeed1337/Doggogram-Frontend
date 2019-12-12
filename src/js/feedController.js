@@ -24,7 +24,7 @@ function loadFeedImage() {
     $('#feedContainer').append(bigLoadSpinner);
 
     $.ajax({
-        url: backendAdress + '/api/v1/images/discover/' + feedImageID,
+        url: backendAdress + '/api/v1/images/feed/' + feedImageID,
         type: 'GET',
         headers: {
             "Authorization": `Bearer ${token}`
