@@ -119,8 +119,6 @@ function openImageModal(event) {
             } else {
                 userImage = "data:image/jpeg;base64," + response.userImage;
             }
-            let username = response.user;
-
             let newImageModal = "<div class=\"modal fade  bd-image-modal\" id='imageModal" + response.id + "' tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"imageModalLabel\" aria-hidden=\"true\">\n" +
                 "    <div class=\"modal-dialog modal-lg modal-dialog-centered\" role=\"document\">\n" +
                 "        <div class=\"modal-content bd-image-modal-content\">\n" +
@@ -134,12 +132,8 @@ function openImageModal(event) {
                 "                        </div>\n" +
                 "                        <div class=\"col-4\">\n" +
                 "                            <header class=\"bd-image-header\">\n" +
-                "                                <a onclick='goToUserpage(\"" + response.user + "\")'><img class=\"bd-image-profile-picture\" src=\"" + userImage + "\" alt=\"Profile Picture\">\n" +
+                "                                <a id='linkheader' onclick='goToUserpage(\"" + response.user + "\")'><img class=\"bd-image-profile-picture\" src=\"" + userImage + "\" alt=\"Profile Picture\">\n" +
                 "                                <span id='username' class=\"bd-image-profile-name\">" + response.user + "</span></a>\n" +
-                "                                <img class=\"bd-image-profile-picture\" src=\"\data:image/jpeg;base64," + response.userImage + "\" alt=\"Profile Picture\">\n" +
-                "                                <span class=\"bd-image-profile-name\">" + response.user + "</span>\n" +
-                "                                <button class=\"btn bd-image-profile-change-btn\"><i class=\"material-icons bd-image-profile-change-btn-icon\">create</i></button>" +
-                "                                <button class=\"btn bd-image-profile-delete-btn\" type=\"button\"><i class=\"material-icons bd-image-profile-delete-btn-icon\">delete</i></button>" +
                 "                                <div class=\"bd-image-profile-container-description\"><span class=\"bd-image-profile-description\">" + response.bio + "</span></div>\n" +
                 "                            </header>\n" +
                 "                            <div class=\"bd-image-body\">\n" +
@@ -171,6 +165,11 @@ function openImageModal(event) {
                 "</div>";
 
             $('#' + imageID).after(newImageModal);
+            if (response.user.toString().toUpperCase() == sessionStorage.getItem('Username').toString().toUpperCase()) {
+                let deleteAndEditButton = "<button id='change" + response.id + "' class=\"btn bd-image-profile-change-btn\"><i class=\"material-icons bd-image-profile-change-btn-icon\">create</i></button>" +
+                    "                      <button onclick='openDeleteModal(" + response.id + ")' id='delete" + response.id + "' class=\"btn bd-image-profile-delete-btn\" type=\"button\"><i class=\"material-icons bd-image-profile-delete-btn-icon\">delete</i></button>";
+                $('#linkheader').after(deleteAndEditButton);
+            }
             if (response.comments != 0) {
                 loadModalComments(response.id);
             }
@@ -328,4 +327,61 @@ function writeComment(imageID) {
 function goToUserpage(user) {
     sessionStorage.setItem('searchUser', user);
     location.href = "userpage.html";
+}
+
+/**
+ *
+ * @param imageID
+ */
+function openDeleteModal(imageID) {
+    let deleteModal = "<div id='deleteModal" + imageID + "' class=\"modal\" tabindex=\"-1\" role=\"dialog\">\n" +
+        "  <div class=\"modal-dialog\" role=\"document\">\n" +
+        "    <div class=\"modal-content\">\n" +
+        "      <div class=\"modal-header\">\n" +
+        "        <h5 class=\"modal-title\">Bild löschen</h5>\n" +
+        "        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n" +
+        "          <span aria-hidden=\"true\">&times;</span>\n" +
+        "        </button>\n" +
+        "      </div>\n" +
+        "      <div class=\"modal-body\">\n" +
+        "        <p>Willst du wirklich das Bild löschen?</p>\n" +
+        "      </div>\n" +
+        "      <div class=\"modal-footer\">\n" +
+        "        <button onclick='deleteImage(" + imageID + ")' type=\"button\" class=\"btn btn-primary\">LÖSCHEN</button>\n" +
+        "        <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Abbrechen</button>\n" +
+        "      </div>\n" +
+        "    </div>\n" +
+        "  </div>\n" +
+        "</div>";
+
+
+    $('#imageModal' + imageID).modal('toggle');
+    $('#idFeedContainerUserImages').append(deleteModal);
+    $('#deleteModal' + imageID).modal('toggle');
+}
+
+/**
+ *
+ * @param imageID
+ */
+function deleteImage(imageID) {
+    let deleteFD = new FormData();
+    deleteFD.append('imageId', imageID);
+
+    $.ajax({
+        url: backendAdress + '/api/v1/images/remove',
+        type: 'POST',
+        processData: false,
+        contentType: false,
+        data: deleteFD,
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }, success: function (response) {
+            debugger
+            location.href = "";
+        },
+        error: function (response) {
+
+        }
+    });
 }
