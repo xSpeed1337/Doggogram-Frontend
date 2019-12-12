@@ -136,6 +136,10 @@ function openImageModal(event) {
                 "                            <header class=\"bd-image-header\">\n" +
                 "                                <a onclick='goToUserpage(\"" + response.user + "\")'><img class=\"bd-image-profile-picture\" src=\"" + userImage + "\" alt=\"Profile Picture\">\n" +
                 "                                <span id='username' class=\"bd-image-profile-name\">" + response.user + "</span></a>\n" +
+                "                                <img class=\"bd-image-profile-picture\" src=\"\data:image/jpeg;base64," + response.userImage + "\" alt=\"Profile Picture\">\n" +
+                "                                <span class=\"bd-image-profile-name\">" + response.user + "</span>\n" +
+                "                                <button class=\"btn bd-image-profile-change-btn\"><i class=\"material-icons bd-image-profile-change-btn-icon\">create</i></button>" +
+                "                                <button class=\"btn bd-image-profile-delete-btn\" type=\"button\"><i class=\"material-icons bd-image-profile-delete-btn-icon\">delete</i></button>" +
                 "                                <div class=\"bd-image-profile-container-description\"><span class=\"bd-image-profile-description\">" + response.bio + "</span></div>\n" +
                 "                            </header>\n" +
                 "                            <div class=\"bd-image-body\">\n" +

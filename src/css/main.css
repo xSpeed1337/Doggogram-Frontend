@@ -401,7 +401,7 @@
 }
 .bd-image-container-comments {
     margin-top: 10px;
-    height: 265px;
+    height: 250px;
     overflow: scroll;
 }
 .bd-image-comment-list {
@@ -480,3 +480,30 @@
     color: #4ECCA3;
 }
 .bd-image-button-icon {}
+
+.bd-image-profile-change-btn {
+}
+.bd-image-profile-delete-btn {
+}
+.bd-image-comment-change-btn {
+    float: right;
+}
+.bd-image-comment-delete-btn {
+    float: right;
+}
+.bd-image-profile-change-btn-icon {
+     font-size: 20px!important;
+     color: #EEEEEE;
+ }
+.bd-image-profile-delete-btn-icon {
+    font-size: 20px!important;
+    color: #EEEEEE;
+}
+.bd-image-comment-change-btn-icon {
+    font-size: 20px!important;
+    color: #EEEEEE;
+}
+.bd-image-comment-delete-btn-icon {
+    font-size: 20px!important;
+    color: #EEEEEE;
+}
