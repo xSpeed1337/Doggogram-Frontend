@@ -13,7 +13,6 @@ let notEmptyAlert = '<div class="alert alert-warning alert-dismissible show" rol
     '                            </div>';
 
 $(document).ready(function () {
-    let debug = true;
     let image;
 
     autoRedirect();
@@ -82,15 +81,10 @@ $(document).ready(function () {
                     "Authorization": `Bearer ${token}`
                 },
                 success: function (response) {
-                    if (debug === true) {
-                        console.log('succes: ' + JSON.stringify(response));
-                    }
                     $("#exampleModal").modal('toggle');
                 },
                 error: function (response) {
-                    if (debug === true) {
-                        console.log('error: ' + JSON.stringify(response));
-                    }
+
                 }
             });
         }
@@ -330,7 +324,7 @@ function goToUserpage(user) {
 }
 
 /**
- *
+ * Opens the Delete Modal
  * @param imageID
  */
 function openDeleteModal(imageID) {
@@ -354,14 +348,13 @@ function openDeleteModal(imageID) {
         "  </div>\n" +
         "</div>";
 
-
     $('#imageModal' + imageID).modal('toggle');
     $('#idFeedContainerUserImages').append(deleteModal);
     $('#deleteModal' + imageID).modal('toggle');
 }
 
 /**
- *
+ * Deletes the Image in the Backend
  * @param imageID
  */
 function deleteImage(imageID) {
