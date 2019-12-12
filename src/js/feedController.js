@@ -41,8 +41,10 @@ function loadFeedImage() {
                 let imageDiv = "<div class=\"post-container\" style=\"flex-direction: column\">\n" +
                     "                    <article class=\"post\">\n" +
                     "                        <header class=\"bd-post-title\">\n" +
-                    "                            <img alt=\"\" class=\"bd-post-pp\" src=\"" + userImage + "\">\n" +
-                    "                            <span class=\"bd-post-name\">" + response.imageDTOS[i].user + "</span>\n" +
+                    "                           <a onclick='goToUserpage(\"" + response.imageDTOS[i].user + "\")'>" +
+                    "                               <img alt=\"\" class=\"bd-post-pp\" src=\"" + userImage + "\">\n" +
+                    "                               <span class=\"bd-post-name\">" + response.imageDTOS[i].user + "</span>" +
+                    "                           </a>\n" +
                     "                        </header>\n" +
                     "                        <div class=\"bd-post-img-container\">\n" +
                     "                            <img onclick='openImageModal(event)' id=\"image" + response.imageDTOS[i].id + "\" alt=\"\" class=\"bd-post-img\" src=\"\data:image/jpeg;base64," + response.imageDTOS[i].image + "\">\n" +
