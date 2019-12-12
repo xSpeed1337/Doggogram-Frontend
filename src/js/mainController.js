@@ -166,7 +166,7 @@ function openImageModal(event) {
 
             $('#' + imageID).after(newImageModal);
             if (response.user.toString().toUpperCase() == sessionStorage.getItem('Username').toString().toUpperCase()) {
-                let deleteAndEditButton = "<button id='change" + response.id + "' class=\"btn bd-image-profile-change-btn\"><i class=\"material-icons bd-image-profile-change-btn-icon\">create</i></button>" +
+                let deleteAndEditButton = "<button hidden id='change" + response.id + "' class=\"btn bd-image-profile-change-btn\"><i class=\"material-icons bd-image-profile-change-btn-icon\">create</i></button>" +
                     "                      <button onclick='openDeleteModal(" + response.id + ")' id='delete" + response.id + "' class=\"btn bd-image-profile-delete-btn\" type=\"button\"><i class=\"material-icons bd-image-profile-delete-btn-icon\">delete</i></button>";
                 $('#linkheader').after(deleteAndEditButton);
             }
