@@ -5,12 +5,8 @@ let bigLoadSpinner = "<div id='bigLoadSpinner' class=\"post-container\" style=\"
     "  <span class=\"sr-only\">Loading...</span>\n" +
     "</div>" +
     "</div>";
-let notEmptyAlert = '<div class="alert alert-warning alert-dismissible show" role="alert">\n' +
-    '                                Dieses feld darf <strong>NICHT</strong> leer sein! \n' +
-    '                                <button aria-label="Close" class="close" data-dismiss="alert" type="button">\n' +
-    '                                    <span aria-hidden="true">&times;</span>\n' +
-    '                                </button>\n' +
-    '                            </div>';
+let smallLoadingSpinner = "<span id='smallSpinner' class=\"spinner-border spinner-border-sm\" role=\"status\" aria-hidden=\"true\"></span>";
+
 
 $(document).ready(function () {
     let image;
@@ -66,10 +62,12 @@ $(document).ready(function () {
             $('#uploadBio').after(notEmptyAlert)
         }
 
+        formdata.append('title', uploadTitle);
+        formdata.append('bio', uploadBio);
+        formdata.append('file', uploadImage);
+
         if (uploadbool) {
-            formdata.append('title', uploadTitle);
-            formdata.append('bio', uploadBio);
-            formdata.append('file', uploadImage);
+            $("#uploadImageBtn").append(smallLoadingSpinner);
 
             $.ajax({
                 url: backendAdress + '/api/v1/images/upload/',
@@ -82,9 +80,16 @@ $(document).ready(function () {
                 },
                 success: function (response) {
                     $("#exampleModal").modal('toggle');
+                    $('#smallSpinner').remove();
+                    let sMain = "Hochladen erfolgreich!";
+                    let sSub = "";
+                    $("#uploadBio").after(createSuccessMessage(sMain, sSub));
                 },
                 error: function (response) {
-
+                    $('#smallSpinner').remove();
+                    let sMain = "Hochladen fehlgeschlagen!"
+                    let sSub = "Bitte versuchen Sie es später erneut."
+                    $("#uploadBio").after(createErrorMessage(sMain, sSub));
                 }
             });
         }
@@ -100,6 +105,17 @@ function openImageModal(event) {
     let imageID = $(event.target)[0].id;
     let iID = imageID.substr(5);
     let userImage;
+
+    let loadModal = "<div id='loadModal' class=\"modal\" tabindex=\"-1\" role=\"dialog\">\n" +
+        "    <div class=\"modal-dialog\" role=\"document\">\n" +
+        "        <div class=\"modal-content\">\n" +
+        "         " + bigLoadSpinner + "   \n" +
+        "        </div>\n" +
+        "    </div>\n" +
+        "</div>"
+
+    $('#' + imageID).after(loadModal);
+    $('#loadModal').modal('toggle');
 
     $.ajax({
         url: backendAdress + '/api/v1/images/image/' + iID,
@@ -167,6 +183,7 @@ function openImageModal(event) {
             if (response.comments != 0) {
                 loadModalComments(response.id);
             }
+            $('#loadModal').modal('toggle');
             $('#imageModal' + response.id).modal('toggle');
         }
     });
@@ -376,4 +393,22 @@ function deleteImage(imageID) {
 
         }
     });
+}
+
+function createErrorMessage(sMain, sSub) {
+    return '<div class="alert alert-warning alert-dismissible show" role="alert">\n' +
+        '                                <strong>' + sMain + '</strong> ' + sSub + ' \n' +
+        '                                <button aria-label="Close" class="close" data-dismiss="alert" type="button">\n' +
+        '                                    <span aria-hidden="true">&times;</span>\n' +
+        '                                </button>\n' +
+        '                            </div>';
+}
+
+function createSuccessMessage(sMain, sSub) {
+    return '<div class="alert alert-success alert-dismissible show" role="alert">\n' +
+        '                                <strong>' + sMain + '</strong> ' + sSub + ' \n' +
+        '                                <button aria-label="Close" class="close" data-dismiss="alert" type="button">\n' +
+        '                                    <span aria-hidden="true">&times;</span>\n' +
+        '                                </button>\n' +
+        '                            </div>';
 }
