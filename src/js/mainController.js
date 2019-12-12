@@ -105,6 +105,7 @@ $(document).ready(function () {
 function openImageModal(event) {
     let imageID = $(event.target)[0].id;
     let iID = imageID.substr(5);
+    let userImage;
 
     $.ajax({
         url: backendAdress + '/api/v1/images/image/' + iID,
@@ -113,6 +114,13 @@ function openImageModal(event) {
             "Authorization": `Bearer ${token}`
         },
         success: function (response) {
+
+            if (response.userImage == "" || response.userImage == undefined || response.userImage == null) {
+                userImage = "resources/images/superthumb.jpg";
+            } else {
+                userImage = "data:image/jpeg;base64," + response.userImage;
+            }
+
             let newImageModal = "<div class=\"modal fade  bd-image-modal\" id='imageModal" + response.id + "' tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"imageModalLabel\" aria-hidden=\"true\">\n" +
                 "    <div class=\"modal-dialog modal-lg modal-dialog-centered\" role=\"document\">\n" +
                 "        <div class=\"modal-content bd-image-modal-content\">\n" +
@@ -126,7 +134,7 @@ function openImageModal(event) {
                 "                        </div>\n" +
                 "                        <div class=\"col-4\">\n" +
                 "                            <header class=\"bd-image-header\">\n" +
-                "                                <img class=\"bd-image-profile-picture\" src=\"\data:image/jpeg;base64," + response.userImage + "\" alt=\"Profile Picture\">\n" +
+                "                                <img class=\"bd-image-profile-picture\" src=\"" + userImage + "\" alt=\"Profile Picture\">\n" +
                 "                                <span class=\"bd-image-profile-name\">" + response.user + "</span>\n" +
                 "                                <div class=\"bd-image-profile-container-description\"><span class=\"bd-image-profile-description\">" + response.bio + "</span></div>\n" +
                 "                            </header>\n" +
