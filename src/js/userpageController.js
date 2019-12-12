@@ -12,6 +12,7 @@ $(document).ready(function () {
         loadAllProfileData(sessionStorage.getItem('searchUser'));
         userId = sessionStorage.getItem('searchUser');
         sessionStorage.setItem('searchUser', '');
+        getFollower(userId);
     }
 
 });
@@ -221,4 +222,32 @@ function followUser() {
 
         }
     });
+}
+
+function getFollower(user) {
+    let getFollowerFD = new FormData();
+    getFollowerFD.append('user', user);
+
+    $.ajax({
+        url: backendAdress + '/api/v1/users/followers/user/' + user,
+        type: 'GET',
+        processData: false,
+        contentType: false,
+        data: getFollowerFD,
+        headers: {
+            "Authorization": `Bearer ${token}`
+        },
+        success: function (response) {
+            for (let i = 0; i < response.userDTOS.length; i++) {
+                if (response.userDTOS[i].user.toString().toUpperCase() == sessionStorage.getItem('Username').toString().toUpperCase()
+                ) {
+                    $('#followBtn').html('Unfollow');
+                }
+            }
+        },
+        error: function (response) {
+
+        }
+    })
+
 }
