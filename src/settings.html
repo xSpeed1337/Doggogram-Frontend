@@ -16,102 +16,85 @@
 
 <header class="navbar navbar-expand flex-row bd-navbar fixed-top">
     <a class="navbar-brand bd-navbar-title" href=""><i class="material-icons bd-navbar-title-icon">pets</i><span
-            class="bd-title-text1">doggo</span><span class="bd-title-text2">gram Settings</span></a>
-    <a class="bd-logout-link d-inline-block " data-target="#exampleModal" data-toggle="modal" onclick="logout()">
-        <i class=" material-icons bd-logout-icon">power_settings_new</i></a>
+            class="bd-title-text1">doggo</span><span class="bd-title-text2">gram</span></a>
+    <span class="bd-title-settings">Einstellungen</span>
+    <a class="bd-logout-link d-inline-block" href="login.html">
+        <i class=" material-icons bd-logout-icon-settings">power_settings_new</i></a>
 </header>
 <main class="bd-head" id="content" role="main">
     <div class="container">
-        <h2>Profilbild ändern</h2>
         <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-4">
-                <h4>Altes Profilbild</h4>
-                <div class="col">
-                    <img alt="usericon" class="bd-main-info-usericon" id="idOldProfileImage"
-                         src="resources/images/defaultuserimage.png">
-                </div>
-            </div>
-            <div class="col-md-4">
-                <h4>Neues Profilbild</h4>
-                <div class="col">
-                    <img alt="usericon" class="bd-main-info-usericon" data-target="#myModal"
-                         data-toggle="modal" src="resources/images/adduserimage.png">
-                </div>
-                <div class="modal" id="myModal">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <!-- Modal Header -->
-                            <div class="modal-header">
-                                <h4 class="modal-title">Neues Profilbild</h4>
-                                <button class="close" data-dismiss="modal" type="button">&times;</button>
-                            </div>
-                            <!-- Modal body -->
-                            <div class="modal-body">
-                                <form>
-                                    <div class="form-group">
-                                        <label for="newProfileImage">Profilbild auswählen</label>
-                                        <div class="custom-file">
-                                            <input accept="image/*" id="newProfileImage" name="datei" type="file">
-                                            <label class="custom-file-label" for="newProfileImage">Datei
-                                                auswählen</label>
+            <div class="col d-flex justify-content-center">
+                <div class="bd-change-pp-container">
+                    <span class="bd-change-pp-title">Profilbild ändern</span>
+                    <div class="bd-old-pp-container">
+                        <span class="bd-change-pp-old-title">Altes Profilbild</span>
+                        <img alt="usericon" class="bd-change-pp-old-img" id="idOldProfileImage" src="resources/images/defaultuserimage.png">
+                    </div>
+                    <div class="bd-new-pp-container">
+                        <span class="bd-change-pp-new-title">Neues Profilbild</span>
+                        <img alt="usericon" class="bd-change-pp-new-img" data-target="#changePictureModal" data-toggle="modal" src="resources/images/adduserimage.png">
+                    </div>
+                    <div class="modal fade" id="changePictureModal" role="dialog" tabindex="-1" aria-hidden="true" aria-labelledby="changePictureModalLabel">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content bd-change-pp-modal-content">
+                                <div class="modal-header bd-change-pp-modal-header">
+                                    <span class="modal-title bd-change-pp-modal-title">Neues Profilbild</span>
+                                </div>
+                                <div class="modal-body bd-change-pp-modal-body">
+                                    <form>
+                                        <div class="form-group">
+                                            <label for="newProfileImage">Profilbild auswählen</label>
+                                            <div class="custom-file">
+                                                <input class="custom-file-input" accept="image/*" id="newProfileImage" name="datei" type="file">
+                                                <label class="custom-file-label" for="newProfileImage">Datei auswählen</label>
+                                            </div>
                                         </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <!-- Modal footer -->
-                            <div class="modal-footer">
-                                <button class="btn btn-secondary" data-dismiss="modal" type="button">Schließen</button>
-                                <button class="btn btn-primary" id="uploadUserPictureBtn" type="button">Bild hochladen
-                                </button>
+                                    </form>
+                                </div>
+                                <div class="modal-footer bd-change-pp-modal-footer">
+                                    <button class="btn btn-secondary" data-dismiss="modal" type="button">Schließen</button>
+                                    <button class="btn btn-primary" id="uploadUserPictureBtn" type="button">Bild hochladen</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-2"></div>
         </div>
-    </div>
-    <div class="container">
-        <h2>Benutzerbeschreibung ändern</h2>
-        <div class="form-group">
-            <label for="comment">Neue Benutzerbeschreibung</label>
-            <textarea class="form-control" id="idTextArea" id="comment" rows="5"></textarea>
+        <div class="row">
+            <div class="col">
+                <div class="bd-change-pd-container">
+                    <span class="bd-change-pd-title">Benutzerbeschreibung ändern</span>
+                    <div class="form-group">
+                        <textarea class="form-control bd-change-pd-textarea" id="idTextArea" id="comment" rows="5"></textarea>
+                    </div>
+                    <button class="btn btn-primary bd-change-pd-btn" id="idChangeBio" type="button">Benutzerbeschreibung ändern</button>
+                </div>
+            </div>
         </div>
-        <button class="btn btn-primary active" id="idChangeBio" type="button">Benutzerbeschreibung ändern</button>
-    </div>
-    <div class="container">
-        <h2>Passwort ändern</h2>
-        <form action="/action_page.php" class="was-validated">
-            <div class="form-group">
-                <label for="uname">Altes Password: </label>
-                <input class="form-control" id="idInputOldPassword" id="uname" name="uname"
-                       placeholder="Altes Password" required type="password">
-                <div class="valid-feedback">Valid.</div>
-                <div class="invalid-feedback">Bitte fülle dieses Feld aus.</div>
+        <div class="row">
+            <div class="col">
+                <div class="bd-change-p-container">
+                    <span class="bd-change-p-title">Passwort ändern</span>
+                    <form action="/action_page.php" class="was-validated">
+                        <div class="form-group">
+                            <input class="form-control bd-change-p-input-old" id="idInputOldPassword" id="uname" name="uname"
+                                   placeholder="Altes Password:" required type="password">
+                            <div class="invalid-feedback">Bitte fülle dieses Feld aus.</div>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control bd-change-p-input-new" id="idInputNewPassword" id="pwd" name="pswd"
+                                   placeholder="Neues Password: " required type="password">
+                            <div class="invalid-feedback">Bitte fülle dieses Feld aus.</div>
+                        </div>
+                        <button  class="btn btn-primary bd-change-p-btn" id="idChangePassword" type="button">Password ändern</button>
+                        <div id="snackbarSuccess" >Änderung erfolgreich durchgeführt!</div>
+                        <div id="snackbarFail" >Änderung nicht erfolgreich durchgeführt!</div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="pwd">Password:</label>
-                <input class="form-control" id="idInputNewPassword" id="pwd" name="pswd"
-                       placeholder="Neues Password: " required type="password">
-                <div class="valid-feedback">Valid.</div>
-                <div class="invalid-feedback">Bitte fülle dieses Feld aus.</div>
-            </div>
-            <!--            <div class="form-group form-check">
-                            <label class="form-check-label">
-                                <input class="form-check-input" type="checkbox" name="remember" required>Hiermit bestätige ich die Datenschutzrichtlinie des Doggograms.S
-                                <div class="valid-feedback">Erfüllt.</div>
-                                <div class="invalid-feedback">Pflichtfeld</div>
-                            </label>
-
-                        </div>-->
-            <button class="btn btn-primary active" id="idChangePassword" type="button">Password ändern</button>
-
-            <div id="snackbarSuccess">Änderung erfolgreich durchgeführt!</div>
-            <div id="snackbarFail">Änderung nicht erfolgreich durchgeführt!</div>
-
-
-        </form>
+        </div>
     </div>
 </main>
 <footer class="bd-footer fixed-bottom">
@@ -129,9 +112,6 @@
         </ul>
     </div>
 </footer>
-<script>
-
-</script>
 <script crossorigin="anonymous"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
