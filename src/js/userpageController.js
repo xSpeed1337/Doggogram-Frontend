@@ -201,7 +201,9 @@ function loadNumImages(username) {
     });
 }
 
-
+/**
+ * Follows or Defollows the user
+ */
 function followUser() {
     let followUserFormData = new FormData();
     followUserFormData.append('followUser', userId);
@@ -224,12 +226,16 @@ function followUser() {
     });
 }
 
-function getFollower(user) {
+/**
+ * Loads all Users and if follow changes the follow Button
+ * @param username
+ */
+function getFollower(username) {
     let getFollowerFD = new FormData();
-    getFollowerFD.append('user', user);
+    getFollowerFD.append('user', username);
 
     $.ajax({
-        url: backendAdress + '/api/v1/users/followers/user/' + user,
+        url: backendAdress + '/api/v1/users/followers/user/' + username,
         type: 'GET',
         processData: false,
         contentType: false,
@@ -248,6 +254,5 @@ function getFollower(user) {
         error: function (response) {
 
         }
-    })
-
+    });
 }
