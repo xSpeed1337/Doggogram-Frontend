@@ -5,7 +5,8 @@ let userId;
 
 $(document).ready(function () {
 
-    if (sessionStorage.getItem('searchUser') == "" || sessionStorage.getItem('searchUser') == undefined || sessionStorage.getItem('searchUser') == null) {
+    if (sessionStorage.getItem('searchUser') == "" || sessionStorage.getItem('searchUser') == undefined
+        || sessionStorage.getItem('searchUser') == null || sessionStorage.getItem('searchUser') == sessionStorage.getItem('Username')) {
         getUserName();
         $('#followBtn').remove();
     } else {
@@ -185,9 +186,7 @@ function loadNumImages(username) {
             "Authorization": `Bearer ${token}`
         },
         success: function (response) {
-
             if (debug === true) {
-
                 console.log('succes: ' + JSON.stringify(response));
             }
             document.getElementById("idBeitraege").innerHTML = response; //vorübergehende Lösung
@@ -218,7 +217,13 @@ function followUser() {
             "Authorization": `Bearer ${token}`
         },
         success: function (response) {
-            $('#followBtn').html('Unfollow');
+            if (response) {
+                $('#followBtn').html('Unfollow');
+                $('#idFollower').html(($('#idFollower').html() * 1) + 1);
+            } else {
+                $('#followBtn').html('Follow');
+                $('#idFollower').html(($('#idFollower').html() * 1) - 1);
+            }
         },
         error: function (response) {
 
@@ -245,14 +250,14 @@ function getFollower(username) {
         },
         success: function (response) {
             for (let i = 0; i < response.userDTOS.length; i++) {
-                if (response.userDTOS[i].user.toString().toUpperCase() == sessionStorage.getItem('Username').toString().toUpperCase()
-                ) {
-                    $('#followBtn').html('Unfollow');
+                if (response.userDTOS[i].user.toString().toUpperCase() == sessionStorage.getItem('Username').toString().toUpperCase()) {
+                    if (response) {
+                        $('#followBtn').html('Unfollow');
+                    } else {
+                        $('#followBtn').html('Follow');
+                    }
                 }
             }
-        },
-        error: function (response) {
-
         }
     });
 }

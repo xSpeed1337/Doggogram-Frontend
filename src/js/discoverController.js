@@ -17,6 +17,9 @@ $(document).ready(function () {
 
 });
 
+/**
+ * Loads the Discover Feed
+ */
 function loadDiscoverFeed() {
     scrollLoad = false;
     $('#discoverFeed').append(bigLoadSpinner);
@@ -51,6 +54,11 @@ function loadDiscoverFeed() {
     });
 }
 
+/**
+ * Searches the user and forwards to the userpage
+ * @param event
+ * @returns {boolean}
+ */
 function searchUser(event) {
     if (event.which == 13 || event.keyCode === 13) {
         let noUserFoundAlert = "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">\n" +
@@ -61,6 +69,8 @@ function searchUser(event) {
             "</div>";
         let searchFormData = new FormData();
         let searchUsername = $('#searchUserFeed').val();
+
+        $('#searchUserFeed').after(smallLoadingSpinner);
 
         searchFormData.append('user', searchUsername);
 
@@ -75,9 +85,11 @@ function searchUser(event) {
             },
             success: function (response) {
                 sessionStorage.setItem('searchUser', response.userDTOS[0].user);
+                $('#smallSpinner').remove();
                 location.href = "userpage.html";
             },
             error: function (response) {
+                $('#smallSpinner').remove();
                 $('#searchUserFeed').after(noUserFoundAlert);
             }
         });

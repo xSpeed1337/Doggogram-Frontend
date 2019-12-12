@@ -1,10 +1,10 @@
 let backendAdress = 'https://cors-anywhere.herokuapp.com/http://88.214.57.214:6889';
 let token = sessionStorage.getItem('token');
-let bigLoadSpinner = "<div id='bigLoadSpinner' class=\"post-container\" style=\"flex-direction: column\" >" +
-    "<div class=\"spinner-border\" style=\"width: 3rem; height: 3rem; flex-direction: column;\" role=\"status\">\n" +
-    "  <span class=\"sr-only\">Loading...</span>\n" +
-    "</div>" +
-    "</div>";
+let bigLoadSpinner = "  <div id='bigLoadSpinner' class=\"post-container\" style=\"flex-direction: column\" >" +
+    "                       <div class=\"spinner-border\" style=\"width: 3rem; height: 3rem; flex-direction: column;\" role=\"status\">\n" +
+    "                           <span class=\"sr-only\">Loading...</span>\n" +
+    "                       </div>" +
+    "                   </div>";
 let smallLoadingSpinner = "<span id='smallSpinner' class=\"spinner-border spinner-border-sm\" role=\"status\" aria-hidden=\"true\"></span>";
 
 
@@ -193,7 +193,7 @@ function openImageModal(event) {
  * Auto redirect to the loginPage if not logged in
  */
 function autoRedirect() {
-    if (token == '' || token == undefined) {
+    if (token == '' || token == undefined || token == null) {
         location.href = "login.html";
     }
 }
@@ -317,13 +317,6 @@ function writeComment(imageID) {
                 "Authorization": `Bearer ${token}`
             },
             success: function (response) {
-                let commendCreatedAlert = "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">\n" +
-                    "  Commentar erfolgreich erstellt\n" +
-                    "  <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n" +
-                    "    <span aria-hidden=\"true\">&times;</span>\n" +
-                    "  </button>\n" +
-                    "</div>";
-                $('#textarea' + imageID).append(commendCreatedAlert);
                 $('#textarea' + imageID).val('');
                 $('#commentList' + imageID).empty();
                 loadModalComments(imageID);
@@ -411,4 +404,9 @@ function createSuccessMessage(sMain, sSub) {
         '                                    <span aria-hidden="true">&times;</span>\n' +
         '                                </button>\n' +
         '                            </div>';
+}
+
+function logout() {
+    sessionStorage.clear();
+    location.href = "login.html";
 }
