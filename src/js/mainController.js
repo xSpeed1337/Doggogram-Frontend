@@ -377,7 +377,6 @@ function deleteImage(imageID) {
         headers: {
             "Authorization": `Bearer ${token}`
         }, success: function (response) {
-            debugger
             location.href = "";
         },
         error: function (response) {
