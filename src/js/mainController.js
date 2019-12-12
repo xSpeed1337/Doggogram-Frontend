@@ -5,15 +5,10 @@ let bigLoadSpinner = "<div id='bigLoadSpinner' class=\"post-container\" style=\"
     "  <span class=\"sr-only\">Loading...</span>\n" +
     "</div>" +
     "</div>";
-let notEmptyAlert = '<div class="alert alert-warning alert-dismissible show" role="alert">\n' +
-    '                                Dieses feld darf <strong>NICHT</strong> leer sein! \n' +
-    '                                <button aria-label="Close" class="close" data-dismiss="alert" type="button">\n' +
-    '                                    <span aria-hidden="true">&times;</span>\n' +
-    '                                </button>\n' +
-    '                            </div>';
+let smallLoadingSpinner = "<span id='smallSpinner' class=\"spinner-border spinner-border-sm\" role=\"status\" aria-hidden=\"true\"></span>";
+
 
 $(document).ready(function () {
-    let debug = true;
     let image;
 
     autoRedirect();
@@ -67,10 +62,12 @@ $(document).ready(function () {
             $('#uploadBio').after(notEmptyAlert)
         }
 
+        formdata.append('title', uploadTitle);
+        formdata.append('bio', uploadBio);
+        formdata.append('file', uploadImage);
+
         if (uploadbool) {
-            formdata.append('title', uploadTitle);
-            formdata.append('bio', uploadBio);
-            formdata.append('file', uploadImage);
+            $("#uploadImageBtn").append(smallLoadingSpinner);
 
             $.ajax({
                 url: backendAdress + '/api/v1/images/upload/',
@@ -82,15 +79,17 @@ $(document).ready(function () {
                     "Authorization": `Bearer ${token}`
                 },
                 success: function (response) {
-                    if (debug === true) {
-                        console.log('succes: ' + JSON.stringify(response));
-                    }
                     $("#exampleModal").modal('toggle');
+                    $('#smallSpinner').remove();
+                    let sMain = "Hochladen erfolgreich!";
+                    let sSub = "";
+                    $("#uploadBio").after(createSuccessMessage(sMain, sSub));
                 },
                 error: function (response) {
-                    if (debug === true) {
-                        console.log('error: ' + JSON.stringify(response));
-                    }
+                    $('#smallSpinner').remove();
+                    let sMain = "Hochladen fehlgeschlagen!"
+                    let sSub = "Bitte versuchen Sie es später erneut."
+                    $("#uploadBio").after(createErrorMessage(sMain, sSub));
                 }
             });
         }
@@ -107,6 +106,17 @@ function openImageModal(event) {
     let iID = imageID.substr(5);
     let userImage;
 
+    let loadModal = "<div id='loadModal' class=\"modal\" tabindex=\"-1\" role=\"dialog\">\n" +
+        "    <div class=\"modal-dialog\" role=\"document\">\n" +
+        "        <div class=\"modal-content\">\n" +
+        "         " + bigLoadSpinner + "   \n" +
+        "        </div>\n" +
+        "    </div>\n" +
+        "</div>"
+
+    $('#' + imageID).after(loadModal);
+    $('#loadModal').modal('toggle');
+
     $.ajax({
         url: backendAdress + '/api/v1/images/image/' + iID,
         type: 'GET',
@@ -119,8 +129,6 @@ function openImageModal(event) {
             } else {
                 userImage = "data:image/jpeg;base64," + response.userImage;
             }
-            let username = response.user;
-
             let newImageModal = "<div class=\"modal fade  bd-image-modal\" id='imageModal" + response.id + "' tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"imageModalLabel\" aria-hidden=\"true\">\n" +
                 "    <div class=\"modal-dialog modal-lg modal-dialog-centered\" role=\"document\">\n" +
                 "        <div class=\"modal-content bd-image-modal-content\">\n" +
@@ -134,12 +142,8 @@ function openImageModal(event) {
                 "                        </div>\n" +
                 "                        <div class=\"col-4\">\n" +
                 "                            <header class=\"bd-image-header\">\n" +
-                "                                <a onclick='goToUserpage(\"" + response.user + "\")'><img class=\"bd-image-profile-picture\" src=\"" + userImage + "\" alt=\"Profile Picture\">\n" +
+                "                                <a id='linkheader' onclick='goToUserpage(\"" + response.user + "\")'><img class=\"bd-image-profile-picture\" src=\"" + userImage + "\" alt=\"Profile Picture\">\n" +
                 "                                <span id='username' class=\"bd-image-profile-name\">" + response.user + "</span></a>\n" +
-                "                                <img class=\"bd-image-profile-picture\" src=\"\data:image/jpeg;base64," + response.userImage + "\" alt=\"Profile Picture\">\n" +
-                "                                <span class=\"bd-image-profile-name\">" + response.user + "</span>\n" +
-                "                                <button class=\"btn bd-image-profile-change-btn\"><i class=\"material-icons bd-image-profile-change-btn-icon\">create</i></button>" +
-                "                                <button class=\"btn bd-image-profile-delete-btn\" type=\"button\"><i class=\"material-icons bd-image-profile-delete-btn-icon\">delete</i></button>" +
                 "                                <div class=\"bd-image-profile-container-description\"><span class=\"bd-image-profile-description\">" + response.bio + "</span></div>\n" +
                 "                            </header>\n" +
                 "                            <div class=\"bd-image-body\">\n" +
@@ -171,9 +175,15 @@ function openImageModal(event) {
                 "</div>";
 
             $('#' + imageID).after(newImageModal);
+            if (response.user.toString().toUpperCase() == sessionStorage.getItem('Username').toString().toUpperCase()) {
+                let deleteAndEditButton = "<button hidden id='change" + response.id + "' class=\"btn bd-image-profile-change-btn\"><i class=\"material-icons bd-image-profile-change-btn-icon\">create</i></button>" +
+                    "                      <button onclick='openDeleteModal(" + response.id + ")' id='delete" + response.id + "' class=\"btn bd-image-profile-delete-btn\" type=\"button\"><i class=\"material-icons bd-image-profile-delete-btn-icon\">delete</i></button>";
+                $('#linkheader').after(deleteAndEditButton);
+            }
             if (response.comments != 0) {
                 loadModalComments(response.id);
             }
+            $('#loadModal').modal('toggle');
             $('#imageModal' + response.id).modal('toggle');
         }
     });
@@ -328,4 +338,77 @@ function writeComment(imageID) {
 function goToUserpage(user) {
     sessionStorage.setItem('searchUser', user);
     location.href = "userpage.html";
+}
+
+/**
+ * Opens the Delete Modal
+ * @param imageID
+ */
+function openDeleteModal(imageID) {
+    let deleteModal = "<div id='deleteModal" + imageID + "' class=\"modal\" tabindex=\"-1\" role=\"dialog\">\n" +
+        "  <div class=\"modal-dialog\" role=\"document\">\n" +
+        "    <div class=\"modal-content\">\n" +
+        "      <div class=\"modal-header\">\n" +
+        "        <h5 class=\"modal-title\">Bild löschen</h5>\n" +
+        "        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n" +
+        "          <span aria-hidden=\"true\">&times;</span>\n" +
+        "        </button>\n" +
+        "      </div>\n" +
+        "      <div class=\"modal-body\">\n" +
+        "        <p>Willst du wirklich das Bild löschen?</p>\n" +
+        "      </div>\n" +
+        "      <div class=\"modal-footer\">\n" +
+        "        <button onclick='deleteImage(" + imageID + ")' type=\"button\" class=\"btn btn-primary\">LÖSCHEN</button>\n" +
+        "        <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Abbrechen</button>\n" +
+        "      </div>\n" +
+        "    </div>\n" +
+        "  </div>\n" +
+        "</div>";
+
+    $('#imageModal' + imageID).modal('toggle');
+    $('#idFeedContainerUserImages').append(deleteModal);
+    $('#deleteModal' + imageID).modal('toggle');
+}
+
+/**
+ * Deletes the Image in the Backend
+ * @param imageID
+ */
+function deleteImage(imageID) {
+    let deleteFD = new FormData();
+    deleteFD.append('imageId', imageID);
+
+    $.ajax({
+        url: backendAdress + '/api/v1/images/remove',
+        type: 'POST',
+        processData: false,
+        contentType: false,
+        data: deleteFD,
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }, success: function (response) {
+            location.href = "";
+        },
+        error: function (response) {
+
+        }
+    });
+}
+
+function createErrorMessage(sMain, sSub) {
+    return '<div class="alert alert-warning alert-dismissible show" role="alert">\n' +
+        '                                <strong>' + sMain + '</strong> ' + sSub + ' \n' +
+        '                                <button aria-label="Close" class="close" data-dismiss="alert" type="button">\n' +
+        '                                    <span aria-hidden="true">&times;</span>\n' +
+        '                                </button>\n' +
+        '                            </div>';
+}
+
+function createSuccessMessage(sMain, sSub) {
+    return '<div class="alert alert-success alert-dismissible show" role="alert">\n' +
+        '                                <strong>' + sMain + '</strong> ' + sSub + ' \n' +
+        '                                <button aria-label="Close" class="close" data-dismiss="alert" type="button">\n' +
+        '                                    <span aria-hidden="true">&times;</span>\n' +
+        '                                </button>\n' +
+        '                            </div>';
 }

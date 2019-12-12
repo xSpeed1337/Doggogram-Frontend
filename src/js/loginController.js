@@ -1,4 +1,3 @@
-let debug = false;
 let backendAdress = 'https://cors-anywhere.herokuapp.com/http://88.214.57.214:6889';
 
 $(document).ready(function () {
@@ -45,9 +44,6 @@ $(document).ready(function () {
                 type: 'POST',
                 data: loginFormData,
                 success: function (response) {
-                    if (debug) {
-                        console.log('succes: ' + JSON.stringify(response));
-                    }
                     sessionStorage.setItem('token', response.token);
                     sessionStorage.setItem('Username', loginUsername);
                     location.href = "feed.html";
