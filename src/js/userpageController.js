@@ -67,7 +67,12 @@ function loadUserData(username) {
                 document.getElementById("idBio").innerHTML = response.bio;
             }
             document.getElementById("idUserName").innerHTML = response.user;
-            picString = "data:image/jpeg;base64," + response.userImage;
+
+            if (response.userImage == "" || response.userImage == undefined || response.userImage == null) {
+                picString = "resources/images/superthumb.jpg";
+            } else {
+                picString = "data:image/jpeg;base64," + response.userImage;
+            }
             $('#idProfileImage').attr("src", picString);
         },
         error: function (response) {
@@ -141,8 +146,6 @@ function loadUserImages(username) {
                 console.log('succes: ' + JSON.stringify(response));
             }
 
-            //display pictures
-
             for (let i = 0; i < response.imageDTOS.length; i++) {
                 let imageDiv = "                    <article class=\"post\">\n" +
                     "                        <header class=\"bd-post-title\">\n" +
@@ -200,7 +203,7 @@ function loadNumImages(username) {
 
 function followUser() {
     let followUserFormData = new FormData();
-    followUserFormData.append('user', userId);
+    followUserFormData.append('followUser', userId);
 
     $.ajax({
         url: backendAdress + '/api/v1/users/follow',
