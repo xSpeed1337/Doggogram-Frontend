@@ -1,6 +1,7 @@
 let debug = false;
 let picString;
 
+
 $(document).ready(function () {
 
     if (sessionStorage.getItem('searchUser') == "" || sessionStorage.getItem('searchUser') == undefined || sessionStorage.getItem('searchUser') == null) {
@@ -151,7 +152,7 @@ function loadUserImages(username) {
                     "                        </div>\n" +
                     "                        <div class=\"bd-post-stats\">\n" +
                     "                            <a id=\"afav" + response.imageDTOS[i].id + "\" class=\"bd-post-favtext\"><i class=\"material-icons bd-post-favicon\">favorite</i><span\n" +
-                    "                                    class=\"bd-post-span\">" + response.imageDTOS[i].likes + "</span></a>\n" +
+                    "                                   id=\"idSpan" + response.imageDTOS[i].id + "\" class=\"bd-post-span\">" + response.imageDTOS[i].likes + "</span></a>\n" +
                     "                            <a class=\"bd-post-chattext\"><i class=\"material-icons bd-post-chaticon\">chat</i><span\n" +
                     "                                    class=\"bd-post-span\">" + response.imageDTOS[1].comments + "</span></a>\n" +
                     "                        </div>\n" +
@@ -181,7 +182,31 @@ function loadUserImages(username) {
 }
 
 function triggerLike(oEvent) {
+
     let imageId = oEvent.currentTarget.id.slice(4);
+        let likeFormData = new FormData();
+        likeFormData.append('imageId', imageId);
+
+        $.ajax({
+            url: backendAdress + '/api/v1/images/liked',
+            type: 'POST',
+            processData: false,
+            contentType: false,
+            data: likeFormData,
+            headers: {
+                "Authorization": `Bearer ${token}`
+            },
+            success: function (response) {
+                let currentLikes = $('#idSpan' + imageId).html() * 1;
+                if (response) {
+                    $('#idSpan' + imageId).text(currentLikes + 1);
+                } else {
+                    $('#idSpan' + imageId).text(currentLikes - 1);
+                }
+            }
+        });
+
+
 }
 
 function loadNumImages(username) {
