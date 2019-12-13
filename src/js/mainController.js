@@ -1,10 +1,17 @@
 let backendAdress = 'https://cors-anywhere.herokuapp.com/http://88.214.57.214:6889';
 let token = sessionStorage.getItem('token');
-let bigLoadSpinner = "  <div id='bigLoadSpinner' class=\"post-container\" style=\"flex-direction: column\" >" +
-    "                       <div class=\"spinner-border\" style=\"width: 3rem; height: 3rem; flex-direction: column;\" role=\"status\">\n" +
+let bigLoadSpinner = "  <div id='bigLoadSpinner' class=\"bd-load-container d-flex justify-content-center\">" +
+    "                       <div class=\"spinner-border\" role=\"status\">\n" +
     "                           <span class=\"sr-only\">Loading...</span>\n" +
     "                       </div>" +
     "                   </div>";
+let bigLoadSpinner2 = "  <div id='bigLoadSpinner' class=\"col\">\n" +
+    "                       <div class=\"bd-load-container d-flex justify-content-center\">" +
+    "                           <div class=\"spinner-border\" role=\"status\">\n" +
+    "                               <span class=\"sr-only\">Loading...</span>\n" +
+    "                           </div>" +
+    "                       </div>" +
+    "                    </div>";
 let smallLoadingSpinner = "<span id='smallSpinner' class=\"spinner-border spinner-border-sm\" role=\"status\" aria-hidden=\"true\"></span>";
 
 
@@ -107,12 +114,14 @@ function openImageModal(event) {
     let userImage;
 
     let loadModal = "<div id='loadModal' class=\"modal\" tabindex=\"-1\" role=\"dialog\">\n" +
-        "    <div class=\"modal-dialog\" role=\"document\">\n" +
-        "        <div class=\"modal-content\">\n" +
+        "    <div class=\"modal-dialog modal-dialog-centered bd-load-modal-dialog\" role=\"document\">\n" +
+        "        <div class=\"modal-content bd-load-modal-content\">\n" +
+        "         <div class=\"modal-body bd-load-modal-body\"" +
         "         " + bigLoadSpinner + "   \n" +
+        "         </div>" +
         "        </div>\n" +
         "    </div>\n" +
-        "</div>"
+        "</div>";
 
     $('#' + imageID).after(loadModal);
     $('#loadModal').modal('toggle');
