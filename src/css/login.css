@@ -492,8 +492,9 @@
     }
     .bd-guideline-container {
         text-align: center;
-        width: 1000px;
-        transform: translateX(45%);
+        width: auto;
+        height: auto;
+        transform: unset;
     }
     .bd-guideline-container span {
         display: flex;
@@ -501,6 +502,9 @@
     }
     .bd-guideline-title {
         margin-top: 30px;
+    }
+    .bd-media4 {
+        height: auto;
     }
 
     /* ***************************************************************** FOOTER */

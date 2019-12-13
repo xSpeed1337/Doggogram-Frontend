@@ -144,12 +144,12 @@ function openImageModal(event) {
                 "            <div class=\"modal-body\">\n" +
                 "                <div class=\"container-fluid bd-image-modal-body-container\">\n" +
                 "                    <div class=\"row no-gutters\">\n" +
-                "                        <div class=\"col-8\">\n" +
+                "                        <div class=\"col-8 bd-media\">\n" +
                 "                            <div class=\"bd-image-container-main-picture\">\n" +
                 "                                <img class=\"bd-image-main-picture\" src=\"\data:image/jpeg;base64," + response.image + "\" alt=\"Content Picture\">\n" +
                 "                            </div>\n" +
                 "                        </div>\n" +
-                "                        <div class=\"col-4\">\n" +
+                "                        <div class=\"col-4 bd-media\">\n" +
                 "                            <header class=\"bd-image-header\">\n" +
                 "                                <a id='linkheader' onclick='goToUserpage(\"" + response.user + "\")'><img class=\"bd-image-profile-picture\" src=\"" + userImage + "\" alt=\"Profile Picture\">\n" +
                 "                                <span id='username' class=\"bd-image-profile-name\">" + response.user + "</span></a>\n" +

@@ -151,7 +151,7 @@ function loadUserImages(username) {
 
             for (let i = 0; i < response.imageDTOS.length; i++) {
                 let imageDiv =
-                    "                    <div class=\"col-4\">\n" +
+                    "                    <div class=\"col-4 bd-media3 d-flex justify-content-center\">\n" +
                     "                    <article class=\"bd-user-post\">\n" +
                     "                        <div class=\"bd-user-post-img-container\">\n" +
                     "                            <img alt=\"\" class=\"bd-user-post-img\" src=\"\data:image/jpeg;base64," + response.imageDTOS[i].image + "\">\n" +
