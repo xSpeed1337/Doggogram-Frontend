@@ -15,34 +15,36 @@
 <header class="navbar navbar-expand flex-row bd-navbar fixed-top">
     <a class="navbar-brand bd-navbar-title" href=""><i class="material-icons bd-navbar-title-icon">pets</i><span
             class="bd-title-text1">doggo</span><span class="bd-title-text2">gram</span></a>
-    <a class="btn btn-bd-upload d-inline-block mr-4" data-target="#exampleModal" data-toggle="modal"
+    <a class="btn btn-bd-upload d-inline-block mr-4" data-target="#uploadModal" data-toggle="modal"
        href="" id="openUploadModalBtn">Hochladen</a>
     <!-- Modal -->
-    <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" role="dialog"
+    <div aria-hidden="true" aria-labelledby="uploadModalLabel" class="modal fade" id="uploadModal" role="dialog"
          tabindex="-1">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content bd-modal-upload-content">
                 <div class="modal-body">
                     <form>
                         <div class="form-group">
                             <label for="uploadTitle">Titel</label>
-                            <input class="form-control" id="uploadTitle"
+                            <input class="form-control bd-modal-upload-form-control" id="uploadTitle"
                                    placeholder="Wunderschöner Titel" type="text">
                         </div>
                         <div class="form-group">
                             <label for="uploadImage">Bild</label>
                             <div class="custom-file">
-                                <input accept="image/*" id="uploadImage" name="datei" type="file">
+                                <input accept="image/*" class="custom-file-input" id="uploadImage" name="datei"
+                                       type="file">
                                 <label class="custom-file-label" for="uploadImage">Datei auswählen</label>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="uploadBio">Beschreibung</label>
-                            <textarea class="form-control" id="uploadBio" rows="3"></textarea>
+                            <textarea class="form-control bd-modal-upload-form-control" id="uploadBio"
+                                      rows="3"></textarea>
                         </div>
                     </form>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer bd-modal-upload-footer">
                     <button class="btn btn-secondary" data-dismiss="modal" type="button">Schließen</button>
                     <button class="btn btn-primary" id="uploadImageBtn" type="button">Bild hochladen</button>
                 </div>
@@ -58,8 +60,6 @@
 <main class="bd-head" id="content" role="main">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-1">
-            </div>
             <div class="col-3">
                 <div class="bd-main-info">
                     <div class="row">
@@ -71,11 +71,14 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <h2 class="col" href="" id="idUserName"></h2>
+                                    <div class="col">
+                                        <span class="bd-main-info-username" id="idUserName"></span>
+                                    </div>
                                 </div>
                                 <div class="row">
-                                    <a class="btn btn-bd-upload d-inline-block mr-4" id="followBtn"
-                                       onclick="followUser()">Follow</a>
+                                    <div class="col" id="followBtnContainer">
+                                        <button type="button" class="btn btn-bd-follow" id="followBtn" onclick="followUser()">Folgen</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -97,20 +100,21 @@
                     <div class="row">
                         <div class="col">
                             <div class="bd-main-info-description">
-                                <span class="bd-main-info-descriptiontitle"></span>
-                                <p class="bd-main-info-descriptioncontent" id="idBio">Noch keine Benutzerbeschreibung
-                                    eingetragen! </p>
+                                <span class="bd-main-info-descriptiontitle">Beschreibung</span>
+                                <p class="bd-main-info-descriptioncontent" id="idBio">Noch keine Benutzerbeschreibung eingetragen! </p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-8">
+            <div class="col-9">
                 <div class="bd-main-content" id="idFeedContainerUserImages">
+                    <div class="row" id="idUserFeed">
+
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </main>
 <footer class="bd-footer fixed-bottom">

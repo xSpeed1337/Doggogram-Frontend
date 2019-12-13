@@ -1,4 +1,4 @@
-
+/* ***************************************************************** HEADER */
 .bd-navbar {
     background-color: #1A1F25;
     height: 7.5vh;
@@ -78,7 +78,7 @@
     color: #4ECCA3;
 }
 
-
+/* ***************************************************************** MAIN */
 
 .bd-head {
     position: relative;
@@ -100,6 +100,7 @@
     padding: 10px;
     height: 250px;
     width: 250px;
+    object-fit: cover;
     margin-bottom: 15px;
 }
 .bd-main-info-username {
@@ -107,10 +108,6 @@
     color: #EEEEEE;
     font-weight: bold;
     font-size: 25px;
-}
-.bd-main-info-username:hover {
-    text-decoration: none;
-    color: #4ECCA3;
 }
 .bd-main-info-user {
     margin-bottom: 15px;
@@ -133,16 +130,94 @@
 .bd-main-info-followernumb {
     font-weight: bold;
 }
-.bd-main-content {
+.btn-bd-follow {
+    border: 2px solid #4ECCA3;
+    color: #EEEEEE;
+    border-radius: 50px;
+    height: 30px;
+    text-align: center;
     margin-top: 15px;
-    margin-left: 30px;
+    padding: 0 15px 0 15px;
+    font-weight: bold;
+}
+.btn-bd-follow:hover {
+    background: #4ECCA3;
+    color: #232931;
+}
+.btn-bd-unfollow {
+    border: 2px solid #4ECCA3;
+    background: #4ECCA3;
+    color: #232931;
+    border-radius: 50px;
+    height: 30px;
+    text-align: center;
+    margin-top: 15px;
+    padding: 0 15px 0 15px;
+    font-weight: bold;
+}
+.btn-bd-unfollow:hover {
+    background: none;
+    color: #EEEEEE;
+}
+.bd-main-content {
+    margin: 15px;
+}
+.bd-user-post {
+    background: #20262D;
+    width: 450px;
+    border-radius: 25px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     margin-bottom: 15px;
 }
-.bd-main-content-img {
-    margin: 15px;
+.bd-user-post-img-container {
     height: 400px;
-    width: 400px;
+    width: 420px;
 }
+.bd-user-post-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+}
+.bd-user-post-img-overlay {
+    position: absolute;
+    width: 420px;
+    height: 400px;
+    border-radius: 15px;
+    top: 15px;
+    opacity: 0;
+    transition: .3s ease;
+    background: rgba(26,31,37,0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.bd-user-post-img-overlay:hover {
+    opacity: 1;
+}
+.bd-user-post-favtext {
+    margin-right: 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    font-size: 30px!important;
+}
+.bd-user-post-favicon {
+    margin-right: 10px;
+}
+.bd-user-post-chattext {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    font-size: 30px!important;
+}
+.bd-user-post-chaticon {
+    margin-right: 10px;
+}
+
 .post-container {
     display: flex;
     justify-content: center;
@@ -261,8 +336,6 @@
 .bd-searchform:focus {
     outline: none;
 }
-.bd-change-pp-container {
-}
 .bd-change-pp-title {
     font-size: 25px;
     font-weight: bold;
@@ -277,8 +350,6 @@
     display:block;
     float:left;
     margin-right: 50px;
-}
-.bd-change-pp-old-title {
 }
 .bd-change-pp-old-img {
     width: 200px;
@@ -295,7 +366,6 @@
     display:block;
     float:left;
 }
-.bd-change-pp-new-title {}
 .bd-change-pp-new-img {
     width: 200px;
     height: 200px;
@@ -316,12 +386,8 @@
     font-size: 20px;
     font-weight: bold;
 }
-.bd-change-pp-modal-body {}
 .bd-change-pp-modal-footer {
     border: none;
-}
-.bd-change-pd-container {
-
 }
 .bd-change-pd-title {
     font-size: 25px;
@@ -341,9 +407,6 @@
 }
 .bd-change-pd-btn {
     float: right;
-}
-.bd-change-p-container {
-
 }
 .bd-change-p-title {
     font-size: 25px;
@@ -375,7 +438,23 @@
     float: right;
     margin-bottom: 25px;
 }
+.bd-load-modal-dialog {
+    width: 75px;
+    height: 75px;
+}
+.bd-load-modal-content {
+    background-color: #232931;
+    border-radius: 100px;
+}
+.bd-load-modal-body {
+    display: flex;
+    justify-content: center;
+}
+.bd-load-container {
+    margin-top: 50px;
+}
 
+/* ***************************************************************** FOOTER */
 
 .bd-footer {
     background-color: #20262D;
@@ -416,7 +495,7 @@
     color: #4ECCA3;
 }
 
-
+/* ***************************************************************** UPLOAD MODAL */
 
 .bd-modal-upload-content {
      background: #232931;
@@ -481,10 +560,8 @@
     background: transparent;  /* optional: just make scrollbar invisible */
 }
 
+/* ***************************************************************** IMAGE MODAL */
 
-
-.bd-image-modal {
-}
 .bd-image-modal-content {
     background-color: #232931;
     border-radius: 25px;
@@ -502,8 +579,6 @@
 }
 .bd-image-modal-body-container {
     padding: 0;
-}
-.bd-image-header {
 }
 .bd-image-profile-container-description {
     height: 75px;
@@ -523,10 +598,6 @@
     padding-left: 15px;
     font-size: 20px;
 }
-.bd-image-profile-description {
-}
-.bd-image-body {
-}
 .bd-image-container-comments {
     margin-top: 10px;
     height: 250px;
@@ -539,14 +610,8 @@
 .bd-image-comment-list-item {
     padding-bottom: 5px;
 }
-.bd-image-comment-user {
-}
 .bd-image-comment-user-name {
     font-weight: bold;
-}
-.bd-image-comment-user-comment {
-}
-.bd-image-comment-container-time {
 }
 .bd-image-comment-time {
     display: flex;
@@ -557,7 +622,6 @@
     font-size: 12px!important;
     padding-right: 10px;
 }
-.bd-image-comment-time-text {}
 .bd-image-container-actions {
     display: flex;
     align-items: center;
@@ -567,15 +631,10 @@
     display: flex;
     align-items: center;
 }
-.bd-image-action-like-icon {}
-.bd-image-action-like-text {}
 .bd-image-action-comment {
     display: flex;
     align-items: center;
 }
-.bd-image-action-like-comment-icon {}
-.bd-image-action-comment-text {}
-.bd-image-section-form {}
 .bd-image-container-form {
     display: flex;
     align-items: center;
@@ -607,12 +666,6 @@
 .bd-image-form-button:hover {
     color: #4ECCA3;
 }
-.bd-image-button-icon {}
-
-.bd-image-profile-change-btn {
-}
-.bd-image-profile-delete-btn {
-}
 .bd-image-comment-change-btn {
     float: right;
 }
@@ -635,3 +688,6 @@
     font-size: 20px!important;
     color: #EEEEEE;
 }
+
+/* ***************************************************************** MEDIA QUERIES */
+

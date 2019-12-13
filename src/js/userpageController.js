@@ -51,6 +51,7 @@ function loadAllProfileData(username) {
 }
 
 function loadUserData(username) {
+    $('#idUserFeed').append(bigLoadSpinner2);
     $.ajax({
         url: 'https://cors-anywhere.herokuapp.com/http://88.214.57.214:6889/api/v1/users/user/' + username,
         type: 'GET',
@@ -149,23 +150,21 @@ function loadUserImages(username) {
             }
 
             for (let i = 0; i < response.imageDTOS.length; i++) {
-                let imageDiv = "                    <article class=\"post\">\n" +
-                    "                        <header class=\"bd-post-title\">\n" +
-                    "                            <img alt=\"\" class=\"bd-post-pp\" src=\"" + picString + "\">\n" +
-                    "                            <span id=\"span" + response.imageDTOS[i].id + "\"  class=\"bd-post-name\">" + response.imageDTOS[i].user + "</span>\n" +
-                    "                        </header>\n" +
-                    "                        <div>\n" +
-                    "                            <img onclick='openImageModal(event)' id=\"image" + response.imageDTOS[i].id + "\" alt=\"\" class=\"bd-post-img\" src=\"\data:image/jpeg;base64," + response.imageDTOS[i].image + "\">\n" +
+                let imageDiv =
+                    "                    <div class=\"col-4\">\n" +
+                    "                    <article class=\"bd-user-post\">\n" +
+                    "                        <div class=\"bd-user-post-img-container\">\n" +
+                    "                            <img alt=\"\" class=\"bd-user-post-img\" src=\"\data:image/jpeg;base64," + response.imageDTOS[i].image + "\">\n" +
+                    "                            <div onclick='openImageModal(event)' id=\"image" + response.imageDTOS[i].id + "\" class=\"bd-user-post-img-overlay\">" +
+                    "                               <a onclick='likingImage(" + response.imageDTOS[i].id + ")' id=\"afav" + response.imageDTOS[i].id + "\" class=\"bd-user-post-favtext\"><i class=\"material-icons bd-user-post-favicon\">favorite</i><span id='imageLikes" + response.imageDTOS[i].id + "' class=\"bd-user-post-span\">" + response.imageDTOS[i].likes + "</span></a>\n" +
+                    "                               <a class=\"bd-user-post-chattext\"><i class=\"material-icons bd-user-post-chaticon\">chat</i><span class=\"bd-user-post-span\">" + response.imageDTOS[i].comments + "</span></a>\n" +
+                    "                            </div> " +
                     "                        </div>\n" +
-                    "                        <div class=\"bd-post-stats\">\n" +
-                    "                            <a onclick='likingImage(" + response.imageDTOS[i].id + ")' id=\"afav" + response.imageDTOS[i].id + "\" class=\"bd-post-favtext\"><i class=\"material-icons bd-post-favicon\">favorite</i><span\n" +
-                    "                                   id='imageLikes" + response.imageDTOS[i].id + "' class=\"bd-post-span\">" + response.imageDTOS[i].likes + "</span></a>\n" +
-                    "                            <a class=\"bd-post-chattext\"><i class=\"material-icons bd-post-chaticon\">chat</i><span\n" +
-                    "                                    class=\"bd-post-span\">" + response.imageDTOS[i].comments + "</span></a>\n" +
-                    "                        </div>\n" +
-                    "                    </article>";
-                $('#idFeedContainerUserImages').append(imageDiv);
+                    "                    </article>\n" +
+                    "                    </div>";
+                $('#idUserFeed').append(imageDiv);
             }
+            $('#bigLoadSpinner').remove();
         },
         error: function (response) {
             if (debug === true) {
@@ -208,7 +207,7 @@ function followUser() {
     followUserFormData.append('followUser', userId);
 
     $.ajax({
-        url: backendAdress + '/api/v1/users/follow',
+        url: 'https://cors-anywhere.herokuapp.com/http://88.214.57.214:6889/api/v1/users/follow',
         type: 'POST',
         processData: false,
         contentType: false,
@@ -218,15 +217,18 @@ function followUser() {
         },
         success: function (response) {
             if (response) {
-                $('#followBtn').html('Unfollow');
+                let unfollowBtn = "<button type=\"button\" class=\"btn btn-bd-unfollow\" id=\"followBtn\" onclick=\"followUser()\">Entfolgen</button>";
+                $('#followBtn').remove();
+                $('#followBtnContainer').append(unfollowBtn);
                 $('#idFollower').html(($('#idFollower').html() * 1) + 1);
             } else {
-                $('#followBtn').html('Follow');
+                let followBtn = "<button type=\"button\" class=\"btn btn-bd-follow\" id=\"followBtn\" onclick=\"followUser()\">Folgen</button>";
+                $('#followBtn').remove();
+                $('#followBtnContainer').append(followBtn);
                 $('#idFollower').html(($('#idFollower').html() * 1) - 1);
             }
         },
         error: function (response) {
-
         }
     });
 }
@@ -240,7 +242,7 @@ function getFollower(username) {
     getFollowerFD.append('user', username);
 
     $.ajax({
-        url: backendAdress + '/api/v1/users/followers/user/' + username,
+        url: 'https://cors-anywhere.herokuapp.com/http://88.214.57.214:6889/api/v1/users/followers/user/' + username,
         type: 'GET',
         processData: false,
         contentType: false,
@@ -252,9 +254,13 @@ function getFollower(username) {
             for (let i = 0; i < response.userDTOS.length; i++) {
                 if (response.userDTOS[i].user.toString().toUpperCase() == sessionStorage.getItem('Username').toString().toUpperCase()) {
                     if (response) {
-                        $('#followBtn').html('Unfollow');
+                        let unfollowBtn = "<button type=\"button\" class=\"btn btn-bd-unfollow\" id=\"followBtn\" onclick=\"followUser()\">Entfolgen</button>";
+                        $('#followBtn').remove();
+                        $('#followBtnContainer').append(unfollowBtn);
                     } else {
-                        $('#followBtn').html('Follow');
+                        let followBtn = "<button type=\"button\" class=\"btn btn-bd-follow\" id=\"followBtn\" onclick=\"followUser()\">Folgen</button>";
+                        $('#followBtn').remove();
+                        $('#followBtnContainer').append(followBtn);
                     }
                 }
             }

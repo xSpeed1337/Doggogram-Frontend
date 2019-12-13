@@ -22,7 +22,7 @@ $(document).ready(function () {
  */
 function loadDiscoverFeed() {
     scrollLoad = false;
-    $('#discoverFeed').append(bigLoadSpinner);
+    $('#discoverFeed').append(bigLoadSpinner2);
     $.ajax({
         url: backendAdress + '/api/v1/images/discover/' + discoverImageID,
         type: 'GET',
@@ -31,8 +31,8 @@ function loadDiscoverFeed() {
         },
         success: function (response) {
             for (let i = 0; i < response.imageDTOS.length; i++) {
-                let imageDiv = "</div>\n" +
-                    "                        <div class=\"col\">\n" +
+                let imageDiv =
+                    "                        <div class=\"col-4\">\n" +
                     "                            <div class=\"card bd-searchcard\">\n" +
                     "                                <img onclick='openImageModal(event)' id =\"image" + response.imageDTOS[i].id + "\" alt=\"\" " +
                     "                                 class=\"bd-post-img\" src=\"\data:image/jpeg;base64," + response.imageDTOS[i].image + "\">\n" +
