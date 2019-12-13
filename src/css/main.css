@@ -1061,33 +1061,33 @@
         justify-content: center;
     }
     .bd-old-pp-container {
-        width:200px;
+        width:100px;
         text-align:center;
         display:block;
         float:left;
         margin-right: 50px;
     }
     .bd-change-pp-old-img {
-        width: 200px;
-        height: 200px;
+        width: 100px;
+        height: 100px;
         border-radius: 100px;
         border: 2px solid #4ECCA3;
-        padding: 10px;
+        padding: 5px;
         object-fit: cover;
         margin-top: 15px;
     }
     .bd-new-pp-container {
-        width:200px;
+        width:100px;
         text-align:center;
         display:block;
         float:left;
     }
     .bd-change-pp-new-img {
-        width: 200px;
-        height: 200px;
+        width: 100px;
+        height: 100px;
         border-radius: 100px;
         border: 2px solid #4ECCA3;
-        padding: 10px;
+        padding: 5px;
         object-fit: cover;
         margin-top: 15px;
     }
