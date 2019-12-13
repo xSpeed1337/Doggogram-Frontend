@@ -32,7 +32,7 @@ function loadDiscoverFeed() {
         success: function (response) {
             for (let i = 0; i < response.imageDTOS.length; i++) {
                 let imageDiv =
-                    "                        <div class=\"col-4\">\n" +
+                    "                        <div class=\"col-4 bd-media\">\n" +
                     "                            <div class=\"card bd-searchcard\">\n" +
                     "                                <img onclick='openImageModal(event)' id =\"image" + response.imageDTOS[i].id + "\" alt=\"\" " +
                     "                                 class=\"bd-post-img\" src=\"\data:image/jpeg;base64," + response.imageDTOS[i].image + "\">\n" +
