@@ -938,17 +938,17 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        margin: 50px;
+        margin: 20px;
     }
     .post {
         background: #20262D;
-        width: 750px;
+        width: 370px;
         border-radius: 25px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         padding: 15px;
-        margin-bottom: 15px;
+        margin-bottom: 2px;
     }
     .bd-post-title {
         padding-bottom: 10px;
@@ -956,22 +956,22 @@
         align-items: center;
     }
     .bd-post-pp {
-        height: 50px;
-        width: 50px;
+        height: 30px;
+        width: 30px;
         object-fit: cover;
         border-radius: 50px;
         border: 2px solid #4ECCA3;
         padding: 3px;
-        margin-right: 20px;
+        margin-right: 10px;
     }
     .bd-post-name {
         font-weight: bold;
-        font-size: 20px;
+        font-size: 15px;
     }
     .bd-post-img-container {
         padding-bottom: 10px;
-        height: 700px;
-        width: 720px;
+        height: 330px;
+        width: 340px;
     }
     .bd-post-img {
         width: 100%;
