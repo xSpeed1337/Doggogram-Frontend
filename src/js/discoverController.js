@@ -70,8 +70,6 @@ function searchUser(event) {
         let searchFormData = new FormData();
         let searchUsername = $('#searchUserFeed').val();
 
-        $('#searchUserFeed').after(smallLoadingSpinner);
-
         searchFormData.append('user', searchUsername);
 
         $.ajax({
@@ -89,7 +87,6 @@ function searchUser(event) {
                 location.href = "userpage.html";
             },
             error: function (response) {
-                $('#smallSpinner').remove();
                 $('#searchUserFeed').after(noUserFoundAlert);
             }
         });
